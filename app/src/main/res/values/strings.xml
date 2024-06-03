@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BookMyCoolie</string>
+    <string name="homepageinstr">
+        Dear Passengers,\n
+
+        Please choose "REQUEST COOLIE SERVICE" to hire one or more coolies. During request you have  Upon confirmed assignment of coolie you will be able to
+        track your request in "TRACK YOUR REQUEST" option. You have to enter your request id, phone number and email id to verify and
+    </string>
+</resources>
