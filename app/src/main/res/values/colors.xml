@@ -8,20 +8,26 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="hintcolor">#352C10</color>
-    <color name="maincolor">#FFB300</color>
-    <color name="pgtvtextcolor">#106170</color>
-    <color name="ngtvtextcolor">#AA1D1A</color>
+    <color name="maincolor">#2183B9</color>
+
     <color name="buttoncolor">#CA205A</color>
     <color name="bgcolor">#DEE5E6</color>
     <color name="red">#B61B0F</color>
-    <color name="maincolor2">#FFB300</color>
+    <color name="maincolor2">#01579B</color>
     <color name="maincolor3">#72BCE9</color>
-    <color name="maincolor4">#43221F</color>
+
+    <color name="maincolor4">#033F6E</color>
     <color name="maincolor5">#7E3017</color>
-    <color name="maincolor6">#9F630D</color>
+    <color name="maincolor6">#2B5678</color>
+
+
     <color name="whitelike">#BDEBE4</color>
     <color name="maincolor7">#8C0335</color>
     <color name="maincolor8">#F4DD79</color>
-    <color name="o1">#BF4808</color>
+    <color name="o1">#0715A3</color>
+
+
+    <color name="pgtvtextcolor">#106170</color>
+    <color name="ngtvtextcolor">#AA1D1A</color>
 
 </resources>
