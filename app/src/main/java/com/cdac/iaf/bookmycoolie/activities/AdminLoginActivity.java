@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.OPERATOR.AdminHomeActivity;
+import com.cdac.iaf.bookmycoolie.activities.USERAUTH.SignUPPassengerActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class AdminLoginActivity extends AppCompatActivity {
 
-    Button btn_admlogin;
+    Button btn_admlogin, btn_signup, btn_admnpage;
     TextInputEditText tied_admname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,17 @@ public class AdminLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_login);
 
         tied_admname = findViewById(R.id.tied_admname);
+        btn_signup = findViewById(R.id.btn_signup);
         btn_admlogin = findViewById(R.id.btn_admlogin);
+
+        btn_admnpage =findViewById(R.id.btn_admnpage);
+
+        btn_admnpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminLoginActivity.this, AdminHomeActivity.class));
+            }
+        });
         btn_admlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +55,13 @@ public class AdminLoginActivity extends AppCompatActivity {
 
 
 
+            }
+        });
+
+        btn_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminLoginActivity.this, SignUPPassengerActivity.class));
             }
         });
 

@@ -112,7 +112,8 @@
                 app:hintTextColor="@color/maincolor4"
                 app:placeholderTextColor="@color/maincolor6"
                 app:prefixTextColor="@color/maincolor4"
-                app:suffixTextColor="@color/maincolor4">
+                app:suffixTextColor="@color/maincolor4"
+                app:endIconMode="password_toggle">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -121,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_semibold"
                     app:startIconContentDescription="Hello"
-                    android:inputType="text"
+                    android:inputType="textPassword"
                     android:textColor="@color/maincolor4"
                     android:textSize="14sp"
                     app:errorEnabled="true"  />

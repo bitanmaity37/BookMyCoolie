@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.OPERATOR.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.utils.FileUtil;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -69,7 +70,7 @@ public class AddCoolieActivity extends AppCompatActivity {
                         .setPositiveButton("HOME", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(AddCoolieActivity.this,AdminHomeActivity.class));
+                                startActivity(new Intent(AddCoolieActivity.this, AdminHomeActivity.class));
                             }
                         }).show();
 
