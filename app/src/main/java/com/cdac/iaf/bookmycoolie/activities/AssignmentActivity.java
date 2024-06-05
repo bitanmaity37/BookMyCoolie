@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
-import com.cdac.iaf.bookmycoolie.activities.OPERATOR.AdminHomeActivity;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.models.CoolieLoad;
 import com.cdac.iaf.bookmycoolie.models.CurrentPassengerRequests;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;

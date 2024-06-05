@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ADMIN.AdminHomeActivity">
+    tools:context=".activities.ADMIN.OperatorListActivity">
+
     <LinearLayout
         android:paddingStart="10dp"
         android:id="@+id/linearLayout"
@@ -34,34 +35,13 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_addopt"
-        android:layout_width="145dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="32dp"
-        android:backgroundTint="@color/maincolor4"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_oprtrlst"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.044"
-        android:text="ADD OPERATOR"/>
-
-    <Button
-        android:id="@+id/btn_modopt"
-        android:layout_width="145dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/maincolor4"
-        android:text="MODIFY OPERATOR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btn_addopt"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.045" />
-
-
-
-
+        android:layout_marginBottom="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

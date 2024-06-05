@@ -1,8 +1,9 @@
-package com.cdac.iaf.bookmycoolie.activities.OPERATOR;
+package com.cdac.iaf.bookmycoolie.activities.ADMIN;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class AdminHomeActivity extends AppCompatActivity {
 
-    Button btn_addopt;
+    Button btn_addopt, btn_modopt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,14 @@ public class AdminHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home2);
 
         btn_addopt = findViewById(R.id.btn_addopt);
+        btn_modopt =findViewById(R.id.btn_modopt);
+
+        btn_modopt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminHomeActivity.this, OperatorListActivity.class ));
+            }
+        });
         btn_addopt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

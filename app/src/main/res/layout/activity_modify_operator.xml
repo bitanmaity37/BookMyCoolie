@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#666666"
-    >
-
-    <FrameLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ADMIN.ModifyOperatorActivity">
+    <LinearLayout
+        android:paddingStart="10dp"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottomsheet"
+        android:layout_height="50dp"
+        android:background="@color/o1"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        >
+        <TextView
+            android:paddingStart="3dp"
+            android:id="@+id/textView"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center|left"
+            android:paddingLeft="8dp"
+            android:text="UPDATE OPERATOR"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
-        <LinearLayout
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:weightSum="1">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:padding="14dp"
-                android:text="ADD AN OPERATOR"
-                android:fontFamily="@font/ubuntu_bold"
-                android:layout_weight="0.95"
-                android:textStyle="bold"/>
+            android:layout_gravity="start"
+            android:fontFamily="@font/ubuntu_bold"
+            android:padding="14dp"
+            android:text="MODIFY AN OPERATOR"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/viewMore"
-                style="@style/Widget.Material3.Button.IconButton.Filled"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/white"
-                android:drawableTint="@color/black"
-                android:gravity="center"
-                app:icon="@drawable/baseline_close_24"
-                app:iconSize="20dp"
-                app:iconTint="@color/black" />
-        </LinearLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -89,6 +91,7 @@
                 app:errorEnabled="true"
                 app:startIconContentDescription="Hello" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_ophn"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -129,6 +132,7 @@
                 app:errorEnabled="true"
                 app:startIconContentDescription="Hello" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_oemail"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -169,9 +173,11 @@
                 app:errorEnabled="true"
                 app:startIconContentDescription="Hello" />
         </com.google.android.material.textfield.TextInputLayout>
+
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_opwd"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/til_stnlist"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -180,44 +186,6 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:focusedByDefault="false"
-            android:foregroundTint="@color/white"
-            android:hint="PASSWORD"
-            android:textColorHint="@color/maincolor4"
-            app:boxCornerRadiusTopStart="5dp"
-            app:boxStrokeColor="@color/maincolor4"
-            app:counterOverflowTextColor="@color/maincolor4"
-            app:counterTextColor="@color/maincolor4"
-            app:cursorColor="@color/maincolor4"
-            app:errorEnabled="true"
-            app:helperTextEnabled="true"
-            app:helperTextTextColor="@color/white"
-            app:hintEnabled="true"
-            app:hintTextColor="@color/maincolor4"
-            app:placeholderTextColor="@color/maincolor6"
-            app:prefixTextColor="@color/maincolor4"
-            app:suffixTextColor="@color/maincolor4">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tied_opwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
-                android:inputType="text"
-                android:textColor="@color/maincolor4"
-                android:textSize="14sp"
-                app:errorEnabled="true"
-                app:startIconContentDescription="Hello" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_req"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:backgroundTint="@color/white"
             android:foregroundTint="@color/white"
             android:hint="SELECT STATION"
             android:textColorHint="@color/maincolor4"
@@ -232,42 +200,37 @@
             app:hintTextColor="@color/maincolor4"
             app:placeholderTextColor="@color/maincolor6"
             app:prefixTextColor="@color/maincolor4"
-            app:suffixTextColor="@color/maincolor4"
-            android:focusedByDefault="false"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
+            app:suffixTextColor="@color/maincolor4">
 
 
-        <AutoCompleteTextView
-            android:id="@+id/act_dd"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/montserrat_semibold"
-            app:startIconContentDescription="Hello"
-            android:textColor="@color/maincolor4"
-            android:textSize="12sp"
-            app:errorEnabled="true" />
+            <AutoCompleteTextView
+                android:id="@+id/act_stn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textColor="@color/maincolor4"
+                android:textSize="12sp"
+                app:errorEnabled="true"
+                app:startIconContentDescription="Hello" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_admlogin"
+            android:id="@+id/btn_oprtrupdt"
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ubuntu_regular"
             android:layout_margin="10dp"
+            android:fontFamily="@font/ubuntu_regular"
             android:gravity="center"
-            android:text="SAVE"
+            android:text="UPDATE"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"
             app:backgroundTint="@color/maincolor"
-            app:rippleColor="@color/maincolor"
+            app:cornerRadius="5dp"
             app:elevation="5dp"
-            app:cornerRadius="5dp"/>
+            app:rippleColor="@color/maincolor" />
 
     </LinearLayout>
-    </FrameLayout>
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
