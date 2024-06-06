@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class AssignmentActivity extends AppCompatActivity {
 
     MultiAutoCompleteTextView mact_dd;
-    AutoCompleteTextView act_dd;
+    AutoCompleteTextView act_dd, act_typereq;
     ArrayList<Integer> selectedCoolieIDs = new ArrayList<>();
     Integer selectedRequestID;
     TextView tv_showreqid, tv_showreqdet, tv_selectedIDs;
@@ -41,12 +41,28 @@ public class AssignmentActivity extends AppCompatActivity {
         tv_showreqdet = findViewById(R.id.tv_showreqdet);
         tv_selectedIDs = findViewById(R.id.tv_selectedIDs);
         btn_assigncr = findViewById(R.id.btn_assigncr);
+        act_typereq = findViewById(R.id.act_typereq);
 
 
         mact_dd = findViewById(R.id.mact_dd);
         mact_dd.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer()); // Set tokenizer
 
         act_dd = findViewById(R.id.act_dd);
+
+        ArrayList<String> types = new ArrayList<>();
+        types.add("Only Coolie");
+        types.add("Coolie + Chair");
+        types.add("Coolie + Cart");
+
+        ArrayAdapter<String> typeadptr= new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1,types);
+        act_typereq.setThreshold(0);
+        act_typereq.setAdapter(typeadptr);
+        act_typereq.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
 
 
         ArrayList<CoolieLoad> coolies = new ArrayList<>();
@@ -114,7 +130,8 @@ public class AssignmentActivity extends AppCompatActivity {
                         .setPositiveButton("RETURN", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(AssignmentActivity.this, AdminHomeActivity.class));
+                                finishAffinity();
+                                startActivity(new Intent(AssignmentActivity.this, AdminLoginActivity.class));
                             }
                         }).show();
             }

@@ -254,6 +254,7 @@
                     app:layout_constraintTop_toTopOf="@+id/shapeableImageView"
                     app:backgroundTint="@color/maincolor2"
                     android:text="CAPTURE PHOTO"
+                    android:textColor="@color/white"
                     android:textSize="11sp"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -267,6 +268,8 @@
                     app:layout_constraintTop_toTopOf="@+id/shapeableImageView2"
                     app:backgroundTint="@color/maincolor2"
                     android:text="CAPTURE ADHAR"
+                    android:textColor="@color/white"
+
                     android:textSize="11sp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -281,7 +284,7 @@
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="ADD"
-                android:textColor="@color/maincolor4"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:backgroundTint="@color/maincolor"

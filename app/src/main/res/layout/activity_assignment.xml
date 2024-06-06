@@ -61,7 +61,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="5dp"
                 android:padding="10dp"
-                android:text="REQUEST ID : 00997463"
+                android:text="REQUEST ID : "
                 android:fontFamily="@font/montserrat_bold"
                 android:textColor="@color/maincolor4"
                 />
@@ -71,10 +71,48 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:padding="10dp"
-                android:text="Passenger : ARUN SHARMA\nDetails : 01/06/2024\nCoolie : 01\nSTATION : DURG"
+                android:text="Passenger : \nDetails : \nCoolie : \nSTATION : "
                 android:fontFamily="@font/montserrat_bold"
                 android:textColor="@color/maincolor4"
                 />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_typereq"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/white"
+                android:foregroundTint="@color/white"
+                android:hint="SELECT A REQUEST TYPE"
+                android:textColorHint="@color/maincolor4"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxStrokeColor="@color/maincolor4"
+                app:counterOverflowTextColor="@color/maincolor4"
+                app:counterTextColor="@color/maincolor4"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/white"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/maincolor4"
+                app:placeholderTextColor="@color/maincolor6"
+                app:prefixTextColor="@color/maincolor4"
+                app:suffixTextColor="@color/maincolor4"
+                android:focusedByDefault="false"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_typereq"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/montserrat_semibold"
+                    app:startIconContentDescription="Hello"
+                    android:textColor="@color/maincolor4"
+                    android:textSize="12sp"
+                    app:errorEnabled="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_req"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
