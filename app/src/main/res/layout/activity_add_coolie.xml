@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AddCoolieActivity">
+    tools:context=".activities.OPERATOR.AddCoolieActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"

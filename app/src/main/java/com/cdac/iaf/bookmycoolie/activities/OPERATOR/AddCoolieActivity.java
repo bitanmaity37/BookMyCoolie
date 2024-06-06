@@ -1,4 +1,4 @@
-package com.cdac.iaf.bookmycoolie.activities;
+package com.cdac.iaf.bookmycoolie.activities.OPERATOR;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;

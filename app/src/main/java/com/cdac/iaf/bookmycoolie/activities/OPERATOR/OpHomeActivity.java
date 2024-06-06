@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.cdac.iaf.bookmycoolie.R;
-import com.cdac.iaf.bookmycoolie.activities.AddCoolieActivity;
-import com.cdac.iaf.bookmycoolie.activities.AssignmentActivity;
 
 public class OpHomeActivity extends AppCompatActivity {
 
