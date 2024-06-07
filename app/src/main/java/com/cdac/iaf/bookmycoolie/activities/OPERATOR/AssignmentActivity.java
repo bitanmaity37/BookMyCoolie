@@ -19,19 +19,21 @@ import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.activities.AdminLoginActivity;
 import com.cdac.iaf.bookmycoolie.models.CoolieLoad;
 import com.cdac.iaf.bookmycoolie.models.CurrentPassengerRequests;
+import com.cdac.iaf.bookmycoolie.models.Operator;
+import com.cdac.iaf.bookmycoolie.models.RequestList;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
 public class AssignmentActivity extends AppCompatActivity {
 
-    MultiAutoCompleteTextView mact_dd;
-    AutoCompleteTextView act_dd, act_typereq;
+    AutoCompleteTextView act_dd;
     ArrayList<Integer> selectedCoolieIDs = new ArrayList<>();
     Integer selectedRequestID;
     TextView tv_showreqid, tv_showreqdet, tv_selectedIDs;
 
     Button btn_assigncr;
+    Intent intentFromRow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,28 +43,22 @@ public class AssignmentActivity extends AppCompatActivity {
         tv_showreqdet = findViewById(R.id.tv_showreqdet);
         tv_selectedIDs = findViewById(R.id.tv_selectedIDs);
         btn_assigncr = findViewById(R.id.btn_assigncr);
-        act_typereq = findViewById(R.id.act_typereq);
 
 
-        mact_dd = findViewById(R.id.mact_dd);
-        mact_dd.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer()); // Set tokenizer
+
 
         act_dd = findViewById(R.id.act_dd);
 
-        ArrayList<String> types = new ArrayList<>();
-        types.add("Only Coolie");
-        types.add("Coolie + Chair");
-        types.add("Coolie + Cart");
+        RequestList request;
 
-        ArrayAdapter<String> typeadptr= new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1,types);
-        act_typereq.setThreshold(0);
-        act_typereq.setAdapter(typeadptr);
-        act_typereq.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        intentFromRow = getIntent();
+        Bundle args = intentFromRow.getBundleExtra("operator");
+        request=(RequestList) args.getSerializable("reqobj");
 
-            }
-        });
+        tv_showreqid.setText("REQUEST ID: "+request.getReqId());
+
+
+
 
 
         ArrayList<CoolieLoad> coolies = new ArrayList<>();
@@ -72,40 +68,19 @@ public class AssignmentActivity extends AppCompatActivity {
         coolies.add(new CoolieLoad(4,"Ravi4", 3, false));
         coolies.add(new CoolieLoad(5,"Vishnu1", 0, false));
         coolies.add(new CoolieLoad(6,"Vishnu2", 8, false));
-        System.out.println("All Details: "+coolies.toString());
 
-        ArrayList<CurrentPassengerRequests> crequests = new ArrayList<>();
-        crequests.add(new CurrentPassengerRequests(1000,"John","02/June/2024","16:45:00",2));
-        crequests.add(new CurrentPassengerRequests(1001,"Harry","05/June/2024","13:30:00",1));
-        crequests.add(new CurrentPassengerRequests(1002,"Brown","11/June/2024","11:10:00",3));
-        crequests.add(new CurrentPassengerRequests(1003,"Roy","21/June/2024","07:05:00",1));
-        System.out.println("All Requests: "+crequests);
 
-        ArrayAdapter<CurrentPassengerRequests> psngreqAdapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1,crequests);
-        act_dd.setThreshold(0);
-        act_dd.setAdapter(psngreqAdapter);
 
-        act_dd.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedRequestID = crequests.get(i).getRequestId();
-                tv_showreqid.setText("REQUEST ID: "+selectedRequestID);
-                tv_showreqdet.setText("Passenger: "+crequests.get(i).getPassengerName()+
-                                        "\nDate: "+crequests.get(i).getDate()+" Time: "+crequests.get(i).getTime()+
-                                        "\nRequirements: "+crequests.get(i).getRequirementNo());
-            }
-        });
 
 
 
 
 
         ArrayAdapter<CoolieLoad> coolieLoadArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_expandable_list_item_1,coolies);
-        mact_dd.setThreshold(0);
-        mact_dd.setAdapter(coolieLoadArrayAdapter);
+        act_dd.setThreshold(0);
+        act_dd.setAdapter(coolieLoadArrayAdapter);
 
-        mact_dd.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        act_dd.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Integer selectedId = coolies.get(i).getId();

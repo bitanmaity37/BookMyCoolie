@@ -23,7 +23,7 @@ public class OpHomeActivity extends AppCompatActivity {
         btn_asgnCoolie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(OpHomeActivity.this, AssignmentActivity.class));
+                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class));
             }
         });
 
