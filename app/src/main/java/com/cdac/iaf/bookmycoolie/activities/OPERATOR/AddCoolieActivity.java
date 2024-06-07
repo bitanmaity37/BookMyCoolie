@@ -26,23 +26,37 @@ import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
+import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
+import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
+import com.cdac.iaf.bookmycoolie.restapi.RestClient;
+import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.FileUtil;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AddCoolieActivity extends AppCompatActivity {
 
-    ShapeableImageView shapeableImageView, shapeableImageView2;
-    Button captimg, captimgadhar, btn_rgstrc;
+    ShapeableImageView shapeableImageView;
+            //shapeableImageView2;
+    Button captimg,  btn_rgstrc;
+    //captimgadhar,
     boolean camFlag;
     String capturedPhoto;
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 1;
     byte[] bytesCapFile;
 
     FileUtil fileUtil;
+    TextInputEditText tied_cname,
+            tied_billano,
+            tied_phno;
 
 
     @Override
@@ -51,23 +65,41 @@ public class AddCoolieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_coolie);
 
         shapeableImageView = findViewById(R.id.shapeableImageView);
-        shapeableImageView2 = findViewById(R.id.shapeableImageView2);
+        /*shapeableImageView2 = findViewById(R.id.shapeableImageView2);*/
         captimg= findViewById(R.id.captimg);
-        captimgadhar= findViewById(R.id.captimgadhar);
+       /* captimgadhar= findViewById(R.id.captimgadhar);*/
         btn_rgstrc = findViewById(R.id.btn_rgstrc);
+
+        tied_cname = findViewById(R.id.tied_cname);
+                tied_billano = findViewById(R.id.tied_billano);
+        tied_phno = findViewById(R.id.tied_phno);
 
         btn_rgstrc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MaterialAlertDialogBuilder m = new MaterialAlertDialogBuilder(AddCoolieActivity.this);
-                m.setTitle("ALERT!")
-                        .setMessage("COOLIE SUCCESSFULLY REGISTERE!")
-                        .setPositiveButton("HOME", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(AddCoolieActivity.this, AdminHomeActivity.class));
-                            }
-                        }).show();
+
+                System.out.println("Image before send"+capturedPhoto);
+
+                Call<AddCoolieResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
+                                                .addCoolie(
+                                                 "Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6IlJPTEVfQURNSU4iLCJzdWIiOiJrdWx2YW50a0BjZGFjLmluIiwiaWF0IjoxNzE3NzM3NTI0LCJleHAiOjE3MTc3NTU1MjR9.wHuA1HIIJOabpTNXyUhOoQGvoW3RtLM9ZtdQBeux6npXGvE77lI0FfGrVLVcz6DEymhSMbyxF9EhgDPF1ma9yQ",
+                                                        new AddCoolieRequest(
+                                                                tied_phno.getText().toString().trim(),
+                                                                tied_cname.getText().toString().trim(),
+                                                                1, 3, 1,
+                                                                tied_billano.getText().toString().trim(),
+                                                                capturedPhoto));
+                call.enqueue(new Callback<AddCoolieResponse>() {
+                    @Override
+                    public void onResponse(Call<AddCoolieResponse> call, Response<AddCoolieResponse> response) {
+                        System.out.println("Coolie ID "+response.body().getUserId());
+                    }
+
+                    @Override
+                    public void onFailure(Call<AddCoolieResponse> call, Throwable t) {
+
+                    }
+                });
 
             }
         });
@@ -109,17 +141,12 @@ public class AddCoolieActivity extends AppCompatActivity {
                 cameraIntentMaker(1);
             }
         });
-        captimgadhar.setOnClickListener(new View.OnClickListener() {
+        /*captimgadhar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cameraIntentMaker(2);
             }
-        });
-
-
-
-
-
+        });*/
 
     }
 
@@ -212,15 +239,15 @@ public class AddCoolieActivity extends AppCompatActivity {
                 }
             });
 
-    ActivityResultLauncher<Intent> camlauncer2 = registerForActivityResult(
+    /*ActivityResultLauncher<Intent> camlauncer2 = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     // Add same code that you want to add in onActivityResult method
-                    /*System.out.println("In Result "+result.);
+                    *//*System.out.println("In Result "+result.);
                     Bitmap photo = (Bitmap) result.getData().getExtras().get("data");
-                    iv2.setImageBitmap(photo);*/
+                    iv2.setImageBitmap(photo);*//*
                     System.out.println("Result is "+result.getResultCode());
                     if (result.getResultCode() == Activity.RESULT_OK ){
                         try{
@@ -266,7 +293,7 @@ public class AddCoolieActivity extends AppCompatActivity {
                         }
                     }
                 }
-            });
+            });*/
     private Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
         Matrix matrix = new Matrix();
         switch (orientation) {
@@ -299,9 +326,10 @@ public class AddCoolieActivity extends AppCompatActivity {
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         if(mode==1){
             camlauncer.launch(cameraIntent);
-        } else if (mode==2) {
-            camlauncer2.launch(cameraIntent);
         }
+        /*else if (mode==2) {
+            camlauncer2.launch(cameraIntent);
+        }*/
 
     }
 }

@@ -1,5 +1,7 @@
 package com.cdac.iaf.bookmycoolie.restapi;
 
+import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
+import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
 import com.cdac.iaf.bookmycoolie.models.LoginRequest;
@@ -17,4 +19,8 @@ public interface RestInterface {
     @POST("operator/add")
     Call<AddOperatorResponse> addOperator(@Body AddOperatorRequest addOperatorRequest,
                                           @Header("Authorization") String authorization);
+
+    @POST("coolie/add")
+    Call<AddCoolieResponse> addCoolie(@Header("Authorization") String authorization,
+                                      @Body AddCoolieRequest addCoolieRequest);
 }
