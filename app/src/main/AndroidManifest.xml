@@ -23,8 +23,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookMyCoolie"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".CarouselLayout"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PASSENGER.PassengerHome"
+            android:exported="false" />
         <activity
             android:name=".activities.OPERATOR.OpHomeActivity"
             android:exported="false" />

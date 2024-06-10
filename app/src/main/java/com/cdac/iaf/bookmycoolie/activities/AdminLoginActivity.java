@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.cdac.iaf.bookmycoolie.activities.PASSENGER.PassengerHome;
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.activities.OPERATOR.OpHomeActivity;
@@ -17,6 +19,7 @@ import com.cdac.iaf.bookmycoolie.models.LoginRequest;
 import com.cdac.iaf.bookmycoolie.models.LoginResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SharedPreferenceUtility;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -28,6 +31,14 @@ public class AdminLoginActivity extends AppCompatActivity {
 
     Button btn_admlogin, btn_signup, btn_admnpage, btn_oprtrpage, btn_psngrpage;
     TextInputEditText tied_admname, tied_admpwd;
+
+    SharedPreferenceUtility sharedPreferenceUtility;
+
+    SharedPreferences sharedPreferences;
+
+    private static final String SHARED_PREF_NAME = "tokenPref";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +50,11 @@ public class AdminLoginActivity extends AppCompatActivity {
         btn_admlogin = findViewById(R.id.btn_admlogin);
 
         btn_oprtrpage = findViewById(R.id.btn_oprtrpage);
-                btn_psngrpage = findViewById(R.id.btn_psngrpage);
+        btn_psngrpage = findViewById(R.id.btn_psngrpage);
 
-        btn_admnpage =findViewById(R.id.btn_admnpage);
+        btn_admnpage = findViewById(R.id.btn_admnpage);
+
+        btn_psngrpage.setOnClickListener(v -> startActivity(new Intent(AdminLoginActivity.this, PassengerHome.class)));
 
         btn_admnpage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +73,8 @@ public class AdminLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                sharedPreferences = getSharedPreferences("jwt_token",MODE_PRIVATE);
+
                 MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(AdminLoginActivity.this);
                 materialAlertDialogBuilder.setCancelable(false)
                         .setTitle("ALERT")
@@ -77,9 +92,15 @@ public class AdminLoginActivity extends AppCompatActivity {
                                 call.enqueue(new Callback<LoginResponse>() {
                                     @Override
                                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                                        System.out.println("Response CODE LOGIN "+response.code());
-                                        System.out.println("Details ++++"+response.body().toString());
-                                        Toast.makeText(AdminLoginActivity.this, "ROLE "+response.body().getRoleName(), Toast.LENGTH_LONG).show();
+                                        System.out.println("Response CODE LOGIN " + response.code());
+                                        System.out.println("Details ++++" + response.body().toString());
+                                        System.out.println("JWT: "+response.body().getJwtToken());
+
+                                        sharedPreferences.edit().putString("auth_token","Bearer "+response.body().getJwtToken()).apply();
+
+                                       // sharedPreferenceUtility.saveToken(response.body().getJwtToken(), AdminLoginActivity.this);
+
+                                        Toast.makeText(AdminLoginActivity.this, "ROLE " + response.body().getRoleName(), Toast.LENGTH_LONG).show();
                                     }
 
                                     @Override
@@ -96,15 +117,12 @@ public class AdminLoginActivity extends AppCompatActivity {
                         .show();
 
 
-
             }
         });
 
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
 
 
                 startActivity(new Intent(AdminLoginActivity.this, SignUPPassengerActivity.class));

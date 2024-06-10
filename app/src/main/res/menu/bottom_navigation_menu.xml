@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:title="Profile"
+    android:icon="@drawable/user_3_fill"
+    android:enabled="true"
+    android:id="@+id/profileItem" />
+    <item android:title="Faq"
+        android:icon="@drawable/faq_icon"
+        android:id="@+id/faqItem" />
+    <item android:title="Contact Us"
+        android:icon="@drawable/baseline_local_phone_24"
+        android:enabled="true"
+        android:id="@+id/contactUsItem" />
+</menu>
