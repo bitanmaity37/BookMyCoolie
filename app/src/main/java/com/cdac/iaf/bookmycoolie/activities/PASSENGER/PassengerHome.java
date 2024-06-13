@@ -88,7 +88,7 @@ public class PassengerHome extends AppCompatActivity {
         callGetSationList.enqueue(new Callback<ArrayList<StationModel>>() {
             @Override
             public void onResponse(Call<ArrayList<StationModel>> call, Response<ArrayList<StationModel>> response) {
-                System.out.println("station list: "+response.body());
+                System.out.println("station list: sd "+response.body());
                 stationList = response.body();
             }
 
