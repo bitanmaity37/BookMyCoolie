@@ -6,11 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -18,19 +14,17 @@ import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.adpater.CarouselAdapter;
+import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
-import com.cdac.iaf.bookmycoolie.restapi.RestClient;
-import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PassengerHome extends AppCompatActivity {
 
@@ -40,7 +34,7 @@ public class PassengerHome extends AppCompatActivity {
 
     List<StationModel> stationModelList;
 
-    List<StationAreaModel> stationAreaModelList;
+    ArrayList<StationAreaModel> stationAreaModelList;
 
     ArrayAdapter<String> stationAdapter;
 
@@ -54,7 +48,29 @@ public class PassengerHome extends AppCompatActivity {
 
     ArrayList<StationAreaModel> stationAreaList;
 
-    ArrayList<StationModel> stationList;
+    ArrayList<StationModel> stationList = new ArrayList<>();
+
+    AutoCompleteTextView autoCompleteStationList;
+
+    AutoCompleteTextView autoCompleteStationAreaPickup;
+
+    AutoCompleteTextView autoCompleteStationAreaDropAt;
+
+    TextInputEditText startTimeInput;
+
+    TextInputEditText endTimePicker;
+
+    BottomSheetDialog coolieBottomSheetDialog;
+
+    BottomSheetDialog cartBottomSheetDialog;
+
+    StationModel selectedStation = new StationModel();
+
+    StationAreaModel selectedStationAreaPickUp = new StationAreaModel();
+
+    StationAreaModel selectedStationAreaDropAt = new StationAreaModel();
+
+    CoolieRequestModel coolieRequestModel = new CoolieRequestModel();
 
 
     @Override
@@ -63,57 +79,38 @@ public class PassengerHome extends AppCompatActivity {
         setContentView(R.layout.activity_passenger_home);
         SharedPreferences sharedPreferences = getSharedPreferences("jwt_token", MODE_PRIVATE);
         authToken = sharedPreferences.getString("auth_token", null);
+        //authToken = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6IlJPTEVfUEFTU0FOR0VSIiwic3ViIjoia3VsdmFudGtAY2RhYy5pbiIsImlhdCI6MTcxODI4MTk1MiwiZXhwIjoxNzE4Mjk5OTUyfQ._Rom18LY8VhR7ZpxsobZbR1s-I7wbLRdUFVy68irH9GhrBBkdutWOYU7kHqMRljpFGhRsrhQRMhGfBsbYbaGJA";
 
         Toast.makeText(PassengerHome.this, "token " + sharedPreferences.getString("auth_token", null), Toast.LENGTH_LONG).show();
 
         bookCoolieCard = findViewById(R.id.book_a_coolie);
-
-        callGetSationArea = RestClient.getRetrofitClient().create(RestInterface.class).getSationArea(authToken);
-
-        callGetSationArea.enqueue(new Callback<ArrayList<StationAreaModel>>() {
-            @Override
-            public void onResponse(Call<ArrayList<StationAreaModel>> call, Response<ArrayList<StationAreaModel>> response) {
-                System.out.println("station area list: " + response.body().toString());
-                stationAreaList = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<StationAreaModel>> call, Throwable t) {
-                System.out.println("station area list: error " + t.getMessage());
-            }
-        });
-
-        callGetSationList = RestClient.getRetrofitClient().create(RestInterface.class).getSationList(authToken);
-
-        callGetSationList.enqueue(new Callback<ArrayList<StationModel>>() {
-            @Override
-            public void onResponse(Call<ArrayList<StationModel>> call, Response<ArrayList<StationModel>> response) {
-                System.out.println("station list: "+response.body());
-                stationList = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<StationModel>> call, Throwable t) {
-                System.out.println("station list: error " + t.getMessage());
-            }
-        });
+        bookCoolieCard.setCardElevation(8f);
 
         bookCoolieCard.setOnClickListener(v -> {
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(PassengerHome.this);
-            View view1 = LayoutInflater.from(PassengerHome.this).inflate(R.layout.book_coolie_layout, null);
-            bottomSheetDialog.setContentView(view1);
-            bottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            bottomSheetDialog.show();
-
-            AutoCompleteTextView autoCompletePickUpArea = bottomSheetDialog.findViewById(R.id.select_pickup_input);
-            ArrayAdapter<StationAreaModel> adapterPickUpArea = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, stationAreaList);
-            autoCompletePickUpArea.setAdapter(adapterPickUpArea);
-
-            AutoCompleteTextView autoCompleteStationList = bottomSheetDialog.findViewById(R.id.select_station_input);
-            ArrayAdapter<StationModel> adapterStationList = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, stationList);
-            autoCompleteStationList.setAdapter(adapterStationList);
-
+            BookCoolieService bookCoolieService = new BookCoolieService(PassengerHome.this,authToken,getSupportFragmentManager());
+            bookCoolieService.showCoolieBottomSheet();
         });
+
+        MaterialCardView bookCartCard = findViewById(R.id.book_a_cart);
+        bookCartCard.setCardElevation(8f);
+        bookCartCard.setOnClickListener(v -> {
+            BookCartService bookCartService = new BookCartService(PassengerHome.this,authToken,getSupportFragmentManager());
+            bookCartService.showCoolieBottomSheet();
+        });
+
+        MaterialCardView bookChairCard = findViewById(R.id.book_a_chair);
+        bookChairCard.setCardElevation(8f);
+        bookChairCard.setOnClickListener(v -> {
+            BookWheelChairService bookWheelChairService = new BookWheelChairService(PassengerHome.this,authToken,getSupportFragmentManager());
+            bookWheelChairService.showCoolieBottomSheet();
+        });
+
+        setCarouselImages();
+    }
+
+
+
+    public void setCarouselImages() {
 
         recyclerView = findViewById(R.id.carousel_recycler_view);
         ArrayList<String> arrayList = new ArrayList<>();
@@ -136,4 +133,5 @@ public class PassengerHome extends AppCompatActivity {
         });
 
     }
+
 }

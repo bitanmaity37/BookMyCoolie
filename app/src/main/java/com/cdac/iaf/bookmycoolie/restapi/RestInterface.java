@@ -4,6 +4,8 @@ import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
 import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
+import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
+import com.cdac.iaf.bookmycoolie.models.CoolieResponseModel;
 import com.cdac.iaf.bookmycoolie.models.LoginRequest;
 import com.cdac.iaf.bookmycoolie.models.LoginResponse;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
@@ -34,4 +36,11 @@ public interface RestInterface {
 
     @GET("admin/getAllStations")
     Call<ArrayList<StationModel>> getSationList(@Header("Authorization") String authorization);
+    
+    @POST("admin/getStationAreaByStationId")
+    Call<ArrayList<StationAreaModel>> getStationAreaByStationId(@Header("Authorization") String authorization,@Body int stationId);
+
+    @POST("passenger/requestSerive")
+    Call<CoolieResponseModel> submitBookCoolieForm(@Header("Authorization") String authorization,
+                                                   @Body CoolieRequestModel coolieRequestModel);
 }

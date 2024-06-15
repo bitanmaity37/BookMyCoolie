@@ -2,30 +2,30 @@ package com.cdac.iaf.bookmycoolie.models;
 
 public class StationAreaModel {
 
-    private int areaMasterId;
-    private String areaName;
+    private int stationAreaMasterMappingId;
+    private String areaDescription;
 
     public StationAreaModel() {
     }
 
     @Override
     public String toString() {
-        return areaName;
+        return areaDescription;
     }
 
-    public int getAreaMasterId() {
-        return areaMasterId;
+    public int getStationAreaMasterMappingId() {
+        return stationAreaMasterMappingId;
     }
 
-    public void setAreaMasterId(int areaMasterId) {
-        this.areaMasterId = areaMasterId;
+    public void setStationAreaMasterMappingId(int stationAreaMasterMappingId) {
+        this.stationAreaMasterMappingId = stationAreaMasterMappingId;
     }
 
-    public String getAreaName() {
-        return areaName;
+    public String getAreaDescription() {
+        return areaDescription;
     }
 
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
+    public void setAreaDescription(String areaDescription) {
+        this.areaDescription = areaDescription;
     }
 }

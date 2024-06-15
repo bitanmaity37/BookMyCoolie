@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/antiflashwhite"
     tools:context=".activities.PASSENGER.PassengerHome">
 
     <!--<androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -103,7 +104,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
@@ -112,8 +113,10 @@
                 android:layout_height="150dp"
                 android:layout_marginEnd="15dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="#C2D5ED"
-                app:cardCornerRadius="10dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -131,7 +134,7 @@
                         android:layout_height="47dp"
                         android:text="Coolie"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
+                        android:textColor="#274060"
                         android:textSize="24dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -139,11 +142,14 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/book_a_cart"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="#C2D5ED"
-                app:cardCornerRadius="10dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -176,12 +182,15 @@
             android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/book_a_chair"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_marginEnd="15dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="#C2D5ED"
-                app:cardCornerRadius="10dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -192,7 +201,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:padding="25dp"
-                        android:src="@drawable/chair_icon" />
+                        android:src="@drawable/shopping_cart_2_fill" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -210,8 +219,10 @@
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="#C2D5ED"
-                app:cardCornerRadius="10dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -271,6 +282,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
+        android:background="#1B2845"
         app:menu="@menu/bottom_navigation_menu"
         app:title="BookMyCoolie" />
 

@@ -30,4 +30,11 @@
     <color name="pgtvtextcolor">#106170</color>
     <color name="ngtvtextcolor">#AA1D1A</color>
 
+    <color name="bluestone">#19535F</color>
+    <color name="surfiegreen">#0B7A75</color>
+    <color name="darkvanilla">#D7C9AA</color>
+    <color name="burntumber">#7B2D26</color>
+    <color name="antiflashwhite">#F0F3F5</color>
+
+
 </resources>
