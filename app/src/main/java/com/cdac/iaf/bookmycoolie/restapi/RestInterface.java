@@ -6,8 +6,11 @@ import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
 import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
 import com.cdac.iaf.bookmycoolie.models.CoolieResponseModel;
+import com.cdac.iaf.bookmycoolie.models.FaqModel;
 import com.cdac.iaf.bookmycoolie.models.LoginRequest;
 import com.cdac.iaf.bookmycoolie.models.LoginResponse;
+import com.cdac.iaf.bookmycoolie.models.OrderDetailsModel;
+import com.cdac.iaf.bookmycoolie.models.OrderStatusModel;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
 
@@ -43,4 +46,19 @@ public interface RestInterface {
     @POST("passenger/requestSerive")
     Call<CoolieResponseModel> submitBookCoolieForm(@Header("Authorization") String authorization,
                                                    @Body CoolieRequestModel coolieRequestModel);
+
+    @POST("passenger/getRequestsByPassengerId")
+    Call<ArrayList<OrderStatusModel>> getOrderHistoryByPassengerId(@Header("Authorization") String authorization,
+                                                        @Body int passengerId);
+
+    @POST("passenger/getAssignedCoolieByRequestId")
+    Call<ArrayList<OrderDetailsModel>> getOrderDetailsByRequestId(@Header("Authorization") String authorization,
+                                                                  @Body int passengerRequestId);
+
+    @POST("passenger/cancelRequest")
+    Call<Boolean> cancelPassengerRequest(@Header("Authorization") String authorization,
+                                         @Body int passengerRequestId);
+
+    @GET("general/getFaq")
+    Call<ArrayList<FaqModel>> getFaqList(@Header("Authorization") String authorization);
 }

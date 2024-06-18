@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pending"  id="1">PENDING</string>
+    <string name="assinged"  id="2">ASSIGNED</string>
+    <string name="completed"  id="3">COMPLETED</string>
+    <string name="canceled"  id="4">CANCELED</string>
+</resources>

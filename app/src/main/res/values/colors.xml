@@ -36,5 +36,10 @@
     <color name="burntumber">#7B2D26</color>
     <color name="antiflashwhite">#F0F3F5</color>
 
+    <color name="pending">#FFC107</color> <!-- Yellow -->
+    <color name="assigned">#2196F3</color> <!-- Orange -->
+    <color name="completed">#4CAF50</color> <!-- Green -->
+    <color name="canceled">#F44336</color> <!-- Red -->
+
 
 </resources>
