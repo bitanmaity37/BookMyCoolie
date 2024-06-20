@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.AssignCoolieToPassngrRequest;
+import com.cdac.iaf.bookmycoolie.models.CancelReqReqest;
 import com.cdac.iaf.bookmycoolie.models.FreeCoolieRequest;
 import com.cdac.iaf.bookmycoolie.models.FreeCoolieResponse;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
@@ -56,7 +57,7 @@ public class AssignmentActivity extends AppCompatActivity {
     ArrayList<FreeCoolieResponse> newCoolie = new ArrayList<>();
     RecyclerView rvcoolie;
 
-    Button btn_getCoolie;
+    Button btn_getCoolie, btn_cancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +69,7 @@ public class AssignmentActivity extends AppCompatActivity {
         rvcoolie = findViewById(R.id.rvcoolie);
         noCoolietv = findViewById(R.id.noCoolietv);
         mact_dd = findViewById(R.id.mact_dd);
+        btn_cancel = findViewById(R.id.btn_cancel);
         /**
          * Data coming from previous activity**/
         PassengerReqResponses request;
@@ -145,9 +147,7 @@ public class AssignmentActivity extends AppCompatActivity {
                             if (!selectedCoolieIDs.contains(selectedId)) { // Prevent duplicates
                                 selectedCoolieIDs.add(selectedId);
                                 newCoolie.add(coolies.get(i));
-
                               //  tv_selectedIDs.setText("Above request with Coolie IDs --> "+selectedCoolieIDs.toString()+" will be mapped");
-
                                 if (selectedCoolieIDs.size() == 0 && newCoolie.size() == 0){
                                     noCoolietv.setVisibility(View.VISIBLE);
 
@@ -176,19 +176,29 @@ public class AssignmentActivity extends AppCompatActivity {
                                 Toast.makeText(AssignmentActivity.this, "PLEASE SELECT A COOLIE", Toast.LENGTH_LONG).show();
                             }
                             else {
-
                                 System.out.println("Selected IDs: --------" + selectedCoolieIDs.toString());
-
                                 Call<ResponseBody> call1 = RestClient.getRetrofitClient()
                                         .create(RestInterface.class).mapCoolie(new TempTokenProvider().returnToken(),
                                                 new AssignCoolieToPassngrRequest(request.getPassengerRequestId(), selectedCoolieIDs));
-
                                 call1.enqueue(new Callback<ResponseBody>() {
                                     @Override
                                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                         System.out.println("Response code after map " + response.code());
                                         try {
                                             System.out.println("Response Body " + response.body().string());
+
+                                            MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(AssignmentActivity.this);
+                                            materialAlertDialogBuilder.setMessage("PASSENGER REQUEST IS MAPPED TO COOLIES")
+                                                    .setTitle("SUCCESS!!")
+                                                    .setCancelable(false)
+                                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                                            startActivity(new Intent(AssignmentActivity.this, AssignHomeActivity.class));
+                                                            dialogInterface.dismiss();
+                                                        }
+                                                    }).show();
+
                                         } catch (IOException e) {
                                             throw new RuntimeException(e);
                                         }
@@ -201,13 +211,8 @@ public class AssignmentActivity extends AppCompatActivity {
                                     }
                                 });
                             }
-
                         }
                     });
-
-
-
-
                 }
             }
 
@@ -217,20 +222,40 @@ public class AssignmentActivity extends AppCompatActivity {
             }
         });
 
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Call<ResponseBody> call2 = RestClient.getRetrofitClient().create(RestInterface.class)
+                        .cancelPReq(new TempTokenProvider().returnToken(),new CancelReqReqest(request.getPassengerRequestId()));
+                call2.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if(response.code()==200 || response.code()==202){
+                            try {
+                                System.out.println("Response code after delete "+response.code()+" "+response.body().string());
+                                MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(AssignmentActivity.this);
+                                materialAlertDialogBuilder.setMessage("PASSENGER REQUEST IS CANCELLED")
+                                        .setTitle("ALERT!!")
+                                        .setCancelable(false)
+                                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                startActivity(new Intent(AssignmentActivity.this, AssignHomeActivity.class));
+                                                dialogInterface.dismiss();
+                                            }
+                                        }).show();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
-
-
-
-
-    /*MaterialAlertDialogBuilder m = new MaterialAlertDialogBuilder(AssignmentActivity.this);
-                                            m.setTitle("Alert!!!")
-                                            .setMessage("COOLIE ASSIGNMENT DONE WITH REQUEST ID")
-                                            .setPositiveButton("RETURN", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                                    finishAffinity();
-                                                    startActivity(new Intent(AssignmentActivity.this, AdminLoginActivity.class));
-                                                    }
-                                              }).show();*/
-
 }

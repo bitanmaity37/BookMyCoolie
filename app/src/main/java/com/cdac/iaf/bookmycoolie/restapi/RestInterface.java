@@ -5,6 +5,7 @@ import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
 import com.cdac.iaf.bookmycoolie.models.AssignCoolieToPassngrRequest;
+import com.cdac.iaf.bookmycoolie.models.CancelReqReqest;
 import com.cdac.iaf.bookmycoolie.models.Coolie;
 import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
 import com.cdac.iaf.bookmycoolie.models.CoolieResponseModel;
@@ -89,4 +90,6 @@ public interface RestInterface {
     @POST("operator/assignCoolieToPassanger")
     Call<ResponseBody> mapCoolie(@Header("Authorization") String authorization, @Body AssignCoolieToPassngrRequest assignCoolieToPassngrRequest);
 
+    @POST("passenger/cancelRequest")
+    Call<ResponseBody> cancelPReq(@Header("Authorization") String authorization, @Body CancelReqReqest cancelReqReqest);
 }
