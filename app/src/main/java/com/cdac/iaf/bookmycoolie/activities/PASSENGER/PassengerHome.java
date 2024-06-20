@@ -1,5 +1,6 @@
 package com.cdac.iaf.bookmycoolie.activities.PASSENGER;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -7,6 +8,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -14,9 +16,11 @@ import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.adpater.CarouselAdapter;
+import com.cdac.iaf.bookmycoolie.databinding.ActivityPassengerHomeBinding;
 import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -29,49 +33,9 @@ import retrofit2.Call;
 public class PassengerHome extends AppCompatActivity {
 
     MaterialCardView bookCoolieCard;
-
     RecyclerView recyclerView;
-
-    List<StationModel> stationModelList;
-
-    ArrayList<StationAreaModel> stationAreaModelList;
-
-    ArrayAdapter<String> stationAdapter;
-
-    ArrayAdapter<String> areaAdapter;
-
-    Call<ArrayList<StationAreaModel>> callGetSationArea;
-
-    Call<ArrayList<StationModel>> callGetSationList;
-
     String authToken;
-
-    ArrayList<StationAreaModel> stationAreaList;
-
-    ArrayList<StationModel> stationList = new ArrayList<>();
-
-    AutoCompleteTextView autoCompleteStationList;
-
-    AutoCompleteTextView autoCompleteStationAreaPickup;
-
-    AutoCompleteTextView autoCompleteStationAreaDropAt;
-
-    TextInputEditText startTimeInput;
-
-    TextInputEditText endTimePicker;
-
-    BottomSheetDialog coolieBottomSheetDialog;
-
-    BottomSheetDialog cartBottomSheetDialog;
-
-    StationModel selectedStation = new StationModel();
-
-    StationAreaModel selectedStationAreaPickUp = new StationAreaModel();
-
-    StationAreaModel selectedStationAreaDropAt = new StationAreaModel();
-
-    CoolieRequestModel coolieRequestModel = new CoolieRequestModel();
-
+    ActivityPassengerHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,31 +47,56 @@ public class PassengerHome extends AppCompatActivity {
 
         Toast.makeText(PassengerHome.this, "token " + sharedPreferences.getString("auth_token", null), Toast.LENGTH_LONG).show();
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.profileItem) {
+                // Handle profile item click
+                Toast.makeText(PassengerHome.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (item.getItemId() == R.id.faq_item) {
+                // Handle FAQ item click
+                startActivity(new Intent(PassengerHome.this, PassengerFaqActivity.class));
+                Toast.makeText(PassengerHome.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (item.getItemId() == R.id.contact_item) {
+                // Handle contact item click
+                Toast.makeText(PassengerHome.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            return false;
+        });
+
+
         bookCoolieCard = findViewById(R.id.book_a_coolie);
         bookCoolieCard.setCardElevation(8f);
 
         bookCoolieCard.setOnClickListener(v -> {
-            BookCoolieService bookCoolieService = new BookCoolieService(PassengerHome.this,authToken,getSupportFragmentManager());
+            BookCoolieService bookCoolieService = new BookCoolieService(PassengerHome.this, authToken, getSupportFragmentManager());
             bookCoolieService.showCoolieBottomSheet();
         });
 
         MaterialCardView bookCartCard = findViewById(R.id.book_a_cart);
         bookCartCard.setCardElevation(8f);
         bookCartCard.setOnClickListener(v -> {
-            BookCartService bookCartService = new BookCartService(PassengerHome.this,authToken,getSupportFragmentManager());
+            BookCartService bookCartService = new BookCartService(PassengerHome.this, authToken, getSupportFragmentManager());
             bookCartService.showCoolieBottomSheet();
         });
 
         MaterialCardView bookChairCard = findViewById(R.id.book_a_chair);
         bookChairCard.setCardElevation(8f);
         bookChairCard.setOnClickListener(v -> {
-            BookWheelChairService bookWheelChairService = new BookWheelChairService(PassengerHome.this,authToken,getSupportFragmentManager());
+            BookWheelChairService bookWheelChairService = new BookWheelChairService(PassengerHome.this, authToken, getSupportFragmentManager());
             bookWheelChairService.showCoolieBottomSheet();
+        });
+
+        MaterialCardView orderHistoryCard = findViewById(R.id.order_history_card);
+        orderHistoryCard.setCardElevation(8f);
+        orderHistoryCard.setOnClickListener(v -> {
+            startActivity(new Intent(PassengerHome.this, PassengerOrderActivity.class));
         });
 
         setCarouselImages();
     }
-
 
 
     public void setCarouselImages() {
