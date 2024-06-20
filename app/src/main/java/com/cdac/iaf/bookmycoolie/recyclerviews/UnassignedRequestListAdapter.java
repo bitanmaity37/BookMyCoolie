@@ -13,21 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdac.iaf.bookmycoolie.R;
-import com.cdac.iaf.bookmycoolie.activities.ADMIN.ModifyOperatorActivity;
 import com.cdac.iaf.bookmycoolie.activities.OPERATOR.AssignmentActivity;
-import com.cdac.iaf.bookmycoolie.models.RequestList;
+import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 
 import java.util.ArrayList;
 
 public class UnassignedRequestListAdapter extends RecyclerView.Adapter<UnassignedRequestListAdapter.ViewHolder> {
 
-    public UnassignedRequestListAdapter(Context context, ArrayList<RequestList> requests) {
+    public UnassignedRequestListAdapter(Context context, ArrayList<PassengerReqResponses> requests) {
         this.context = context;
         this.requests = requests;
+        System.out.println("In const.........."+requests);
     }
 
     Context context;
-    ArrayList<RequestList> requests;
+    ArrayList<PassengerReqResponses> requests;
     @NonNull
     @Override
     public UnassignedRequestListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,34 +39,51 @@ public class UnassignedRequestListAdapter extends RecyclerView.Adapter<Unassigne
     @Override
     public void onBindViewHolder(@NonNull UnassignedRequestListAdapter.ViewHolder holder, int position) {
 
-        holder.reqid.setText("REQUEST NO: "+requests.get(holder.getAdapterPosition()).getReqId());
-        switch (requests.get(holder.getAdapterPosition()).getReqType()){
-            case 1:
-                holder.reqtype.setText("SERVICE: Coolie Only");
-                break;
-            case 2:
-                holder.reqtype.setText("SERVICE: Coolie and Cart");
-                break;
-            case 3:
-                holder.reqtype.setText("SERVICE: Coolie , Chair and Cart");
-                break;
+        System.out.println("requests: "+ requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime());
+
+        holder.reqid.setText("REQUEST NO: "+requests.get(holder.getAdapterPosition()).getPassengerRequestId());
+
+        holder.reqtype.setText("SERVICE: "+requests.get(holder.getAdapterPosition()).getServiceTypeName()+", WEIGHT: "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+"KG. BAGS: "+requests.get(holder.getAdapterPosition()).getNoOfBags());
+
+        holder.reqpsngr.setText("PASSENGER: "+requests.get(holder.getAdapterPosition()).getPassengerName());
+        /*holder.psngrphn.setText("DATE: "+requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime().substring(1,10)+
+                                "Time: "+requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime().substring(11,16)+
+                                "to "+requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime().substring(11,16));*/
+        String a = requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime();
+        String b = requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime();
+
+        if (a != null && b!= null){
+            holder.psngrphn.setText("Date: "+a.substring(0,10)+" Time: "+a.substring(11,16));
+        } else {
+            holder.psngrphn.setText("Date & Time not available");
         }
-        holder.reqpsngr.setText("PASSENGER: "+requests.get(holder.getAdapterPosition()).getpName());
-        holder.psngrphn.setText("PHONE:"+requests.get(holder.getAdapterPosition()).getpPhn());
-        holder.pltfrm.setText("PLATFORM: "+requests.get(holder.getAdapterPosition()).getPlatform());
+
+        //holder.psngrphn.setText(a.substring(6));
+        holder.pltfrm.setText("PICKUP: "+requests.get(holder.getAdapterPosition()).getStationAreaPickupFromName()+
+                                " DROP: "+requests.get(holder.getAdapterPosition()).getStationAreaDropAtName());
 
         holder.btnassgn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestList request = new RequestList(requests.get(holder.getAdapterPosition()).getReqId(),
-                        requests.get(holder.getAdapterPosition()).getReqType(),
-                        requests.get(holder.getAdapterPosition()).getpName(),
-                        requests.get(holder.getAdapterPosition()).getpId(),
-                        requests.get(holder.getAdapterPosition()).getPlatform(),
-                        requests.get(holder.getAdapterPosition()).getpPhn());
+
                 Intent intent = new Intent(context, AssignmentActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("reqobj",request);
+                bundle.putSerializable("reqobj",new PassengerReqResponses(
+                        requests.get(holder.getAdapterPosition()).getPassengerRequestId(),
+                        requests.get(holder.getAdapterPosition()).getApproxTotalWeightage(),
+                        requests.get(holder.getAdapterPosition()).getBookingDate(),
+                        requests.get(holder.getAdapterPosition()).getBookingFor(),
+                        requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime(),
+                        requests.get(holder.getAdapterPosition()).getBookingType(),
+                        requests.get(holder.getAdapterPosition()).getNoOfBags(),
+                        requests.get(holder.getAdapterPosition()).getStationAreaDropAt(),
+                        requests.get(holder.getAdapterPosition()).getStationAreaPickupFrom(),
+                        requests.get(holder.getAdapterPosition()).getStationAreaDropAtName(),
+                        requests.get(holder.getAdapterPosition()).getStationAreaPickupFromName(),
+                        requests.get(holder.getAdapterPosition()).getServiceTypeName(),
+                        requests.get(holder.getAdapterPosition()).getPassengerName(),
+                        requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime()
+                        ));
                 intent.putExtra("operator", bundle);
                 context.startActivity(intent);
             }
@@ -97,6 +114,8 @@ public class UnassignedRequestListAdapter extends RecyclerView.Adapter<Unassigne
              reqtype = itemView.findViewById(R.id.reqtype);
              pltfrm = itemView.findViewById(R.id.pltfrm);
              btnassgn = itemView.findViewById(R.id.btnassgn);
+
+
         }
     }
 }

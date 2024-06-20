@@ -9,8 +9,15 @@ import android.os.Bundle;
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.Operator;
 import com.cdac.iaf.bookmycoolie.recyclerviews.OperatorListAdapter;
+import com.cdac.iaf.bookmycoolie.restapi.RestClient;
+import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OperatorListActivity extends AppCompatActivity {
 
@@ -25,23 +32,31 @@ public class OperatorListActivity extends AppCompatActivity {
         rcv_oprtrlst = findViewById(R.id.rcv_oprtrlst);
 
         operators = new ArrayList<>();
-        operators.add(new Operator(1001, "Rajat Agarwal", "8978976767", "abcv.kshwk@ksck.in","dhwjsnsw",3,"Durg"));
-        operators.add(new Operator(1002, "Rajat Sen", "8944476767", "jjwjkj.eoepo@ksck.in","dhwjsnsw",2,"Bhillai"));
-        operators.add(new Operator(1003, "Rajat Sharma", "8978123467", "123.owiuw@ksck.in","dhwjsnsw",3,"Durg"));
-        operators.add(new Operator(1004, "Rajat Das", "6543976767", "cnc.fpme@ksck.in","dhwjsnsw",1,"Raipur"));
-        operators.add(new Operator(1005, "Rajat Patil", "6008976767", "abcv.cbdnn@ond.in","dhwjsnsw",1,"Raipur"));
-        operators.add(new Operator(1006, "Rajat Kumar", "89798098012", "bsjdkd.ekekkd@ksck.in","dhwjsnsw",3,"Durg"));
-        operators.add(new Operator(1007, "Rajat Chowdhary", "7670076767", "rscvd.cncnc@ksck.in","dhwjsnsw",3,"Durg"));
-        operators.add(new Operator(1008, "Rajat Shankar", "8978123767", "abchhek@ksk.in","dhwjsnsw",2,"Bhillai"));
-        operators.add(new Operator(1008, "Rajat Shankar", "8978123767", "abchhek@ksk.in","dhwjsnsw",2,"Bhillai"));
-        operators.add(new Operator(1008, "Rajat Shankar", "8978123767", "abchhek@ksk.in","dhwjsnsw",2,"Bhillai"));
-        operators.add(new Operator(1008, "Rajat Shankar", "8978123767", "abchhek@ksk.in","dhwjsnsw",2,"Bhillai"));
-        operators.add(new Operator(1008, "Rajat Shankar", "8978123767", "abchhek@ksk.in","dhwjsnsw",2,"Bhillai"));
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(OperatorListActivity.this);
-        rcv_oprtrlst.setLayoutManager(linearLayoutManager);
-        OperatorListAdapter operatorListAdapter = new OperatorListAdapter(OperatorListActivity.this,operators);
-        rcv_oprtrlst.setAdapter(operatorListAdapter);
+        Call<ArrayList<Operator>> call = RestClient.getRetrofitClient()
+                .create(RestInterface.class)
+                .getOperators(new TempTokenProvider().returnToken());
+
+        call.enqueue(new Callback<ArrayList<Operator>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Operator>> call, Response<ArrayList<Operator>> response) {
+                if(response.code() == 200){
+                    operators = response.body();
+                    System.out.println("List is "+operators);
+
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(OperatorListActivity.this);
+                    rcv_oprtrlst.setLayoutManager(linearLayoutManager);
+                    OperatorListAdapter operatorListAdapter = new OperatorListAdapter(OperatorListActivity.this,operators);
+                    rcv_oprtrlst.setAdapter(operatorListAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Operator>> call, Throwable t) {
+
+            }
+        });
+
 
 
     }

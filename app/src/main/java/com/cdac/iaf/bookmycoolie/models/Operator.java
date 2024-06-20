@@ -1,92 +1,89 @@
 package com.cdac.iaf.bookmycoolie.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Operator implements Serializable {
-    Integer id;
-    String name;
-    String phone;
-    String email;
-    String password;
-    Integer stn_id;
-    String station;
+    @SerializedName("stationName")
+    String stationName;
+    @SerializedName("userId")
+    Integer userId;
+    @SerializedName("userEmailId")
+    String userEmailId;
+    @SerializedName("userEmpId")
+    String userEmpId;
+    @SerializedName("userMobile")
+    String userMobile;
+    @SerializedName("userName")
+    String userName;
 
-    public Operator(Integer id, String name, String phone, String email, String password, Integer stn_id, String station) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-        this.stn_id = stn_id;
-        this.station = station;
+    public Operator(String stationName, Integer userId, String userEmailId, String userEmpId, String userMobile, String userName) {
+        this.stationName = stationName;
+        this.userId = userId;
+        this.userEmailId = userEmailId;
+        this.userEmpId = userEmpId;
+        this.userMobile = userMobile;
+        this.userName = userName;
     }
 
-    public Integer getId() {
-        return id;
+    public String getStationName() {
+        return stationName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 
-    public String getName() {
-        return name;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getUserEmailId() {
+        return userEmailId;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUserEmailId(String userEmailId) {
+        this.userEmailId = userEmailId;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserEmpId() {
+        return userEmpId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserEmpId(String userEmpId) {
+        this.userEmpId = userEmpId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserMobile() {
+        return userMobile;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserMobile(String userMobile) {
+        this.userMobile = userMobile;
     }
 
-    public Integer getStn_id() {
-        return stn_id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setStn_id(Integer stn_id) {
-        this.stn_id = stn_id;
-    }
-
-    public String getStation() {
-        return station;
-    }
-
-    public void setStation(String station) {
-        this.station = station;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override
     public String toString() {
         return "Operator{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", stn_id=" + stn_id +
-                ", station='" + station + '\'' +
+                "stationName='" + stationName + '\'' +
+                ", userId=" + userId +
+                ", userEmailId='" + userEmailId + '\'' +
+                ", userEmpId='" + userEmpId + '\'' +
+                ", userMobile='" + userMobile + '\'' +
+                ", userName='" + userName + '\'' +
                 '}';
     }
 }

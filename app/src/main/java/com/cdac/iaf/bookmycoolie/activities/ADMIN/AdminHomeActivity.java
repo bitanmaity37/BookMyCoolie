@@ -19,6 +19,7 @@ import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -74,7 +75,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                                                             tied_ophn.getText().toString().trim(),
                                                             "Operator 1",
                                                             "12345",
-                                                            1,1,1),"Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6IlJPTEVfQURNSU4iLCJzdWIiOiJrdWx2YW50a0BjZGFjLmluIiwiaWF0IjoxNzE3NjY0MjQ0LCJleHAiOjE3MTc2ODIyNDR9.-KOX0ZW6Ov6Gj2m63bMSOUcQQV1Ojmh38Vw6XNfeAfFZlv4PvAfcD9zgqUHiUgreKOtY-ZTG1LW1ftHsq8H-wQ");
+                                                            1,1,1), new TempTokenProvider().returnToken());
                         call.enqueue(new Callback<AddOperatorResponse>() {
                             @Override
                             public void onResponse(Call<AddOperatorResponse> call, Response<AddOperatorResponse> response) {

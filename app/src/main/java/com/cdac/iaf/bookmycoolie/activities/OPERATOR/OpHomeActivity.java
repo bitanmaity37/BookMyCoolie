@@ -11,7 +11,7 @@ import com.cdac.iaf.bookmycoolie.R;
 
 public class OpHomeActivity extends AppCompatActivity {
 
-    Button btn_addCoolie, btn_asgnCoolie;
+    Button btn_addCoolie, btn_asgnCoolie, btn_modCoolie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ public class OpHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_op_home);
         btn_addCoolie = findViewById(R.id.btn_addCoolie);
         btn_asgnCoolie = findViewById(R.id.btn_asgnCoolie);
+        btn_modCoolie = findViewById(R.id.btn_modCoolie);
 
         btn_asgnCoolie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +33,13 @@ public class OpHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(OpHomeActivity.this, AddCoolieActivity.class));
+            }
+        });
+
+        btn_modCoolie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OpHomeActivity.this, CoolieListActivity.class));
             }
         });
     }

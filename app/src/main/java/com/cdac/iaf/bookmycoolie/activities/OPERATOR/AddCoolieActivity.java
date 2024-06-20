@@ -31,6 +31,7 @@ import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.FileUtil;
+import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -82,7 +83,7 @@ public class AddCoolieActivity extends AppCompatActivity {
 
                 Call<AddCoolieResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
                                                 .addCoolie(
-                                                 "Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6IlJPTEVfQURNSU4iLCJzdWIiOiJrdWx2YW50a0BjZGFjLmluIiwiaWF0IjoxNzE3NzM3NTI0LCJleHAiOjE3MTc3NTU1MjR9.wHuA1HIIJOabpTNXyUhOoQGvoW3RtLM9ZtdQBeux6npXGvE77lI0FfGrVLVcz6DEymhSMbyxF9EhgDPF1ma9yQ",
+                                                        new TempTokenProvider().returnToken(),
                                                         new AddCoolieRequest(
                                                                 tied_phno.getText().toString().trim(),
                                                                 tied_cname.getText().toString().trim(),

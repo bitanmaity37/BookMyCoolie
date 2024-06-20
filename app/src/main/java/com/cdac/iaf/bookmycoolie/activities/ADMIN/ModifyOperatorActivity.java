@@ -41,10 +41,10 @@ public class ModifyOperatorActivity extends AppCompatActivity {
         operator=(Operator) args.getSerializable("opobj");
         System.out.println("Editing +++++++++++++"+operator);
 
-        tied_name.setText(operator.getName());
-        tied_oemail.setText(operator.getEmail());
-        tied_ophn.setText(operator.getPhone());
-        act_stn.setText(operator.getStation());
+        tied_name.setText(operator.getUserName());
+        tied_oemail.setText(operator.getUserEmailId());
+        tied_ophn.setText(operator.getUserMobile());
+        act_stn.setText(operator.getStationName());
 
         btn_oprtrupdt.setOnClickListener(new View.OnClickListener() {
             @Override

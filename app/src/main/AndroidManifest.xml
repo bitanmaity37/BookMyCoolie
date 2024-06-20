@@ -85,6 +85,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activities.OPERATOR.CoolieAttendanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.OPERATOR.CoolieListActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.HomeActivity"
             android:exported="false"
