@@ -20,6 +20,7 @@ import com.cdac.iaf.bookmycoolie.models.OrderDetailsModel;
 import com.cdac.iaf.bookmycoolie.models.OrderStatusModel;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 import com.cdac.iaf.bookmycoolie.models.PassengerRequestsModel;
+import com.cdac.iaf.bookmycoolie.models.SimpleResponse;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
 
@@ -92,4 +93,8 @@ public interface RestInterface {
 
     @POST("passenger/cancelRequest")
     Call<ResponseBody> cancelPReq(@Header("Authorization") String authorization, @Body CancelReqReqest cancelReqReqest);
+
+    @POST("operator/completePassangerRequest")
+    Call<SimpleResponse> completeReq(@Header("Authorization") String authorization, @Body CancelReqReqest cancelReqReqest);
+
 }
