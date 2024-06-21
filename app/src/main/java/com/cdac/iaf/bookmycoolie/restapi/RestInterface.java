@@ -5,6 +5,7 @@ import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
 import com.cdac.iaf.bookmycoolie.models.AssignCoolieToPassngrRequest;
+import com.cdac.iaf.bookmycoolie.models.AttendanceCoolieResponse;
 import com.cdac.iaf.bookmycoolie.models.CancelReqReqest;
 import com.cdac.iaf.bookmycoolie.models.Coolie;
 import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
@@ -20,6 +21,7 @@ import com.cdac.iaf.bookmycoolie.models.OrderDetailsModel;
 import com.cdac.iaf.bookmycoolie.models.OrderStatusModel;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 import com.cdac.iaf.bookmycoolie.models.PassengerRequestsModel;
+import com.cdac.iaf.bookmycoolie.models.SaveAttendanceModel;
 import com.cdac.iaf.bookmycoolie.models.SimpleResponse;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
@@ -96,5 +98,13 @@ public interface RestInterface {
 
     @POST("operator/completePassangerRequest")
     Call<SimpleResponse> completeReq(@Header("Authorization") String authorization, @Body CancelReqReqest cancelReqReqest);
+
+    @POST("coolie/getAllCoolieForAttendance")
+    Call<ArrayList<AttendanceCoolieResponse>> getCforAtndnc(@Header("Authorization") String authorization,
+                                                            @Body GetCoolieRequest freeCoolieRequest);
+
+    @POST("/operator/takeAttandance")
+    Call<ResponseBody> saveAttendance(@Header("Authorization") String authorization,
+                                      @Body SaveAttendanceModel getCoolieRequest);
 
 }

@@ -31,22 +31,21 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.75"
                 android:id="@+id/reqid"
                 android:text="ID : 437"
                 android:fontFamily="@font/montserrat_medium"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.25"
                 android:id="@+id/psngrphn"
-                android:text="PHONE : 8987675654"
+                android:text="Date &amp; Time"
                 android:fontFamily="@font/montserrat_medium"/>
 
         </LinearLayout>
 
         <TextView
-            android:layout_marginTop="5dp"
             android:id="@+id/reqtype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,8 +57,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
             android:weightSum="3">
@@ -76,19 +74,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:gravity="end">
-                <Button
-                    android:id="@+id/btncmplt"
-                    style="@style/Widget.Material3.Button.IconButton.Filled"
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@color/white"
-                    android:drawableTint="@color/black"
-                    android:gravity="center"
-                    app:icon="@drawable/baseline_task_24"
-                    app:iconSize="20dp"
-                    app:iconTint="@color/surfiegreen" />
 
             </LinearLayout>
 

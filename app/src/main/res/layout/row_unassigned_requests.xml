@@ -31,14 +31,14 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.75"
                     android:id="@+id/reqid"
                     android:text="ID : 437"
                     android:fontFamily="@font/montserrat_medium"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.25"
                     android:id="@+id/psngrphn"
                     android:text="PHONE : 8987675654"
                     android:fontFamily="@font/montserrat_medium"/>

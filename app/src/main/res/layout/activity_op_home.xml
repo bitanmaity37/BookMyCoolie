@@ -62,7 +62,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="48dp"
                 android:backgroundTint="@color/maincolor4"
-                android:text="ADD COOLIE"
+                android:text="MANAGE COOLIES"
                 android:layout_margin="20dp"/>
             <Button
                 android:id="@+id/btn_modCoolie"
@@ -71,7 +71,8 @@
                 android:layout_marginTop="48dp"
                 android:backgroundTint="@color/maincolor4"
                 android:text="EDIT COOLIE"
-                android:layout_margin="20dp"/>
+                android:layout_margin="20dp"
+                android:visibility="gone"/>
 
 
         </LinearLayout>
@@ -86,7 +87,7 @@
                 android:layout_height="80dp"
                 android:layout_margin="20dp"
                 android:backgroundTint="@color/maincolor4"
-                android:text="REQUESTS" />
+                android:text="MANAGE REQUESTS" />
 
 
         </LinearLayout>
@@ -98,11 +99,12 @@
 
 
             <Button
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="80dp"
                 android:layout_margin="20dp"
                 android:backgroundTint="@color/maincolor4"
-                android:text="REPORTS"/>
+                android:text="ATTENDANCE"
+                android:id="@+id/btn_attendance"/>
     </LinearLayout>
     </LinearLayout>
 
