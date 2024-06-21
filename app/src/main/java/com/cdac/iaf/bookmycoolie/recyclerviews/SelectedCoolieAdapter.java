@@ -67,6 +67,7 @@ public class SelectedCoolieAdapter extends RecyclerView.Adapter<SelectedCoolieAd
                 public boolean onLongClick(View view) {
 
                     selectedCoolieIDs.remove(getAdapterPosition());
+                    freeCoolieResponses.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(getAdapterPosition(), selectedCoolieIDs.size());
                     notifyItemRangeChanged(getAdapterPosition(), freeCoolieResponses.size());
