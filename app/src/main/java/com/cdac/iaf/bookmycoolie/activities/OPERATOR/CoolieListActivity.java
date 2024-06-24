@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.models.Coolie;
 import com.cdac.iaf.bookmycoolie.models.GetCoolieRequest;
 import com.cdac.iaf.bookmycoolie.recyclerviews.CoolieListAdapter;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 
@@ -29,6 +34,7 @@ public class CoolieListActivity extends AppCompatActivity {
     ArrayList<Coolie> coolies;
 
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+    Button home;
 
 
     @Override
@@ -38,6 +44,14 @@ public class CoolieListActivity extends AppCompatActivity {
         rcv_cList = findViewById(R.id.rcv_cList);
 
         rcv_cList = findViewById(R.id.rcv_cList);
+        home =findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CoolieListActivity.this, OpHomeActivity.class));
+                finishAffinity();
+            }
+        });
 
         try {
             securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(CoolieListActivity.this);
@@ -49,7 +63,7 @@ public class CoolieListActivity extends AppCompatActivity {
 
         Call<ArrayList<Coolie>> call = RestClient.getRetrofitClient()
                                         .create(RestInterface.class).getCoolies(securedSharedPreferenceUtils.getLoginData().getJwtToken(),
-                                                                new GetCoolieRequest(16));
+                                                                new GetCoolieRequest(securedSharedPreferenceUtils.getLoginData().getUserId()));
         call.enqueue(new Callback<ArrayList<Coolie>>() {
             @Override
             public void onResponse(Call<ArrayList<Coolie>> call, Response<ArrayList<Coolie>> response) {
@@ -64,6 +78,18 @@ public class CoolieListActivity extends AppCompatActivity {
                     CoolieListAdapter coolieListAdapter = new CoolieListAdapter(CoolieListActivity.this,coolies);
                     rcv_cList.setAdapter(coolieListAdapter);
                 }
+                if(response.code()==401){
+
+                    try {
+                        InvalidateUser.invalidate(CoolieListActivity.this);
+
+                    } catch (GeneralSecurityException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
 
             }
 
@@ -75,9 +101,11 @@ public class CoolieListActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(CoolieListActivity.this, OpHomeActivity.class));
+        finishAffinity();
     }
 }

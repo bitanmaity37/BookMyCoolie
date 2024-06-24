@@ -13,11 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.models.CancelReqReqest;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 import com.cdac.iaf.bookmycoolie.models.SimpleResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -101,6 +103,18 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
                                             notifyDataSetChanged();
                                         }
                                     }).show();
+                        }
+                        if(response.code()==401){
+
+                            try {
+                                InvalidateUser.invalidate(context);
+
+                            } catch (GeneralSecurityException e) {
+                                throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+
                         }
                     }
 

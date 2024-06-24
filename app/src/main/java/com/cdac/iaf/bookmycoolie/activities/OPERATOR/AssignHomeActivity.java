@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 import com.cdac.iaf.bookmycoolie.models.PassengerRequestsModel;
 import com.cdac.iaf.bookmycoolie.recyclerviews.AssignedListAdapter;
@@ -18,6 +20,7 @@ import com.cdac.iaf.bookmycoolie.recyclerviews.FinishedRequestListAdapter;
 import com.cdac.iaf.bookmycoolie.recyclerviews.UnassignedRequestListAdapter;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 
@@ -38,6 +41,7 @@ public class AssignHomeActivity extends AppCompatActivity {
     Integer rvMode;
 
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+    Button home;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,15 @@ public class AssignHomeActivity extends AppCompatActivity {
         tv_ongoing = findViewById(R.id.tv_ongoing);
         tv_finished = findViewById(R.id.tv_finished);
         tv_cancelled = findViewById(R.id.tv_cancelled);
+
+        home =findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AssignHomeActivity.this, OpHomeActivity.class));
+                finishAffinity();
+            }
+        });
 
         Intent intent = getIntent();
         Integer callmode = intent.getIntExtra("callmode",0);
@@ -107,7 +120,8 @@ public class AssignHomeActivity extends AppCompatActivity {
         rcv_requestList.setLayoutManager(linearLayoutManager);
 
         Call<ArrayList<PassengerReqResponses>> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new PassengerRequestsModel(5, callmode, 1));
+                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),
+                        new PassengerRequestsModel(securedSharedPreferenceUtils.getLoginData().getStationId(), callmode, 1));
         call.enqueue(new Callback<ArrayList<PassengerReqResponses>>() {
             @Override
             public void onResponse(Call<ArrayList<PassengerReqResponses>> call, Response<ArrayList<PassengerReqResponses>> response) {
@@ -118,6 +132,18 @@ public class AssignHomeActivity extends AppCompatActivity {
                     rcv_requestList.setAdapter(unassignedRequestListAdapter);
 
                     System.out.println("Requests Unassigned :"+response.body().toString());
+                }
+                if(response.code()==401){
+
+                    try {
+                        InvalidateUser.invalidate(AssignHomeActivity.this);
+
+                    } catch (GeneralSecurityException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
             }
 
@@ -133,7 +159,8 @@ public class AssignHomeActivity extends AppCompatActivity {
         rcv_requestList.setLayoutManager(linearLayoutManager);
 
         Call<ArrayList<PassengerReqResponses>> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new PassengerRequestsModel(5, callmode, 2));
+                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),
+                        new PassengerRequestsModel(securedSharedPreferenceUtils.getLoginData().getStationId(), callmode, 2));
         call.enqueue(new Callback<ArrayList<PassengerReqResponses>>() {
             @Override
             public void onResponse(Call<ArrayList<PassengerReqResponses>> call, Response<ArrayList<PassengerReqResponses>> response) {
@@ -144,6 +171,18 @@ public class AssignHomeActivity extends AppCompatActivity {
                     rcv_requestList.setAdapter(assignedListAdapter);
 
                     System.out.println("Requests Unassigned :"+response.body().toString());
+                }
+                if(response.code()==401){
+
+                    try {
+                        InvalidateUser.invalidate(AssignHomeActivity.this);
+
+                    } catch (GeneralSecurityException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
             }
 
@@ -210,7 +249,7 @@ public class AssignHomeActivity extends AppCompatActivity {
         rcv_requestList.setLayoutManager(linearLayoutManager);
 
         Call<ArrayList<PassengerReqResponses>> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new PassengerRequestsModel(5, callmode, mode));
+                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new PassengerRequestsModel(securedSharedPreferenceUtils.getLoginData().getStationId(), callmode, mode));
         call.enqueue(new Callback<ArrayList<PassengerReqResponses>>() {
             @Override
             public void onResponse(Call<ArrayList<PassengerReqResponses>> call, Response<ArrayList<PassengerReqResponses>> response) {
@@ -222,6 +261,18 @@ public class AssignHomeActivity extends AppCompatActivity {
 
                     //System.out.println("Requests Unassigned :"+response.body().toString());
                 }
+                if(response.code()==401){
+
+                    try {
+                        InvalidateUser.invalidate(AssignHomeActivity.this);
+
+                    } catch (GeneralSecurityException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
             }
 
             @Override
@@ -231,4 +282,9 @@ public class AssignHomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AssignHomeActivity.this, OpHomeActivity.class));
+        finishAffinity();
+    }
 }

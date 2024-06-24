@@ -27,12 +27,14 @@ import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.OperatorListActivity;
 import com.cdac.iaf.bookmycoolie.activities.AdminLoginActivity;
 import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
 import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.FileUtil;
+import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -52,7 +54,7 @@ public class AddCoolieActivity extends AppCompatActivity {
 
     ShapeableImageView shapeableImageView;
             //shapeableImageView2;
-    Button captimg,  btn_rgstrc;
+    Button captimg,  btn_rgstrc, home;
     //captimgadhar,
     boolean camFlag;
     String capturedPhoto;
@@ -72,6 +74,15 @@ public class AddCoolieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_coolie);
 
+        home =findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddCoolieActivity.this, OpHomeActivity.class));
+                finishAffinity();
+            }
+        });
+
         try {
             securedSharedPreferenceUtils =new SecuredSharedPreferenceUtils(AddCoolieActivity.this);
         } catch (GeneralSecurityException e) {
@@ -82,6 +93,7 @@ public class AddCoolieActivity extends AppCompatActivity {
 
 
         shapeableImageView = findViewById(R.id.shapeableImageView);
+        shapeableImageView.setImageDrawable(getResources().getDrawable(R.drawable.baseline_person_24));
         /*shapeableImageView2 = findViewById(R.id.shapeableImageView2);*/
         captimg= findViewById(R.id.captimg);
        /* captimgadhar= findViewById(R.id.captimgadhar);*/
@@ -116,7 +128,28 @@ public class AddCoolieActivity extends AppCompatActivity {
                     public void onResponse(Call<AddCoolieResponse> call, Response<AddCoolieResponse> response) {
 
                         progressDialog.dismiss();
-                        System.out.println("Coolie ID "+response.body());
+
+                        if (response.code()==200){
+
+                            System.out.println("Coolie ID "+response.body());
+                            Toast.makeText(AddCoolieActivity.this, "COOLIE ADDED", Toast.LENGTH_LONG).show();
+                            tied_cname.setText("");
+                            tied_cname.setEnabled(false);
+                            shapeableImageView.setImageDrawable(getResources().getDrawable(R.drawable.baseline_person_24));
+                        }
+
+                        if(response.code()==401){
+
+                            try {
+                                InvalidateUser.invalidate(AddCoolieActivity.this);
+
+                            } catch (GeneralSecurityException e) {
+                                throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                        }
                     }
 
                     @Override
@@ -356,4 +389,9 @@ public class AddCoolieActivity extends AppCompatActivity {
         }*/
 
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AddCoolieActivity.this, OpHomeActivity.class));
+        finishAffinity();    }
 }

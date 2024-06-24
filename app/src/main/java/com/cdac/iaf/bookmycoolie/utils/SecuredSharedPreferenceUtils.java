@@ -47,6 +47,17 @@ public class SecuredSharedPreferenceUtils {
         return lm;
     }
 
+    public Boolean isUserLogin(){
+        return sharedPreferences.getBoolean("loggedIn",false);
+    }
+
+    public void updateUserLoginStatus(boolean status){
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("loggedIn",status);
+        editor.apply();
+    }
+
     public void clearSharedPreference(){
         sharedPreferences.edit().clear().commit();
     }

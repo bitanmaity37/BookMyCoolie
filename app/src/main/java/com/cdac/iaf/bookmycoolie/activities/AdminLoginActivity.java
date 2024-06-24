@@ -51,33 +51,15 @@ public class AdminLoginActivity extends AppCompatActivity {
 
         try {
             securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AdminLoginActivity.this);
+            if (securedSharedPreferenceUtils.isUserLogin()){
+                switchActivities(securedSharedPreferenceUtils.getLoginData().getRoleName());
+            }
         } catch (GeneralSecurityException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
-        /*btn_oprtrpage = findViewById(R.id.btn_oprtrpage);
-        btn_psngrpage = findViewById(R.id.btn_psngrpage);
-
-        btn_admnpage = findViewById(R.id.btn_admnpage);*/
-
-        // btn_psngrpage.setOnClickListener(v -> startActivity(new Intent(AdminLoginActivity.this, PassengerHome.class)));
-
-        /*btn_admnpage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AdminLoginActivity.this, AdminHomeActivity.class));
-            }
-        });*/
-
-        /*btn_oprtrpage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AdminLoginActivity.this, OpHomeActivity.class));
-            }
-        });*/
         btn_admlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +78,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         System.out.println("Response CODE LOGIN " + response.code());
-                        System.out.println("Details ++++" + response.body().toString());
+                        System.out.println("Details ++++" + response.body());
                         System.out.println("JWT: " + response.body().getJwtToken());
 
                         progressDialog.dismiss();
@@ -106,19 +88,8 @@ public class AdminLoginActivity extends AppCompatActivity {
                         if(response.code()==200){
 
                             securedSharedPreferenceUtils.saveLoginData(response.body());
-                            switch (response.body().getRoleName()) {
-                                case "ROLE_PASSANGER":
-                                    startActivity(new Intent(AdminLoginActivity.this, PassengerHome.class));
-                                    break;
-                                case "ROLE_ADMIN":
-                                    startActivity(new Intent(AdminLoginActivity.this, AdminHomeActivity.class));
-                                    break;
-                                case "ROLE_OPERATOR":
-                                    startActivity(new Intent(AdminLoginActivity.this, OpHomeActivity.class));
-                                    break;
-                                default:
-                                    Toast.makeText(AdminLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                            }
+                            securedSharedPreferenceUtils.updateUserLoginStatus(true);
+                            switchActivities(response.body().getRoleName());
 
                         }
 
@@ -135,27 +106,41 @@ public class AdminLoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
 
                         System.out.println("Login error" + t.getMessage());
-
                     }
                 });
-
-                                /*Intent intent = new Intent(AdminLoginActivity.this, AdminHomeActivity.class);
-                                intent.putExtra("role",tied_admname.getText().toString());
-                                startActivity(intent);*/
-
-
             }
         });
 
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 startActivity(new Intent(AdminLoginActivity.this, SignUPPassengerActivity.class));
             }
         });
 
 
+    }
+
+    public void switchActivities(String role){
+        switch (role) {
+            case "ROLE_PASSANGER":
+                Toast.makeText(AdminLoginActivity.this, "WELCOME PASSENGER", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdminLoginActivity.this, PassengerHome.class));
+
+                break;
+            case "ROLE_ADMIN":
+                Toast.makeText(AdminLoginActivity.this, "WELCOME ADMIN", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdminLoginActivity.this, AdminHomeActivity.class));
+                finish();
+                break;
+            case "ROLE_OPERATOR":
+                Toast.makeText(AdminLoginActivity.this, "WELCOME OPERATOR", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdminLoginActivity.this, OpHomeActivity.class));
+                finish();
+                break;
+            default:
+                Toast.makeText(AdminLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                finish();
+        }
     }
 }

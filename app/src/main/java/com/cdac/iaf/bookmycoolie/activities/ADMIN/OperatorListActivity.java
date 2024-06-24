@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.Operator;
 import com.cdac.iaf.bookmycoolie.recyclerviews.OperatorListAdapter;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 
@@ -28,10 +32,21 @@ public class OperatorListActivity extends AppCompatActivity {
     ArrayList<Operator> operators;
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
+    Button home;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operator_list);
+
+        home =findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OperatorListActivity.this, AdminHomeActivity.class));
+                finishAffinity();
+            }
+        });
 
         rcv_oprtrlst = findViewById(R.id.rcv_oprtrlst);
         try {
@@ -60,6 +75,18 @@ public class OperatorListActivity extends AppCompatActivity {
                     OperatorListAdapter operatorListAdapter = new OperatorListAdapter(OperatorListActivity.this,operators);
                     rcv_oprtrlst.setAdapter(operatorListAdapter);
                 }
+                if(response.code()==401){
+
+                    try {
+                        InvalidateUser.invalidate(OperatorListActivity.this);
+
+                    } catch (GeneralSecurityException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
             }
 
             @Override
@@ -70,5 +97,11 @@ public class OperatorListActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(OperatorListActivity.this, AdminHomeActivity.class));
+        finishAffinity();
     }
 }

@@ -7,6 +7,7 @@
     tools:context=".activities.OPERATOR.AddCoolieActivity">
 
     <LinearLayout
+        android:paddingStart="10dp"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -14,30 +15,39 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:weightSum="1">
 
         <TextView
+            android:paddingStart="3dp"
             android:id="@+id/textView"
-            android:layout_width="350dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="0.97"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center|left"
             android:paddingLeft="8dp"
-            android:text="ADD A COOLIE"
+            android:text="ADD COOLIE"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_login"
-            style="@style/Widget.Material3.Button.IconButton.Filled"
+        <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|end"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_gravity="center"
             android:backgroundTint="@color/o1"
-            app:icon="@drawable/logout" />
+            android:drawableTint="@color/black"
+            android:gravity="center"
+            app:icon="@drawable/baseline_home_24"
+            app:iconSize="20dp"
+            app:iconTint="@color/white"
+            app:rippleColor="@color/white"
+            android:id="@+id/home"/>
+
+
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView

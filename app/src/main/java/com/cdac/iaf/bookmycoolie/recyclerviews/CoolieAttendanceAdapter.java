@@ -13,10 +13,12 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.models.AttendanceCoolieResponse;
 import com.cdac.iaf.bookmycoolie.models.SaveAttendanceModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 
@@ -93,6 +95,19 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
                                     holder.switch_attndnce.setText("YES");
                                     System.out.println("SAVED ATTENDNC TRUE");
                                 }
+
+                                if(response.code()==401){
+
+                                    try {
+                                        InvalidateUser.invalidate(context);
+
+                                    } catch (GeneralSecurityException e) {
+                                        throw new RuntimeException(e);
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+
+                                }
                             } catch (IOException e) {
                                 progressDialog.dismiss();
                                 throw new RuntimeException(e);
@@ -124,6 +139,18 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
                                     progressDialog.dismiss();
                                     holder.switch_attndnce.setText("NO");
                                     System.out.println("SAVED ATTENDNC False");
+                                }
+                                if(response.code()==401){
+
+                                    try {
+                                        InvalidateUser.invalidate(context);
+
+                                    } catch (GeneralSecurityException e) {
+                                        throw new RuntimeException(e);
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+
                                 }
                             } catch (IOException e) {
                                 progressDialog.dismiss();

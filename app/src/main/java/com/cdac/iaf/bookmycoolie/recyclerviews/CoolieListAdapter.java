@@ -1,5 +1,6 @@
 package com.cdac.iaf.bookmycoolie.recyclerviews;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,6 +36,7 @@ public class CoolieListAdapter extends RecyclerView.Adapter<CoolieListAdapter.Vi
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CoolieListAdapter.ViewHolder holder, int position) {
 
@@ -45,6 +47,25 @@ public class CoolieListAdapter extends RecyclerView.Adapter<CoolieListAdapter.Vi
                 holder.shpimv_coolie.setImageBitmap(decodedBitmap);
             }
         }
+        holder.tv_cname.setText("NAME: "+coolies.get(holder.getAdapterPosition()).getUserName());
+        holder.billa.setText("BILLA NO: "+coolies.get(holder.getAdapterPosition()).getCoolieBatchId());
+        holder.phn.setText("PHONE NO: "+coolies.get(holder.getAdapterPosition()).getUserMobile());
+
+        holder.btnmdfy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        holder.btndlt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
 
     }
 

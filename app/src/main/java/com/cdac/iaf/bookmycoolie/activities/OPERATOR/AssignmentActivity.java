@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.models.AssignCoolieToPassngrRequest;
 import com.cdac.iaf.bookmycoolie.models.CancelReqReqest;
 import com.cdac.iaf.bookmycoolie.models.FreeCoolieRequest;
@@ -29,6 +30,7 @@ import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 import com.cdac.iaf.bookmycoolie.recyclerviews.SelectedCoolieAdapter;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -59,13 +61,22 @@ public class AssignmentActivity extends AppCompatActivity {
     ArrayList<FreeCoolieResponse> newCoolie = new ArrayList<>();
     RecyclerView rvcoolie;
 
-    Button btn_getCoolie, btn_cancel;
+    Button btn_getCoolie, btn_cancel, home;
 
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment);
+
+        home =findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AssignmentActivity.this, OpHomeActivity.class));
+                finishAffinity();
+            }
+        });
 
         try {
             securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AssignmentActivity.this);
@@ -120,7 +131,8 @@ public class AssignmentActivity extends AppCompatActivity {
         /**
          * Call to get Free Coolies **/
         Call<ArrayList<FreeCoolieResponse>> call = RestClient.getRetrofitClient().create(RestInterface.class).getFCoolies(
-                                            securedSharedPreferenceUtils.getLoginData().getJwtToken(),new FreeCoolieRequest(1));
+                                            securedSharedPreferenceUtils.getLoginData().getJwtToken(),
+                new FreeCoolieRequest(securedSharedPreferenceUtils.getLoginData().getStationId()));
 
         call.enqueue(new Callback<ArrayList<FreeCoolieResponse>>() {
             @Override
@@ -214,6 +226,18 @@ public class AssignmentActivity extends AppCompatActivity {
                                         } catch (IOException e) {
                                             throw new RuntimeException(e);
                                         }
+                                        if(response.code()==401){
+
+                                            try {
+                                                InvalidateUser.invalidate(AssignmentActivity.this);
+
+                                            } catch (GeneralSecurityException e) {
+                                                throw new RuntimeException(e);
+                                            } catch (IOException e) {
+                                                throw new RuntimeException(e);
+                                            }
+
+                                        }
                                     }
 
                                     @Override
@@ -225,6 +249,18 @@ public class AssignmentActivity extends AppCompatActivity {
                             }
                         }
                     });
+                }
+                if(response.code()==401){
+
+                    try {
+                        InvalidateUser.invalidate(AssignmentActivity.this);
+
+                    } catch (GeneralSecurityException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
                 }
             }
 
@@ -260,6 +296,19 @@ public class AssignmentActivity extends AppCompatActivity {
                                 throw new RuntimeException(e);
                             }
                         }
+
+                        if(response.code()==401){
+
+                            try {
+                                InvalidateUser.invalidate(AssignmentActivity.this);
+
+                            } catch (GeneralSecurityException e) {
+                                throw new RuntimeException(e);
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                        }
                     }
 
                     @Override
@@ -269,5 +318,11 @@ public class AssignmentActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AssignmentActivity.this, OpHomeActivity.class));
+        finishAffinity();
     }
 }

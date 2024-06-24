@@ -24,6 +24,7 @@ import com.cdac.iaf.bookmycoolie.models.PassengerRequestsModel;
 import com.cdac.iaf.bookmycoolie.models.SaveAttendanceModel;
 import com.cdac.iaf.bookmycoolie.models.SimpleResponse;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
+import com.cdac.iaf.bookmycoolie.models.StationListResponse;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
 
 import java.util.ArrayList;
@@ -106,5 +107,8 @@ public interface RestInterface {
     @POST("/operator/takeAttandance")
     Call<ResponseBody> saveAttendance(@Header("Authorization") String authorization,
                                       @Body SaveAttendanceModel getCoolieRequest);
+
+    @GET("admin/getAllStations")
+    Call<ArrayList<StationListResponse>> getStation(@Header("Authorization") String authorization);
 
 }
