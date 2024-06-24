@@ -7,15 +7,14 @@
     android:orientation="horizontal"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="1dp"
-    android:background="#1B2845"
-    android:paddingTop="5dp"
-    style="@style/Widget.MaterialComponents.Toolbar.Primary">
+    android:background="#446b90"
+    android:paddingTop="5dp">
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:srcCompat="@drawable/logo3" />
+        app:srcCompat="@drawable/logo3" />-->
 
     <TextView
         android:id="@+id/textView3"

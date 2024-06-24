@@ -60,6 +60,8 @@ public class PassengerHome extends AppCompatActivity {
                 return true;
             } else if (item.getItemId() == R.id.contact_item) {
                 // Handle contact item click
+
+                startActivity(new Intent(PassengerHome.this, PassengerContactUsActivity.class));
                 Toast.makeText(PassengerHome.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             }

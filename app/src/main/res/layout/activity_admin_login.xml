@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#446b90"
     tools:context=".activities.AdminLoginActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -11,139 +12,175 @@
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#1B2845"
+        android:background="#446b90"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
+
         <include
             android:id="@+id/custom_toolbar"
             layout="@layout/nav_items" />
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView2"
-        android:layout_width="350dp"
-        android:layout_height="330dp"
-        android:layout_marginTop="25dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="15dp"
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topAppBar">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/sign_up_bg" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_adname"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:hint="USERNAME"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxStrokeColor="@color/maincolor4"
-                app:errorEnabled="true"
-                app:helperTextEnabled="true"
-                app:hintEnabled="true"
-                app:hintTextColor="@color/maincolor4"
-                android:focusedByDefault="false"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:backgroundTint="@color/white">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tied_admname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:inputType="text"
-                    android:textColor="@color/maincolor4"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_adpwd"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:hint="PASSWORD"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxStrokeColor="@color/maincolor4"
-                app:errorEnabled="true"
-                app:helperTextEnabled="true"
-                app:hintEnabled="true"
-                app:hintTextColor="@color/maincolor4"
-                android:focusedByDefault="false"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:backgroundTint="@color/white"
-                app:endIconMode="password_toggle">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tied_admpwd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:inputType="textPassword"
-                    android:textColor="@color/maincolor4"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_admlogin"
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="SIGN IN"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:backgroundTint="@color/maincolor"
-                app:rippleColor="@color/maincolor"
-                app:elevation="5dp" />
+            android:layout_below="@+id/imageView3"
+            android:layout_marginTop="-80dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:weightSum="1.0">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="15dp">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_signup"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_adname"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_margin="5dp"
-                    android:layout_gravity="center"
-                    android:text="SIGN UP"
-                    android:textSize="14sp"
-                    android:textColor="@color/maincolor4" />
+                    android:layout_margin="10dp"
+                    android:backgroundTint="@color/white"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:focusedByDefault="false"
+                    android:hint="Email ID"
+                    app:boxCornerRadiusBottomEnd="50dp"
+                    app:boxCornerRadiusBottomStart="50dp"
+                    app:boxCornerRadiusTopEnd="50dp"
+                    app:boxCornerRadiusTopStart="50dp"
+                    app:boxStrokeColor="@color/maincolor4"
+                    app:errorEnabled="true"
+                    app:helperTextEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/maincolor4">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tied_admname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:inputType="text"
+                        android:textColor="@color/maincolor4"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_adpwd"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:backgroundTint="@color/white"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:focusedByDefault="false"
+                    android:hint="PASSWORD"
+                    app:boxCornerRadiusBottomEnd="50dp"
+                    app:boxCornerRadiusBottomStart="50dp"
+                    app:boxCornerRadiusTopEnd="50dp"
+                    app:boxCornerRadiusTopStart="50dp"
+                    app:boxStrokeColor="@color/maincolor4"
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true"
+                    app:helperTextEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/maincolor4">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tied_admpwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:inputType="textPassword"
+                        android:textColor="@color/maincolor4"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_admlogin"
+                        style="@style/Widget.Material3.Button.ElevatedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="SIGN IN"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@color/maincolor"
+                        app:elevation="5dp"
+                        app:rippleColor="@color/maincolor" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:weightSum="1.0">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_signup"
+                            style="@style/Widget.Material3.Button.ElevatedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:text="SIGN UP"
+                            android:layout_margin="5dp"
+                            app:backgroundTint="@color/maincolor"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_fpwd"
+                    style="@style/Widget.Material3.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_margin="5dp"
-                    android:layout_gravity="center"
-                    android:text="FORGOT PASSWORD"
-                    android:textSize="14sp"
-                    android:textColor="@color/maincolor4" />
-            </LinearLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                    android:text="FORGOT PASSWORD?"
+                    android:textColor="@color/maincolor4"
+                    android:textSize="14sp" />
 
-    <com.google.android.material.card.MaterialCardView
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </RelativeLayout>
+
+
+    <!--<com.google.android.material.card.MaterialCardView
         android:layout_width="300dp"
         android:layout_height="170dp"
         android:layout_marginTop="100dp"
@@ -192,6 +229,6 @@
                 android:textSize="15sp"
                 app:backgroundTint="@color/white" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

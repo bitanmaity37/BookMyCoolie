@@ -31,12 +31,7 @@ public class AdminLoginActivity extends AppCompatActivity {
 
     Button btn_admlogin, btn_signup, btn_admnpage, btn_oprtrpage, btn_psngrpage;
     TextInputEditText tied_admname, tied_admpwd;
-
-    SharedPreferenceUtility sharedPreferenceUtility;
-
     SharedPreferences sharedPreferences;
-
-    private static final String SHARED_PREF_NAME = "tokenPref";
 
 
     @Override
@@ -49,31 +44,31 @@ public class AdminLoginActivity extends AppCompatActivity {
         btn_signup = findViewById(R.id.btn_signup);
         btn_admlogin = findViewById(R.id.btn_admlogin);
 
-        btn_oprtrpage = findViewById(R.id.btn_oprtrpage);
+        /*btn_oprtrpage = findViewById(R.id.btn_oprtrpage);
         btn_psngrpage = findViewById(R.id.btn_psngrpage);
 
-        btn_admnpage = findViewById(R.id.btn_admnpage);
+        btn_admnpage = findViewById(R.id.btn_admnpage);*/
 
-        btn_psngrpage.setOnClickListener(v -> startActivity(new Intent(AdminLoginActivity.this, PassengerHome.class)));
+       // btn_psngrpage.setOnClickListener(v -> startActivity(new Intent(AdminLoginActivity.this, PassengerHome.class)));
 
-        btn_admnpage.setOnClickListener(new View.OnClickListener() {
+        /*btn_admnpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AdminLoginActivity.this, AdminHomeActivity.class));
             }
-        });
+        });*/
 
-        btn_oprtrpage.setOnClickListener(new View.OnClickListener() {
+        /*btn_oprtrpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AdminLoginActivity.this, OpHomeActivity.class));
             }
-        });
+        });*/
         btn_admlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                sharedPreferences = getSharedPreferences("jwt_token",MODE_PRIVATE);
+                sharedPreferences = getSharedPreferences("jwt_token", MODE_PRIVATE);
 
                 MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(AdminLoginActivity.this);
                 materialAlertDialogBuilder.setCancelable(false)
@@ -94,11 +89,26 @@ public class AdminLoginActivity extends AppCompatActivity {
                                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                                         System.out.println("Response CODE LOGIN " + response.code());
                                         System.out.println("Details ++++" + response.body().toString());
-                                        System.out.println("JWT: "+response.body().getJwtToken());
+                                        System.out.println("JWT: " + response.body().getJwtToken());
 
-                                        sharedPreferences.edit().putString("auth_token","Bearer "+response.body().getJwtToken()).apply();
+                                        sharedPreferences.edit().putString("auth_token", "Bearer " + response.body().getJwtToken()).apply();
+                                        sharedPreferences.edit().putString("user_role", response.body().getRoleName()).apply();
 
-                                       // sharedPreferenceUtility.saveToken(response.body().getJwtToken(), AdminLoginActivity.this);
+                                        switch (response.body().getRoleName()) {
+                                            case "ROLE_PASSANGER":
+                                                startActivity(new Intent(AdminLoginActivity.this, PassengerHome.class));
+                                                break;
+                                            case "ROLE_ADMIN":
+                                                startActivity(new Intent(AdminLoginActivity.this, AdminHomeActivity.class));
+                                                break;
+                                            case "ROLE_OPERATOR":
+                                                startActivity(new Intent(AdminLoginActivity.this, OpHomeActivity.class));
+                                                break;
+                                            default:
+                                                Toast.makeText(AdminLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        // sharedPreferenceUtility.saveToken(response.body().getJwtToken(), AdminLoginActivity.this);
 
                                         Toast.makeText(AdminLoginActivity.this, "ROLE " + response.body().getRoleName(), Toast.LENGTH_LONG).show();
                                     }

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/faq_item_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/contact_us_station_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:text="Station Name: "
+            android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/contact_us_mobile_no_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+
+            <ImageView
+                android:id="@+id/mobile_no_icon"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/phone_fill" />
+
+            <TextView
+                android:id="@+id/contact_us_mobile_no"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:text="0123456789"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/contact_us_email_id_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+
+            <ImageView
+                android:id="@+id/email_id_icon"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/mail_fill" />
+
+            <TextView
+                android:id="@+id/contact_us_email_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:text="operator@gmail.com "
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
