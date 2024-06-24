@@ -5,6 +5,8 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,11 +22,16 @@ public class RestClient {
 
         //OkHttpClient okHttpClient = SSLPinning.getOkHttpClient(context);
 
+        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(90, TimeUnit.SECONDS)
+                .connectTimeout(90, TimeUnit.SECONDS)
+                .build();
+
         if(retrofit==null){
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
-                    //.client(okHttpClient)
+                    .client(okHttpClient)
                     .build();
         }
         return retrofit;

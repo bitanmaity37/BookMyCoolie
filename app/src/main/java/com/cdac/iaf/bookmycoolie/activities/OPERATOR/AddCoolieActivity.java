@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -26,11 +27,13 @@ import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
+import com.cdac.iaf.bookmycoolie.activities.AdminLoginActivity;
 import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
 import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.FileUtil;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -38,6 +41,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,11 +64,22 @@ public class AddCoolieActivity extends AppCompatActivity {
             tied_billano,
             tied_phno;
 
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_coolie);
+
+        try {
+            securedSharedPreferenceUtils =new SecuredSharedPreferenceUtils(AddCoolieActivity.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
         shapeableImageView = findViewById(R.id.shapeableImageView);
         /*shapeableImageView2 = findViewById(R.id.shapeableImageView2);*/
@@ -79,26 +95,33 @@ public class AddCoolieActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                ProgressDialog progressDialog = new ProgressDialog(AddCoolieActivity.this);
+                progressDialog.setCancelable(false);
+                progressDialog.setTitle("Please Wait!!");
+                progressDialog.show();
+
                 System.out.println("Image before send"+capturedPhoto);
 
                 Call<AddCoolieResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
                                                 .addCoolie(
-                                                        new TempTokenProvider().returnToken(),
+                                                        securedSharedPreferenceUtils.getLoginData().getJwtToken(),
                                                         new AddCoolieRequest(
                                                                 tied_phno.getText().toString().trim(),
                                                                 tied_cname.getText().toString().trim(),
-                                                                1, 3, 1,
+                                                                1, 3, securedSharedPreferenceUtils.getLoginData().getStationId(),
                                                                 tied_billano.getText().toString().trim(),
                                                                 capturedPhoto));
                 call.enqueue(new Callback<AddCoolieResponse>() {
                     @Override
                     public void onResponse(Call<AddCoolieResponse> call, Response<AddCoolieResponse> response) {
-                        System.out.println("Coolie ID "+response.body().getUserId());
+
+                        progressDialog.dismiss();
+                        System.out.println("Coolie ID "+response.body());
                     }
 
                     @Override
                     public void onFailure(Call<AddCoolieResponse> call, Throwable t) {
-
+                        progressDialog.dismiss();
                     }
                 });
 

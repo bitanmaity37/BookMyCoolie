@@ -12,8 +12,11 @@ import com.cdac.iaf.bookmycoolie.models.GetCoolieRequest;
 import com.cdac.iaf.bookmycoolie.recyclerviews.CoolieListAdapter;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -25,6 +28,8 @@ public class CoolieListActivity extends AppCompatActivity {
     RecyclerView rcv_cList;
     ArrayList<Coolie> coolies;
 
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +39,16 @@ public class CoolieListActivity extends AppCompatActivity {
 
         rcv_cList = findViewById(R.id.rcv_cList);
 
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(CoolieListActivity.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         Call<ArrayList<Coolie>> call = RestClient.getRetrofitClient()
-                                        .create(RestInterface.class).getCoolies(new TempTokenProvider().returnToken(),
+                                        .create(RestInterface.class).getCoolies(securedSharedPreferenceUtils.getLoginData().getJwtToken(),
                                                                 new GetCoolieRequest(16));
         call.enqueue(new Callback<ArrayList<Coolie>>() {
             @Override

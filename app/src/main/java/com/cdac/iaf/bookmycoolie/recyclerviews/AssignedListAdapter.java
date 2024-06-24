@@ -18,9 +18,12 @@ import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 import com.cdac.iaf.bookmycoolie.models.SimpleResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -47,6 +50,14 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull AssignedListAdapter.ViewHolder holder, int position) {
+        SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(context);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("requests assigned: "+ requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime());
         holder.reqid.setText("REQUEST NO: "+requests.get(holder.getAdapterPosition()).getPassengerRequestId());
         holder.reqtype.setText("SERVICE: "+requests.get(holder.getAdapterPosition()).getServiceTypeName()+", WEIGHT: "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+"KG. BAGS: "+requests.get(holder.getAdapterPosition()).getNoOfBags());
@@ -71,7 +82,8 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
             @Override
             public void onClick(View view) {
                 Call<SimpleResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                        .completeReq(new TempTokenProvider().returnToken(),new CancelReqReqest(requests.get(holder.getAdapterPosition()).getPassengerRequestId()));
+                        .completeReq(securedSharedPreferenceUtils.getLoginData().getJwtToken()
+                                ,new CancelReqReqest(requests.get(holder.getAdapterPosition()).getPassengerRequestId()));
                 call.enqueue(new Callback<SimpleResponse>() {
                     @Override
                     public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response) {

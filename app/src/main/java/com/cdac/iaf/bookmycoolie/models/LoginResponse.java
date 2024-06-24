@@ -14,13 +14,32 @@ public class LoginResponse implements Serializable {
             @SerializedName("roleName")
             String roleName;
             @SerializedName("roleId")
-            String roleId;
+            Integer roleId;
 
-    public LoginResponse(String jwtToken, String username, String roleName, String roleId) {
+            @SerializedName("userId")
+            Integer userId;
+            @SerializedName("stationId")
+            Integer stationId;
+
+    public LoginResponse(String jwtToken, String username, String roleName, Integer roleId, Integer userId, Integer stationId) {
         this.jwtToken = jwtToken;
         this.username = username;
         this.roleName = roleName;
         this.roleId = roleId;
+        this.userId = userId;
+        this.stationId = stationId;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginResponse{" +
+                "jwtToken='" + jwtToken + '\'' +
+                ", username='" + username + '\'' +
+                ", roleName='" + roleName + '\'' +
+                ", roleId=" + roleId +
+                ", userId=" + userId +
+                ", stationId=" + stationId +
+                '}';
     }
 
     public String getJwtToken() {
@@ -47,21 +66,27 @@ public class LoginResponse implements Serializable {
         this.roleName = roleName;
     }
 
-    public String getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
-    @Override
-    public String toString() {
-        return "LoginResponse{" +
-                "jwtToken='" + jwtToken + '\'' +
-                ", username='" + username + '\'' +
-                ", roleName='" + roleName + '\'' +
-                ", roleId='" + roleId + '\'' +
-                '}';
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(Integer stationId) {
+        this.stationId = stationId;
     }
 }

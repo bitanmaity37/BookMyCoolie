@@ -17,9 +17,11 @@ import com.cdac.iaf.bookmycoolie.models.AttendanceCoolieResponse;
 import com.cdac.iaf.bookmycoolie.models.SaveAttendanceModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
@@ -48,6 +50,15 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
     @Override
     public void onBindViewHolder(@NonNull CoolieAttendanceAdapter.ViewHolder holder, int position) {
 
+        SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(context);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         holder.cid.setText(coolies.get(holder.getAdapterPosition()).getCoolieId().toString());
         holder.cname.setText(coolies.get(holder.getAdapterPosition()).getUserName());
         holder.cbatch.setText(coolies.get(holder.getAdapterPosition()).getCoolieBatchId());
@@ -71,7 +82,8 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
                     progressDialog.show();
 
                     Call<ResponseBody> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                            .saveAttendance(new TempTokenProvider().returnToken(),new SaveAttendanceModel(coolies.get(holder.getAdapterPosition()).getCoolieId(),true));
+                            .saveAttendance(securedSharedPreferenceUtils.getLoginData().getJwtToken()
+                                    ,new SaveAttendanceModel(coolies.get(holder.getAdapterPosition()).getCoolieId(),true));
                     call.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -103,7 +115,7 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
                     progressDialog.show();
 
                     Call<ResponseBody> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                            .saveAttendance(new TempTokenProvider().returnToken(),new SaveAttendanceModel(coolies.get(holder.getAdapterPosition()).getCoolieId(),false));
+                            .saveAttendance(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new SaveAttendanceModel(coolies.get(holder.getAdapterPosition()).getCoolieId(),false));
                     call.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

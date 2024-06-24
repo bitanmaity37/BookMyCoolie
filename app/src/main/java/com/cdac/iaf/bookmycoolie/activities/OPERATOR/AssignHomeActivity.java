@@ -18,8 +18,11 @@ import com.cdac.iaf.bookmycoolie.recyclerviews.FinishedRequestListAdapter;
 import com.cdac.iaf.bookmycoolie.recyclerviews.UnassignedRequestListAdapter;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -33,6 +36,8 @@ public class AssignHomeActivity extends AppCompatActivity {
     TextView tv_pending,tv_ongoing, tv_finished,tv_cancelled;
 
     Integer rvMode;
+
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,13 @@ public class AssignHomeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Integer callmode = intent.getIntExtra("callmode",0);
 
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AssignHomeActivity.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         rvPendingLoad(callmode);
         c1();
@@ -95,7 +107,7 @@ public class AssignHomeActivity extends AppCompatActivity {
         rcv_requestList.setLayoutManager(linearLayoutManager);
 
         Call<ArrayList<PassengerReqResponses>> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                .getPReqs(new TempTokenProvider().returnToken(),new PassengerRequestsModel(5, callmode, 1));
+                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new PassengerRequestsModel(5, callmode, 1));
         call.enqueue(new Callback<ArrayList<PassengerReqResponses>>() {
             @Override
             public void onResponse(Call<ArrayList<PassengerReqResponses>> call, Response<ArrayList<PassengerReqResponses>> response) {
@@ -121,7 +133,7 @@ public class AssignHomeActivity extends AppCompatActivity {
         rcv_requestList.setLayoutManager(linearLayoutManager);
 
         Call<ArrayList<PassengerReqResponses>> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                .getPReqs(new TempTokenProvider().returnToken(),new PassengerRequestsModel(5, callmode, 2));
+                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new PassengerRequestsModel(5, callmode, 2));
         call.enqueue(new Callback<ArrayList<PassengerReqResponses>>() {
             @Override
             public void onResponse(Call<ArrayList<PassengerReqResponses>> call, Response<ArrayList<PassengerReqResponses>> response) {
@@ -198,7 +210,7 @@ public class AssignHomeActivity extends AppCompatActivity {
         rcv_requestList.setLayoutManager(linearLayoutManager);
 
         Call<ArrayList<PassengerReqResponses>> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                .getPReqs(new TempTokenProvider().returnToken(),new PassengerRequestsModel(5, callmode, mode));
+                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new PassengerRequestsModel(5, callmode, mode));
         call.enqueue(new Callback<ArrayList<PassengerReqResponses>>() {
             @Override
             public void onResponse(Call<ArrayList<PassengerReqResponses>> call, Response<ArrayList<PassengerReqResponses>> response) {

@@ -19,9 +19,13 @@ import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +39,8 @@ public class AdminHomeActivity extends AppCompatActivity {
       AutoCompleteTextView act_stndd;
     Button btn_addoptsave;
 
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,14 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         btn_addopt = findViewById(R.id.btn_addopt);
         btn_modopt =findViewById(R.id.btn_modopt);
+
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AdminHomeActivity.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         btn_modopt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +89,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                                                             tied_ophn.getText().toString().trim(),
                                                             "Operator 1",
                                                             "12345",
-                                                            1,1,1), new TempTokenProvider().returnToken());
+                                                            1,1,1), securedSharedPreferenceUtils.getLoginData().getJwtToken());
                         call.enqueue(new Callback<AddOperatorResponse>() {
                             @Override
                             public void onResponse(Call<AddOperatorResponse> call, Response<AddOperatorResponse> response) {

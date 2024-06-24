@@ -29,11 +29,13 @@ import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 import com.cdac.iaf.bookmycoolie.recyclerviews.SelectedCoolieAdapter;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -58,10 +60,20 @@ public class AssignmentActivity extends AppCompatActivity {
     RecyclerView rvcoolie;
 
     Button btn_getCoolie, btn_cancel;
+
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment);
+
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AssignmentActivity.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         tv_showreqid = findViewById(R.id.tv_showreqid);
         tv_showreqdet = findViewById(R.id.tv_showreqdet);
@@ -108,7 +120,7 @@ public class AssignmentActivity extends AppCompatActivity {
         /**
          * Call to get Free Coolies **/
         Call<ArrayList<FreeCoolieResponse>> call = RestClient.getRetrofitClient().create(RestInterface.class).getFCoolies(
-                                            new TempTokenProvider().returnToken(),new FreeCoolieRequest(1));
+                                            securedSharedPreferenceUtils.getLoginData().getJwtToken(),new FreeCoolieRequest(1));
 
         call.enqueue(new Callback<ArrayList<FreeCoolieResponse>>() {
             @Override
@@ -178,7 +190,7 @@ public class AssignmentActivity extends AppCompatActivity {
                             else {
                                 System.out.println("Selected IDs: --------" + selectedCoolieIDs.toString());
                                 Call<ResponseBody> call1 = RestClient.getRetrofitClient()
-                                        .create(RestInterface.class).mapCoolie(new TempTokenProvider().returnToken(),
+                                        .create(RestInterface.class).mapCoolie(securedSharedPreferenceUtils.getLoginData().getJwtToken(),
                                                 new AssignCoolieToPassngrRequest(request.getPassengerRequestId(), selectedCoolieIDs));
                                 call1.enqueue(new Callback<ResponseBody>() {
                                     @Override
@@ -226,7 +238,7 @@ public class AssignmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Call<ResponseBody> call2 = RestClient.getRetrofitClient().create(RestInterface.class)
-                        .cancelPReq(new TempTokenProvider().returnToken(),new CancelReqReqest(request.getPassengerRequestId()));
+                        .cancelPReq(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new CancelReqReqest(request.getPassengerRequestId()));
                 call2.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

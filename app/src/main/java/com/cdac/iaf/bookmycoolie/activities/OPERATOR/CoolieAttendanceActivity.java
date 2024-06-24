@@ -14,9 +14,12 @@ import com.cdac.iaf.bookmycoolie.models.GetCoolieRequest;
 import com.cdac.iaf.bookmycoolie.recyclerviews.CoolieAttendanceAdapter;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -27,6 +30,7 @@ public class CoolieAttendanceActivity extends AppCompatActivity {
 
 
     RecyclerView rv_attndnce;
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +38,16 @@ public class CoolieAttendanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_coolie_attendance);
 //        materialSwitch = findViewById(R.id.present);
         rv_attndnce = findViewById(R.id.rv_attndnce);
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(CoolieAttendanceActivity.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         Call<ArrayList<AttendanceCoolieResponse>> call = RestClient.getRetrofitClient().create(RestInterface.class).getCforAtndnc(
-                new TempTokenProvider().returnToken(),new GetCoolieRequest(16));
+                securedSharedPreferenceUtils.getLoginData().getJwtToken(),new GetCoolieRequest(16));
         call.enqueue(new Callback<ArrayList<AttendanceCoolieResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<AttendanceCoolieResponse>> call, Response<ArrayList<AttendanceCoolieResponse>> response) {
