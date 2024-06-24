@@ -152,7 +152,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                                                             tied_name.getText().toString(),
                                                             tied_opwd.getText().toString(),
                                                             1,
-                                                            1,
+                                                            2,
                                                             stationId),
                                                             securedSharedPreferenceUtils.getLoginData().getJwtToken());
                         call.enqueue(new Callback<AddOperatorResponse>() {
