@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#446b90"
+    android:background="@color/navbar_color"
     tools:context=".activities.AdminLoginActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -12,7 +12,7 @@
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#446b90"
+        android:background="@color/navbar_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -119,20 +119,17 @@
                     android:layout_margin="5dp">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_admlogin"
+                        android:id="@+id/btn_signup"
                         style="@style/Widget.Material3.Button.ElevatedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
+                        android:text="SIGN UP"
                         android:layout_margin="5dp"
-                        android:gravity="center"
-                        android:text="SIGN IN"
+                        app:backgroundTint="@color/dark_blue"
                         android:textColor="@color/white"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:backgroundTint="@color/maincolor"
-                        app:elevation="5dp"
-                        app:rippleColor="@color/maincolor" />
-
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -141,17 +138,20 @@
                         android:weightSum="1.0">
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_signup"
+                            android:id="@+id/btn_admlogin"
                             style="@style/Widget.Material3.Button.ElevatedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:text="SIGN UP"
                             android:layout_margin="5dp"
-                            app:backgroundTint="@color/maincolor"
+                            android:layout_gravity="end"
+                            android:text="SIGN IN"
                             android:textColor="@color/white"
                             android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            app:backgroundTint="@color/dark_blue"
+                            app:elevation="5dp"
+                            app:rippleColor="@color/light_blue" />
+
                     </LinearLayout>
 
                 </LinearLayout>

@@ -8,4 +8,11 @@
     </string>
     <string name="present">PRESENT</string>
     <string name="pref_file_key">pref_file_key</string>
+
+    <string name="passenger_home">Home</string>
+    <string name="passenger_faq">FAQs</string>
+    <string name="passenger_contact">Contact Us</string>
+    <string name="passenger_order_history">History</string>
+    <string name="passenger_order_details">Order Details</string>
+
 </resources>

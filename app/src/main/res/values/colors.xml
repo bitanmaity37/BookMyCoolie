@@ -42,4 +42,9 @@
     <color name="canceled">#F44336</color> <!-- Red -->
 
 
+    <color name="navbar_color">#2C455D</color>
+    <color name="light_blue">#DAE4EE</color>
+    <color name="dark_blue">#192735</color>
+
+
 </resources>

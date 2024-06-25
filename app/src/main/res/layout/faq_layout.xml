@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:cardBackgroundColor="@color/whitelike"
+            app:cardBackgroundColor="@color/light_blue"
             app:cardElevation="0dp">
 
             <TextView

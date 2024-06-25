@@ -12,19 +12,26 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.adpater.CarouselAdapter;
 import com.cdac.iaf.bookmycoolie.databinding.ActivityPassengerHomeBinding;
 import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,16 +43,27 @@ public class PassengerHome extends AppCompatActivity {
     RecyclerView recyclerView;
     String authToken;
     ActivityPassengerHomeBinding binding;
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_home);
-        SharedPreferences sharedPreferences = getSharedPreferences("jwt_token", MODE_PRIVATE);
-        authToken = sharedPreferences.getString("auth_token", null);
+
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(PassengerHome.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        authToken = securedSharedPreferenceUtils.getLoginData().getJwtToken();
+
+        TextView navbarTitle = findViewById(R.id.navbar_title);
+        navbarTitle.setText(R.string.passenger_home);
         //authToken = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6IlJPTEVfUEFTU0FOR0VSIiwic3ViIjoia3VsdmFudGtAY2RhYy5pbiIsImlhdCI6MTcxODI4MTk1MiwiZXhwIjoxNzE4Mjk5OTUyfQ._Rom18LY8VhR7ZpxsobZbR1s-I7wbLRdUFVy68irH9GhrBBkdutWOYU7kHqMRljpFGhRsrhQRMhGfBsbYbaGJA";
 
-        Toast.makeText(PassengerHome.this, "token " + sharedPreferences.getString("auth_token", null), Toast.LENGTH_LONG).show();
+        //Toast.makeText(PassengerHome.this, "token " + sharedPreferences.getString("auth_token", null), Toast.LENGTH_LONG).show();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -97,6 +115,7 @@ public class PassengerHome extends AppCompatActivity {
             startActivity(new Intent(PassengerHome.this, PassengerOrderActivity.class));
         });
 
+        logoutButton();
         setCarouselImages();
     }
 
@@ -122,6 +141,11 @@ public class PassengerHome extends AppCompatActivity {
                 startActivity(new Intent(PassengerHome.this, CarouselAdapter.class).putExtra("image", path), ActivityOptions.makeSceneTransitionAnimation(PassengerHome.this, imageView, "image").toBundle());
             }
         });
+
+    }
+
+    public void logoutButton(){
+
 
     }
 

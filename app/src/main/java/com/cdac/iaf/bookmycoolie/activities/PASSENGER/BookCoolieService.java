@@ -1,4 +1,5 @@
 package com.cdac.iaf.bookmycoolie.activities.PASSENGER;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -7,7 +8,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
+
 import androidx.fragment.app.FragmentManager;
+
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
 import com.cdac.iaf.bookmycoolie.models.CoolieResponseModel;
@@ -21,11 +24,13 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,19 +77,6 @@ public class BookCoolieService {
         //getStationAreaByStationId();
     }
 
-    public void showCartBottomSheet() {
-        cartBottomSheetDialog = new BottomSheetDialog(context);
-        View view1 = LayoutInflater.from(context).inflate(R.layout.book_cart_layout, null);
-        cartBottomSheetDialog.setContentView(view1);
-        cartBottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        cartBottomSheetDialog.show();
-
-        getAllStation();
-        setTentativeStartTimePicker();
-        setTentativeEndTimePicker();
-
-    }
-
     public void getAllStation() {
 
         callGetSationList = RestClient.getRetrofitClient().create(RestInterface.class).getSationList(authToken);
@@ -92,9 +84,13 @@ public class BookCoolieService {
         callGetSationList.enqueue(new Callback<ArrayList<StationModel>>() {
             @Override
             public void onResponse(Call<ArrayList<StationModel>> call, Response<ArrayList<StationModel>> response) {
-                System.out.println("station list: " + response.body());
-                stationList = response.body();
-                setStationList();
+                if(response.isSuccessful() || response.code() == 200){
+                    System.out.println("station list: " + response.body());
+                    stationList = response.body();
+                    setStationList();
+                }else{
+                    Toast.makeText(context, "No Station found!!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

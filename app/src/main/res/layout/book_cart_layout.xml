@@ -444,10 +444,10 @@
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:backgroundTint="@color/maincolor"
+                app:backgroundTint="@color/dark_blue"
                 app:cornerRadius="5dp"
                 app:elevation="5dp"
-                app:rippleColor="@color/maincolor" />
+                app:rippleColor="@color/light_blue" />
 
         </LinearLayout>
     </FrameLayout>

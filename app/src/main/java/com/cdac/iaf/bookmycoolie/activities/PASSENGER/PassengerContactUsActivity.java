@@ -2,6 +2,7 @@ package com.cdac.iaf.bookmycoolie.activities.PASSENGER;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +37,8 @@ public class PassengerContactUsActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt_token", MODE_PRIVATE);
         authToken = sharedPreferences.getString("auth_token", null);
+        TextView navbarTitle = findViewById(R.id.navbar_title);
+        navbarTitle.setText(R.string.passenger_contact);
 
         Call<ArrayList<Operator>> getOperatorListCall = RestClient.getRetrofitClient().create(RestInterface.class)
                 .getOperators(authToken);

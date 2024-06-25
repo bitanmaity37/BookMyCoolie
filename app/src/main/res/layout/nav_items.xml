@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="1dp"
-    android:background="#446b90"
+    android:background="#2C455D"
     android:paddingTop="5dp">
 
     <!--<ImageView
@@ -17,13 +17,22 @@
         app:srcCompat="@drawable/logo3" />-->
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/navbar_title"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="BookMyCoolie"
         android:gravity="bottom"
         android:paddingBottom="10dp"
+        android:layout_weight="1"
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/logout_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/faq_icon"
+        android:layout_gravity="center" />
+
 </LinearLayout>

@@ -26,7 +26,7 @@ public class StationListResponse implements Serializable {
 
     @Override
     public String toString() {
-        return "Id: " + stationId + " Code: " + stationCode + " \nName: " + stationName;
+        return stationName+"("+stationCode+")" ;
     }
 
     public Integer getStationId() {

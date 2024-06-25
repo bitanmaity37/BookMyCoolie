@@ -3,6 +3,7 @@ package com.cdac.iaf.bookmycoolie.activities.PASSENGER;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -38,6 +39,9 @@ public class PassengerOrderDetailsActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt_token", MODE_PRIVATE);
         authToken = sharedPreferences.getString("auth_token", null);
+        TextView navbarTitle = findViewById(R.id.navbar_title);
+        navbarTitle.setText(R.string.passenger_order_details);
+
         reqId = getIntent().getIntExtra("reqId", 0);
         Intent  intent = getIntent();
         Toast.makeText(this, "reqId" + intent.getSerializableExtra("reqId"), Toast.LENGTH_SHORT).show();

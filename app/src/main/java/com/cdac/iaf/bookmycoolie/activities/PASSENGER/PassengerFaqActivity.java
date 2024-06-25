@@ -2,6 +2,8 @@ package com.cdac.iaf.bookmycoolie.activities.PASSENGER;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,7 +13,10 @@ import com.cdac.iaf.bookmycoolie.adpater.FaqAdapter;
 import com.cdac.iaf.bookmycoolie.models.FaqModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -23,14 +28,23 @@ public class PassengerFaqActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     String authToken;
     ArrayList<FaqModel> faqModels = new ArrayList<>();
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_faq);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("jwt_token", MODE_PRIVATE);
-        authToken = sharedPreferences.getString("auth_token", null);
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(PassengerFaqActivity.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        authToken = securedSharedPreferenceUtils.getLoginData().getJwtToken();
+        TextView navbarTitle = findViewById(R.id.navbar_title);
+        navbarTitle.setText(R.string.passenger_faq);
 
         Call<ArrayList<FaqModel>> getFaqListCall = RestClient.getRetrofitClient().create(RestInterface.class)
                 .getFaqList(authToken);
@@ -38,8 +52,14 @@ public class PassengerFaqActivity extends AppCompatActivity {
         getFaqListCall.enqueue(new Callback<ArrayList<FaqModel>>() {
             @Override
             public void onResponse(Call<ArrayList<FaqModel>> call, Response<ArrayList<FaqModel>> response) {
-                faqModels.addAll(response.body());
-                setAdapter();
+               if(response.isSuccessful() || response.code() == 200){
+                   System.out.println(response.body());
+                   faqModels.addAll(response.body());
+                   setAdapter();
+               }else{
+                   System.out.println(response.message());
+                   Toast.makeText(PassengerFaqActivity.this, "No FAQs found", Toast.LENGTH_SHORT).show();
+               }
             }
 
             @Override

@@ -293,7 +293,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_layout_servtype_status"
         android:layout_toEndOf="@id/coolie_image"
-        android:backgroundTint="#1B2845"
+        android:backgroundTint="@color/dark_blue"
         android:text="cancel request" />
 
     <com.google.android.material.divider.MaterialDivider

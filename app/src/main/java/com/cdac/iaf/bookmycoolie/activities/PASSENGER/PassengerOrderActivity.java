@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -42,6 +43,8 @@ public class PassengerOrderActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("jwt_token", MODE_PRIVATE);
         authToken = sharedPreferences.getString("auth_token", null);
+        TextView navbarTitle = findViewById(R.id.navbar_title);
+        navbarTitle.setText(R.string.passenger_order_history);
 
         recyclerView = findViewById(R.id.order_status_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

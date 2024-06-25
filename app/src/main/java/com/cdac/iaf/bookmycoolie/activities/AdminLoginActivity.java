@@ -51,7 +51,7 @@ public class AdminLoginActivity extends AppCompatActivity {
 
         try {
             securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AdminLoginActivity.this);
-            if (securedSharedPreferenceUtils.isUserLogin()){
+            if (securedSharedPreferenceUtils.isUserLogin()) {
                 switchActivities(securedSharedPreferenceUtils.getLoginData().getRoleName());
             }
         } catch (GeneralSecurityException e) {
@@ -77,27 +77,27 @@ public class AdminLoginActivity extends AppCompatActivity {
                 call.enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        System.out.println("Response CODE LOGIN " + response.code());
-                        System.out.println("Details ++++" + response.body());
-                        System.out.println("JWT: " + response.body().getJwtToken());
 
                         progressDialog.dismiss();
 
-                       // sharedPreferences.edit().putString("auth_token", "Bearer " + response.body().getJwtToken()).apply();
-                     //   sharedPreferences.edit().putString("user_role", response.body().getRoleName()).apply();
-                        if(response.code()==200){
+                        // sharedPreferences.edit().putString("auth_token", "Bearer " + response.body().getJwtToken()).apply();
+                        //   sharedPreferences.edit().putString("user_role", response.body().getRoleName()).apply();
+                        if (response.code() == 200) {
+
+                            System.out.println("Response CODE LOGIN " + response.code());
+                            System.out.println("Details ++++" + response.body());
+                            System.out.println("JWT: " + response.body().getJwtToken());
 
                             securedSharedPreferenceUtils.saveLoginData(response.body());
                             securedSharedPreferenceUtils.updateUserLoginStatus(true);
                             switchActivities(response.body().getRoleName());
 
+                            Toast.makeText(AdminLoginActivity.this, "ROLE " + response.body().getRoleName(), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(AdminLoginActivity.this, "Invalid Email ID or Password ", Toast.LENGTH_LONG).show();
                         }
 
-
-
                         // sharedPreferenceUtility.saveToken(response.body().getJwtToken(), AdminLoginActivity.this);
-
-                        Toast.makeText(AdminLoginActivity.this, "ROLE " + response.body().getRoleName(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -121,7 +121,7 @@ public class AdminLoginActivity extends AppCompatActivity {
 
     }
 
-    public void switchActivities(String role){
+    public void switchActivities(String role) {
         switch (role) {
             case "ROLE_PASSANGER":
                 Toast.makeText(AdminLoginActivity.this, "WELCOME PASSENGER", Toast.LENGTH_SHORT).show();
