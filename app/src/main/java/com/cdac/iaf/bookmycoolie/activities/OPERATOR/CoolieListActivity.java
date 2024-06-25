@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.cdac.iaf.bookmycoolie.R;
-import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
 import com.cdac.iaf.bookmycoolie.models.Coolie;
 import com.cdac.iaf.bookmycoolie.models.GetCoolieRequest;
 import com.cdac.iaf.bookmycoolie.recyclerviews.CoolieListAdapter;
@@ -18,7 +17,6 @@ import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
-import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

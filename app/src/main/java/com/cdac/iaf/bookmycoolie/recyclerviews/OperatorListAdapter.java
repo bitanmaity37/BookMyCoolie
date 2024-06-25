@@ -44,23 +44,17 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull OperatorListAdapter.ViewHolder holder, int position) {
-        holder.optid.setText("ID: "+operators.get(position).getUserEmpId()+" NAME: "+operators.get(holder.getAdapterPosition()).getUserName());
+        holder.optid.setText("ID: "+operators.get(position).getUserEmpId());
         holder.phn.setText("PH: "+operators.get(holder.getAdapterPosition()).getUserMobile());
-        holder.email.setText("MAIL: "+operators.get(holder.getAdapterPosition()).getUserMobile());
+        holder.email.setText("EMAIL: "+operators.get(holder.getAdapterPosition()).getUserEmailId());
         holder.stn.setText("STN: "+operators.get(holder.getAdapterPosition()).getStationName());
+        holder.optname.setText("NAME: "+operators.get(holder.getAdapterPosition()).getUserName());
         holder.btnmdfy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Operator op2 = operators.get(holder.getAdapterPosition());
 
-                /*Operator op = new Operator(operators.get(holder.getAdapterPosition()).getId(),
-                        operators.get(holder.getAdapterPosition()).getName(),
-                        operators.get(holder.getAdapterPosition()).getPhone(),
-                        operators.get(holder.getAdapterPosition()).getEmail(),
-                        operators.get(holder.getAdapterPosition()).getPassword(),
-                        operators.get(holder.getAdapterPosition()).getStn_id(),
-                        operators.get(holder.getAdapterPosition()).getStation());*/
                 Toast.makeText(context, "Modify Clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ModifyOperatorActivity.class);
                 Bundle bundle = new Bundle();
@@ -106,7 +100,7 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView optid,phn,email,stn;
+        TextView optid,phn,email,stn, optname;
         Button btnmdfy,btndlt;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -115,6 +109,7 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
                     phn = itemView.findViewById(R.id.phn);
             email = itemView.findViewById(R.id.email);
                     stn = itemView.findViewById(R.id.stn);
+            optname = itemView.findViewById(R.id.optname);
 
             btnmdfy = itemView.findViewById(R.id.btnmdfy);
                     btndlt = itemView.findViewById(R.id.btndlt);

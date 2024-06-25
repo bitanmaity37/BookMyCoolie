@@ -49,34 +49,50 @@
 
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/btn_addopt"
-        android:layout_width="145dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="32dp"
-        android:backgroundTint="@color/maincolor4"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.044"
-        android:text="ADD OPERATOR"/>
+        app:layout_constraintVertical_bias="0.044" 
+        app:cardCornerRadius="8dp"
+        android:elevation="20dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/black"
+        android:focusable="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:background="@color/red">
+            <ImageView
+                android:paddingTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.75"
+                android:src="@drawable/smartphone_business_person_svgrepo_com" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.25"
+                android:background="@color/maincolor4">
+                <TextView
+                    android:padding="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:text="MANAGE OPERATORS"
+                    android:textSize="10dp"
+                    android:textAlignment="center"
+                    tools:ignore="HardcodedText,SpUsage"
+                    android:fontFamily="@font/montserrat_bold" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_modopt"
-        android:layout_width="145dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/maincolor4"
-        android:text="MODIFY OPERATOR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btn_addopt"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.045" />
-
-
-
-
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
