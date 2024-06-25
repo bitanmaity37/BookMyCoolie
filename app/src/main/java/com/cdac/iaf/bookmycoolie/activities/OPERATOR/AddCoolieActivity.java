@@ -9,7 +9,6 @@ import androidx.core.content.FileProvider;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -26,18 +25,13 @@ import android.widget.Toast;
 
 
 import com.cdac.iaf.bookmycoolie.R;
-import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
-import com.cdac.iaf.bookmycoolie.activities.ADMIN.OperatorListActivity;
-import com.cdac.iaf.bookmycoolie.activities.AdminLoginActivity;
 import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
-import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
+import com.cdac.iaf.bookmycoolie.models.SimpleUserIDResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.FileUtil;
 import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
-import com.cdac.iaf.bookmycoolie.utils.TempTokenProvider;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -114,7 +108,7 @@ public class AddCoolieActivity extends AppCompatActivity {
 
                 System.out.println("Image before send"+capturedPhoto);
 
-                Call<AddCoolieResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
+                Call<SimpleUserIDResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
                                                 .addCoolie(
                                                         securedSharedPreferenceUtils.getLoginData().getJwtToken(),
                                                         new AddCoolieRequest(
@@ -123,9 +117,9 @@ public class AddCoolieActivity extends AppCompatActivity {
                                                                 1, 3, securedSharedPreferenceUtils.getLoginData().getStationId(),
                                                                 tied_billano.getText().toString().trim(),
                                                                 capturedPhoto));
-                call.enqueue(new Callback<AddCoolieResponse>() {
+                call.enqueue(new Callback<SimpleUserIDResponse>() {
                     @Override
-                    public void onResponse(Call<AddCoolieResponse> call, Response<AddCoolieResponse> response) {
+                    public void onResponse(Call<SimpleUserIDResponse> call, Response<SimpleUserIDResponse> response) {
 
                         progressDialog.dismiss();
 
@@ -153,7 +147,7 @@ public class AddCoolieActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<AddCoolieResponse> call, Throwable t) {
+                    public void onFailure(Call<SimpleUserIDResponse> call, Throwable t) {
                         progressDialog.dismiss();
                     }
                 });

@@ -1,6 +1,6 @@
 package com.cdac.iaf.bookmycoolie.models;
 
-public class AddCoolieResponse {
+public class SimpleUserIDResponse {
 
     Integer userId;
 
@@ -12,7 +12,7 @@ public class AddCoolieResponse {
         this.userId = userId;
     }
 
-    public AddCoolieResponse(Integer userId) {
+    public SimpleUserIDResponse(Integer userId) {
         this.userId = userId;
     }
 

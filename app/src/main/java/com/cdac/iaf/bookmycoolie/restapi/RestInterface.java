@@ -1,7 +1,7 @@
 package com.cdac.iaf.bookmycoolie.restapi;
 
 import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
-import com.cdac.iaf.bookmycoolie.models.AddCoolieResponse;
+import com.cdac.iaf.bookmycoolie.models.SimpleUserIDResponse;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
 import com.cdac.iaf.bookmycoolie.models.AssignCoolieToPassngrRequest;
@@ -14,6 +14,7 @@ import com.cdac.iaf.bookmycoolie.models.FaqModel;
 import com.cdac.iaf.bookmycoolie.models.FreeCoolieRequest;
 import com.cdac.iaf.bookmycoolie.models.FreeCoolieResponse;
 import com.cdac.iaf.bookmycoolie.models.GetCoolieRequest;
+import com.cdac.iaf.bookmycoolie.models.GetOtpRequestModel;
 import com.cdac.iaf.bookmycoolie.models.LoginRequest;
 import com.cdac.iaf.bookmycoolie.models.LoginResponse;
 import com.cdac.iaf.bookmycoolie.models.Operator;
@@ -21,11 +22,13 @@ import com.cdac.iaf.bookmycoolie.models.OrderDetailsModel;
 import com.cdac.iaf.bookmycoolie.models.OrderStatusModel;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 import com.cdac.iaf.bookmycoolie.models.PassengerRequestsModel;
+import com.cdac.iaf.bookmycoolie.models.RegisterPassengerDetailsModel;
 import com.cdac.iaf.bookmycoolie.models.SaveAttendanceModel;
 import com.cdac.iaf.bookmycoolie.models.SimpleResponse;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationListResponse;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
+import com.cdac.iaf.bookmycoolie.models.VerifyOtpRequestModel;
 
 import java.util.ArrayList;
 
@@ -45,8 +48,8 @@ public interface RestInterface {
                                           @Header("Authorization") String authorization);
 
     @POST("coolie/add")
-    Call<AddCoolieResponse> addCoolie(@Header("Authorization") String authorization,
-                                      @Body AddCoolieRequest addCoolieRequest);
+    Call<SimpleUserIDResponse> addCoolie(@Header("Authorization") String authorization,
+                                         @Body AddCoolieRequest addCoolieRequest);
 
     @GET("admin/getStationArea")
     Call<ArrayList<StationAreaModel>> getSationArea(@Header("Authorization") String authorization);
@@ -110,5 +113,14 @@ public interface RestInterface {
 
     @GET("admin/getAllStations")
     Call<ArrayList<StationListResponse>> getStation(@Header("Authorization") String authorization);
+
+    @POST("auth/getOtp")
+    Call<SimpleResponse> getOTP(@Body GetOtpRequestModel getOtpRequestModel);
+
+    @POST("auth/verifyOtp")
+    Call<SimpleResponse> verifyOtp(@Body VerifyOtpRequestModel verifyOtpRequestModel);
+
+    @POST("/passenger/add")
+    Call<SimpleUserIDResponse> registerPsngr(@Body RegisterPassengerDetailsModel registerPassengerDetailsModel);
 
 }
