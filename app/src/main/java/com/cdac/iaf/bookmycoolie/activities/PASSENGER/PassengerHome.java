@@ -91,21 +91,21 @@ public class PassengerHome extends AppCompatActivity {
         bookCoolieCard.setCardElevation(8f);
 
         bookCoolieCard.setOnClickListener(v -> {
-            BookCoolieService bookCoolieService = new BookCoolieService(PassengerHome.this, authToken, getSupportFragmentManager());
+            BookCoolieService bookCoolieService = new BookCoolieService(PassengerHome.this, authToken, getSupportFragmentManager(),securedSharedPreferenceUtils);
             bookCoolieService.showCoolieBottomSheet();
         });
 
         MaterialCardView bookCartCard = findViewById(R.id.book_a_cart);
         bookCartCard.setCardElevation(8f);
         bookCartCard.setOnClickListener(v -> {
-            BookCartService bookCartService = new BookCartService(PassengerHome.this, authToken, getSupportFragmentManager());
+            BookCartService bookCartService = new BookCartService(PassengerHome.this, authToken, getSupportFragmentManager(),securedSharedPreferenceUtils);
             bookCartService.showCoolieBottomSheet();
         });
 
         MaterialCardView bookChairCard = findViewById(R.id.book_a_chair);
         bookChairCard.setCardElevation(8f);
         bookChairCard.setOnClickListener(v -> {
-            BookWheelChairService bookWheelChairService = new BookWheelChairService(PassengerHome.this, authToken, getSupportFragmentManager());
+            BookWheelChairService bookWheelChairService = new BookWheelChairService(PassengerHome.this, authToken, getSupportFragmentManager(),securedSharedPreferenceUtils);
             bookWheelChairService.showCoolieBottomSheet();
         });
 

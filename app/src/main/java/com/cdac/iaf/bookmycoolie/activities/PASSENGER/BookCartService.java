@@ -18,6 +18,7 @@ import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TimeConversionUtil;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
@@ -56,11 +57,13 @@ public class BookCartService {
     CoolieRequestModel coolieRequestModel = new CoolieRequestModel();
     Context context;
     FragmentManager fragmentManager;
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
-    public BookCartService(Context context, String authToken, FragmentManager fragmentManager) {
+    public BookCartService(Context context, String authToken, FragmentManager fragmentManager, SecuredSharedPreferenceUtils securedSharedPreferenceUtils) {
         this.authToken = authToken;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.securedSharedPreferenceUtils = securedSharedPreferenceUtils;
     }
 
     public void showCoolieBottomSheet() {
@@ -266,7 +269,7 @@ public class BookCartService {
                 coolieRequestModel.setRecordTracking(formattedDate);
                 coolieRequestModel.setServiceType(2);
                 coolieRequestModel.setRequestStatus(1);
-                coolieRequestModel.setUserMaster(27);
+                coolieRequestModel.setUserMaster(securedSharedPreferenceUtils.getLoginData().getUserId());
 
                 System.out.println("coolieRequestModel: " + coolieRequestModel.toString());
 

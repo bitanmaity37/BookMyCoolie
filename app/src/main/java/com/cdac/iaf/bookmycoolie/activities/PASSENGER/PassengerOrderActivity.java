@@ -21,7 +21,10 @@ import com.cdac.iaf.bookmycoolie.adpater.OrderStatusAdapter;
 import com.cdac.iaf.bookmycoolie.models.OrderStatusModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -35,14 +38,22 @@ public class PassengerOrderActivity extends AppCompatActivity {
     private ArrayList<OrderStatusModel> orderStatusList = new ArrayList<>();
     private RecyclerView recyclerView;
     private OrderStatusAdapter orderStatusAdapter;
+    private SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_order);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("jwt_token", MODE_PRIVATE);
-        authToken = sharedPreferences.getString("auth_token", null);
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(PassengerOrderActivity.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        authToken = securedSharedPreferenceUtils.getLoginData().getJwtToken();
+
         TextView navbarTitle = findViewById(R.id.navbar_title);
         navbarTitle.setText(R.string.passenger_order_history);
 
@@ -56,7 +67,7 @@ public class PassengerOrderActivity extends AppCompatActivity {
     private void fetchOrderHistory() {
         Call<ArrayList<OrderStatusModel>> orderStatusModelCall = RestClient.getRetrofitClient()
                 .create(RestInterface.class)
-                .getOrderHistoryByPassengerId(authToken, 27);
+                .getOrderHistoryByPassengerId(authToken, securedSharedPreferenceUtils.getLoginData().getUserId());
         orderStatusModelCall.enqueue(new Callback<ArrayList<OrderStatusModel>>() {
             @Override
             public void onResponse(Call<ArrayList<OrderStatusModel>> call, Response<ArrayList<OrderStatusModel>> response) {

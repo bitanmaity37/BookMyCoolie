@@ -43,6 +43,7 @@ public class PassengerFaqActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
         authToken = securedSharedPreferenceUtils.getLoginData().getJwtToken();
+
         TextView navbarTitle = findViewById(R.id.navbar_title);
         navbarTitle.setText(R.string.passenger_faq);
 

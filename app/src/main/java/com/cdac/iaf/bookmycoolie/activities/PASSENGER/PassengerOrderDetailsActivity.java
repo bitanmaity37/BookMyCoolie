@@ -18,7 +18,10 @@ import com.cdac.iaf.bookmycoolie.adpater.OrderDetailsAdapter;
 import com.cdac.iaf.bookmycoolie.models.OrderDetailsModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -31,14 +34,22 @@ public class PassengerOrderDetailsActivity extends AppCompatActivity {
     Integer reqId;
     ArrayList<OrderDetailsModel> orderDetailsList;
     RecyclerView orderDetailsRecyclerView;
+    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("jwt_token", MODE_PRIVATE);
-        authToken = sharedPreferences.getString("auth_token", null);
+        try {
+            securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(PassengerOrderDetailsActivity.this);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        authToken = securedSharedPreferenceUtils.getLoginData().getJwtToken();
+
         TextView navbarTitle = findViewById(R.id.navbar_title);
         navbarTitle.setText(R.string.passenger_order_details);
 
@@ -58,11 +69,14 @@ public class PassengerOrderDetailsActivity extends AppCompatActivity {
         orderDetailsModel.enqueue(new Callback<ArrayList<OrderDetailsModel>>() {
             @Override
             public void onResponse(Call<ArrayList<OrderDetailsModel>> call, Response<ArrayList<OrderDetailsModel>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    System.out.println("response.body().get(0): "+response.body().get(0));
+                if (response.isSuccessful() && response.body() != null && response.body().size() > 0) {
+                    System.out.println("response.body().get(0): "+response.body().size());
                     orderDetailsList = response.body();
                     setAdapters();
-                    Toast.makeText(PassengerOrderDetailsActivity.this, orderDetailsList.get(0).toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PassengerOrderDetailsActivity.this, orderDetailsList.get(0).toString(), Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(PassengerOrderDetailsActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
                 }
             }
 
