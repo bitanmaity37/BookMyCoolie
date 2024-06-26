@@ -16,22 +16,28 @@ import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
+import com.google.android.material.card.MaterialCardView;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 public class OpHomeActivity extends AppCompatActivity {
 
-    Button btn_addCoolie, btn_asgnCoolie, btn_attendance, logout;
+    MaterialCardView add_coolie, rqstcoolie, mngattndnce, listcoolies, rqstcart,rqstchair;
+            Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_op_home);
-        btn_addCoolie = findViewById(R.id.btn_addCoolie);
-        btn_asgnCoolie = findViewById(R.id.btn_asgnCoolie);
+        add_coolie = findViewById(R.id.add_coolie);
+        listcoolies = findViewById(R.id.listcoolies);
 
-        btn_attendance = findViewById(R.id.btn_attendance);
+        rqstcoolie = findViewById(R.id.rqstcoolie);
+
+        mngattndnce = findViewById(R.id.mngattndnce);
+        rqstcart = findViewById(R.id.rqstcart);
+        rqstchair = findViewById(R.id.rqstchair);
 
         logout = findViewById(R.id.logout);
 
@@ -49,14 +55,14 @@ public class OpHomeActivity extends AppCompatActivity {
             }
         });
 
-        btn_attendance.setOnClickListener(new View.OnClickListener() {
+        mngattndnce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
               startActivity(new Intent(OpHomeActivity.this, CoolieAttendanceActivity.class));
             }
         });
 
-        btn_asgnCoolie.setOnClickListener(new View.OnClickListener() {
+        rqstcoolie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class));
@@ -65,7 +71,7 @@ public class OpHomeActivity extends AppCompatActivity {
         });
 
 
-        btn_addCoolie.setOnClickListener(new View.OnClickListener() {
+        add_coolie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopupMenu2(view);

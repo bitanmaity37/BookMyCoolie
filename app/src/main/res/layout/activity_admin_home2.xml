@@ -45,54 +45,193 @@
             app:iconTint="@color/white"
             app:rippleColor="@color/white"
             android:id="@+id/logout"/>
-
-
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/btn_addopt"
-        android:layout_width="120dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:cardElevation="20dp"
+        android:focusable="true"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.044" 
-        app:cardCornerRadius="8dp"
-        android:elevation="20dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/black"
-        android:focusable="true">
+        app:strokeColor="@color/white"
+        app:strokeWidth="4dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1"
-            android:background="@color/red">
-            <ImageView
-                android:paddingTop="2dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="3dp"
+                android:text="MANAGE OPERATORS &amp; STATIONS"
+                android:fontFamily="@font/ubuntu_bold"
+                tools:ignore="HardcodedText"
+                android:textColor="@color/maincolor4"/>
+            <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.75"
-                android:src="@drawable/smartphone_business_person_svgrepo_com" />
+                android:layout_height="wrap_content"
+                app:dividerInsetStart="5dp"
+                app:dividerInsetEnd="5dp"
+                app:dividerColor="@color/maincolor4"
+                app:dividerThickness="2dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.25"
-                android:background="@color/maincolor4">
-                <TextView
-                    android:padding="2dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/white"
-                    android:text="MANAGE OPERATORS"
-                    android:textSize="10dp"
-                    android:textAlignment="center"
-                    tools:ignore="HardcodedText,SpUsage"
-                    android:fontFamily="@font/montserrat_bold" />
+                android:layout_height="wrap_content"
+                android:weightSum="4"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_addopt"
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="80dp"
+                        app:strokeWidth="5dp"
+                        app:strokeColor="@color/white"
+                        app:cardElevation="10dp"
+                        android:focusable="true"
+                        app:cardCornerRadius="20dp">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/add_admin" />
+                    </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/maincolor4"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="ADD OPERATORS"
+                        android:textSize="12dp"
+                        tools:ignore="HardcodedText,SpUsage" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/listops"
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="80dp"
+                        app:strokeWidth="5dp"
+                        app:strokeColor="@color/white"
+                        app:cardElevation="10dp"
+                        android:focusable="true"
+                        app:cardCornerRadius="20dp">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/admn_grp" />
+                    </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/maincolor4"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="OPERATORS LIST"
+                        android:textSize="12dp"
+                        tools:ignore="HardcodedText,SpUsage" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/addstn"
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="80dp"
+                        app:strokeWidth="5dp"
+                        app:strokeColor="@color/white"
+                        app:cardElevation="10dp"
+                        android:focusable="true"
+                        app:cardCornerRadius="20dp">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/statn" />
+                    </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/maincolor4"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="ADD STATIONS"
+                        android:textSize="12dp"
+                        tools:ignore="HardcodedText,SpUsage" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/liststns"
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_height="80dp"
+                        app:strokeWidth="5dp"
+                        app:strokeColor="@color/white"
+                        app:cardElevation="10dp"
+                        android:focusable="true"
+                        app:cardCornerRadius="20dp">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/modstn" />
+                    </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/maincolor4"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="STATIONS LIST"
+                        android:textSize="12dp"
+                        tools:ignore="HardcodedText,SpUsage" />
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
