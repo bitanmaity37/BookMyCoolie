@@ -67,8 +67,9 @@ public class PassengerHome extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.profileItem) {
+            if (item.getItemId() == R.id.home) {
                 // Handle profile item click
+                startActivity(new Intent(PassengerHome.this, PassengerHome.class));
                 Toast.makeText(PassengerHome.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (item.getItemId() == R.id.faq_item) {
@@ -116,11 +117,11 @@ public class PassengerHome extends AppCompatActivity {
         });
 
         logoutButton();
-        setCarouselImages();
+        //setCarouselImages();
     }
 
 
-    public void setCarouselImages() {
+    /*public void setCarouselImages() {
 
         recyclerView = findViewById(R.id.carousel_recycler_view);
         ArrayList<String> arrayList = new ArrayList<>();
@@ -142,7 +143,7 @@ public class PassengerHome extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     public void logoutButton(){
 

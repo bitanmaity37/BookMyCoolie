@@ -22,6 +22,7 @@ import com.cdac.iaf.bookmycoolie.models.OrderStatusModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -53,6 +54,28 @@ public class PassengerOrderActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
         authToken = securedSharedPreferenceUtils.getLoginData().getJwtToken();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.home) {
+                // Handle profile item click
+                startActivity(new Intent(PassengerOrderActivity.this, PassengerHome.class));
+                Toast.makeText(PassengerOrderActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (item.getItemId() == R.id.faq_item) {
+                // Handle FAQ item click
+                startActivity(new Intent(PassengerOrderActivity.this, PassengerFaqActivity.class));
+                Toast.makeText(PassengerOrderActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (item.getItemId() == R.id.contact_item) {
+                // Handle contact item click
+
+                startActivity(new Intent(PassengerOrderActivity.this, PassengerContactUsActivity.class));
+                Toast.makeText(PassengerOrderActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            return false;
+        });
 
         TextView navbarTitle = findViewById(R.id.navbar_title);
         navbarTitle.setText(R.string.passenger_order_history);
@@ -90,10 +113,12 @@ public class PassengerOrderActivity extends AppCompatActivity {
         System.out.println("setAdapter()");
         orderStatusAdapter = new OrderStatusAdapter(PassengerOrderActivity.this,orderStatusList,authToken);
         recyclerView.setAdapter(orderStatusAdapter);
-        orderStatusAdapter.setOnItemClickListener((textView, reqId) -> {
+        orderStatusAdapter.setOnItemClickListener((textView, reqId, status) -> {
             System.out.println("reqId: " + reqId);
+            System.out.println("status: " + status);
             Intent intent = new Intent(PassengerOrderActivity.this, PassengerOrderDetailsActivity.class);
             intent.putExtra("reqId", reqId);
+            intent.putExtra("status", status);
             startActivity(intent);
         });
 

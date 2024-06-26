@@ -19,6 +19,7 @@ import com.cdac.iaf.bookmycoolie.models.OrderDetailsModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -32,6 +33,7 @@ public class PassengerOrderDetailsActivity extends AppCompatActivity {
 
     String authToken;
     Integer reqId;
+    int status;
     ArrayList<OrderDetailsModel> orderDetailsList;
     RecyclerView orderDetailsRecyclerView;
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
@@ -50,10 +52,33 @@ public class PassengerOrderDetailsActivity extends AppCompatActivity {
         }
         authToken = securedSharedPreferenceUtils.getLoginData().getJwtToken();
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.home) {
+                // Handle profile item click
+                startActivity(new Intent(PassengerOrderDetailsActivity.this, PassengerHome.class));
+                Toast.makeText(PassengerOrderDetailsActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (item.getItemId() == R.id.faq_item) {
+                // Handle FAQ item click
+                startActivity(new Intent(PassengerOrderDetailsActivity.this, PassengerFaqActivity.class));
+                Toast.makeText(PassengerOrderDetailsActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (item.getItemId() == R.id.contact_item) {
+                // Handle contact item click
+
+                startActivity(new Intent(PassengerOrderDetailsActivity.this, PassengerContactUsActivity.class));
+                Toast.makeText(PassengerOrderDetailsActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            return false;
+        });
+
         TextView navbarTitle = findViewById(R.id.navbar_title);
         navbarTitle.setText(R.string.passenger_order_details);
 
         reqId = getIntent().getIntExtra("reqId", 0);
+        status = getIntent().getIntExtra("status",0);
         Intent  intent = getIntent();
         Toast.makeText(this, "reqId" + intent.getSerializableExtra("reqId"), Toast.LENGTH_SHORT).show();
 
@@ -90,7 +115,7 @@ public class PassengerOrderDetailsActivity extends AppCompatActivity {
     private void setAdapters() {
         System.out.println("orderDetailsList: "+orderDetailsList);
         orderDetailsRecyclerView = findViewById(R.id.order_details_recycler_view);
-        OrderDetailsAdapter orderDetailsAdapter = new OrderDetailsAdapter(this, orderDetailsList);
+        OrderDetailsAdapter orderDetailsAdapter = new OrderDetailsAdapter(this, orderDetailsList, status);
         orderDetailsRecyclerView.setAdapter(orderDetailsAdapter);
     }
 }

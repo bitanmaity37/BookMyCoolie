@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.OrderDetailsModel;
+import com.cdac.iaf.bookmycoolie.utils.OrderStatusUtil;
 import com.google.android.material.card.MaterialCardView;
 
 import java.text.MessageFormat;
@@ -30,10 +32,12 @@ public class OrderDetailsAdapter extends  RecyclerView.Adapter<OrderDetailsAdapt
 
     private ArrayList<OrderDetailsModel> orderDetails;
     private Context context;
+    private int status;
 
-    public OrderDetailsAdapter(Context context, ArrayList<OrderDetailsModel> orderDetails) {
+    public OrderDetailsAdapter(Context context, ArrayList<OrderDetailsModel> orderDetails, int status) {
         this.context = context;
         this.orderDetails = orderDetails;
+        this.status = status;
     }
 
     @NonNull
@@ -46,10 +50,12 @@ public class OrderDetailsAdapter extends  RecyclerView.Adapter<OrderDetailsAdapt
     @Override
     public void onBindViewHolder(@NonNull OrderDetailsAdapter.ViewHolder holder, int position) {
         OrderDetailsModel orderDetailsModel = orderDetails.get(position);
+        String mobileNumber = orderDetailsModel.getUserMobile();
+        String maskedMobileNumber = "*******"+mobileNumber.substring(mobileNumber.length() - 3);
 
-        holder.coolieName.setText(orderDetailsModel.getUserName());
-        holder.coolieBillaNo.setText(orderDetailsModel.getCoolieBatchId());
-        holder.cooliePhoneNo.setText(orderDetailsModel.getUserMobile());
+        holder.coolieName.setText(String.format("Name:  %s", orderDetailsModel.getUserName()));
+        holder.coolieBillaNo.setText(String.format("Billa no.:  %s", orderDetailsModel.getCoolieBatchId()));
+        holder.cooliePhoneNo.setText(String.format("Mobile:  %s", maskedMobileNumber));
 
         String base64Image = orderDetailsModel.getCooliePhoto();
         System.out.println("in adapter base64Image: "+base64Image);
@@ -64,14 +70,24 @@ public class OrderDetailsAdapter extends  RecyclerView.Adapter<OrderDetailsAdapt
                     .apply(RequestOptions.bitmapTransform(new RoundedCorners(50))) // 20 is the radius in pixels
                     .into(holder.coolieImage);
 
-            holder.callButton.setOnClickListener(v -> {
-                String phoneNumber = holder.cooliePhoneNo.getText().toString().trim();
-                phoneNumber = phoneNumber.replaceAll("[^\\d]", "");
-                Intent dialIntent = new Intent(Intent.ACTION_DIAL);
-                System.out.println("in adapter phoneNumber: "+phoneNumber);
-                dialIntent.setData(Uri.parse("tel:" + phoneNumber));
-                context.startActivity(dialIntent);
-            });
+            Toast.makeText(context, ""+status, Toast.LENGTH_SHORT).show();
+
+            holder.callButton.setVisibility(View.GONE);
+
+            if(!OrderStatusUtil.getOrderStatus(status).equalsIgnoreCase("COMPLETED")){
+                holder.callButton.setVisibility(View.VISIBLE);
+                holder.cooliePhoneNo.setText(String.format("Mobile:  %s", mobileNumber));
+                holder.callButton.setOnClickListener(v -> {
+                    String phoneNumber = holder.cooliePhoneNo.getText().toString().trim();
+                    phoneNumber = phoneNumber.replaceAll("[^\\d]", "");
+                    Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+                    System.out.println("in adapter phoneNumber: "+phoneNumber);
+                    dialIntent.setData(Uri.parse("tel:" + phoneNumber));
+                    context.startActivity(dialIntent);
+                });
+            }
+
+
 
         } else {
             holder.coolieImage.setImageResource(R.drawable.coolie_icon); // Set a default image if base64Image is null or empty

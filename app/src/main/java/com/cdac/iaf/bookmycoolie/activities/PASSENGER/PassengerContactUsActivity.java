@@ -1,8 +1,10 @@
 package com.cdac.iaf.bookmycoolie.activities.PASSENGER;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import com.cdac.iaf.bookmycoolie.models.Operator;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -47,6 +50,28 @@ public class PassengerContactUsActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
         authToken = securedSharedPreferenceUtils.getLoginData().getJwtToken();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.home) {
+                // Handle profile item click
+                startActivity(new Intent(PassengerContactUsActivity.this, PassengerHome.class));
+                Toast.makeText(PassengerContactUsActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (item.getItemId() == R.id.faq_item) {
+                // Handle FAQ item click
+                startActivity(new Intent(PassengerContactUsActivity.this, PassengerFaqActivity.class));
+                Toast.makeText(PassengerContactUsActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (item.getItemId() == R.id.contact_item) {
+                // Handle contact item click
+
+                startActivity(new Intent(PassengerContactUsActivity.this, PassengerContactUsActivity.class));
+                Toast.makeText(PassengerContactUsActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            return false;
+        });
 
         TextView navbarTitle = findViewById(R.id.navbar_title);
         navbarTitle.setText(R.string.passenger_contact);

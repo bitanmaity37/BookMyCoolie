@@ -1,9 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home"/>
+    <!--<item
         android:id="@+id/profileItem"
         android:enabled="true"
         android:icon="@drawable/user_3_fill"
-        android:title="Profile"/>
+        android:title="Profile"/>-->
     <item
         android:id="@+id/faq_item"
         android:enabled="true"

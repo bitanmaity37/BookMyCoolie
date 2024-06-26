@@ -49,21 +49,6 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         return new OrderStatusViewHolder(view);
     }
 
-    private String getStatusString(int status) {
-        switch (status) {
-            case 1:
-                return context.getString(R.string.pending);
-            case 2:
-                return context.getString(R.string.assinged);
-            case 3:
-                return context.getString(R.string.completed);
-            case 4:
-                return context.getString(R.string.canceled);
-            default:
-                return context.getString(R.string.pending); // default to pending if status code is unknown
-        }
-    }
-
     @Override
     public void onBindViewHolder(@NonNull OrderStatusViewHolder holder, int position) {
         OrderStatusModel orderStatus = orderStatusList.get(position);
@@ -93,7 +78,9 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
             });
         }
 
-        holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(holder.requestId, orderStatusList.get(position).getPassengerRequestId()));
+        System.out.println("Request Status: " + orderStatus.getRequestStatus());
+
+        holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(holder.requestId, orderStatusList.get(position).getPassengerRequestId(), orderStatus.getRequestStatus()));
 
         // Handle the cancel request button
         holder.cancelButton.setOnClickListener(v -> {
@@ -150,7 +137,7 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
     }
 
     public interface OnItemClickListener {
-        void onClick(TextView textView, int reqId);
+        void onClick(TextView textView, int reqId, int status);
     }
 
 }
