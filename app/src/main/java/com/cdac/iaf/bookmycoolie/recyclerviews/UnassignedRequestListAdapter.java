@@ -63,7 +63,7 @@ public class UnassignedRequestListAdapter extends RecyclerView.Adapter<Unassigne
 
         //holder.psngrphn.setText(a.substring(6));
         holder.pltfrm.setText("PICKUP: "+requests.get(holder.getAdapterPosition()).getStationAreaPickupFromName()+
-                                " DROP: "+requests.get(holder.getAdapterPosition()).getStationAreaDropAtName());
+                                "\nDROP: "+requests.get(holder.getAdapterPosition()).getStationAreaDropAtName());
 
         holder.btnassgn.setOnClickListener(new View.OnClickListener() {
             @Override
