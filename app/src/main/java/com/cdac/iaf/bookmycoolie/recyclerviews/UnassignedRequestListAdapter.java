@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,14 +21,16 @@ import java.util.ArrayList;
 
 public class UnassignedRequestListAdapter extends RecyclerView.Adapter<UnassignedRequestListAdapter.ViewHolder> {
 
-    public UnassignedRequestListAdapter(Context context, ArrayList<PassengerReqResponses> requests) {
+    public UnassignedRequestListAdapter(Context context, ArrayList<PassengerReqResponses> requests, Integer serviceMode) {
         this.context = context;
         this.requests = requests;
+        this.serviceMode = serviceMode;
         System.out.println("In const.........."+requests);
     }
 
     Context context;
     ArrayList<PassengerReqResponses> requests;
+    Integer serviceMode;
     @NonNull
     @Override
     public UnassignedRequestListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -85,6 +88,8 @@ public class UnassignedRequestListAdapter extends RecyclerView.Adapter<Unassigne
                         requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime()
                         ));
                 intent.putExtra("operator", bundle);
+                intent.putExtra("serviceMode",serviceMode);
+                Toast.makeText(context, "serviceMode in RV"+serviceMode, Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             }
         });

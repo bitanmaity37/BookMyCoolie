@@ -53,6 +53,7 @@ public class AssignmentActivity extends AppCompatActivity {
     RecyclerView rvcoolie;
 
     Button btn_getCoolie, btn_cancel, home;
+    Integer serviceMode;
 
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
     @Override
@@ -90,6 +91,7 @@ public class AssignmentActivity extends AppCompatActivity {
         intentFromRow = getIntent();
         Bundle args = intentFromRow.getBundleExtra("operator");
         request=(PassengerReqResponses) args.getSerializable("reqobj");
+        serviceMode = intentFromRow.getIntExtra("serviceMode",0);
 
         /**
          * Decoration**/
@@ -209,7 +211,7 @@ public class AssignmentActivity extends AppCompatActivity {
                                                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialogInterface, int i) {
-                                                            startActivity(new Intent(AssignmentActivity.this, AssignHomeActivity.class));
+                                                            startActivity(new Intent(AssignmentActivity.this, AssignHomeActivity.class).putExtra("serviceMode",serviceMode));
                                                             dialogInterface.dismiss();
                                                         }
                                                     }).show();
@@ -279,7 +281,7 @@ public class AssignmentActivity extends AppCompatActivity {
                                         .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                startActivity(new Intent(AssignmentActivity.this, AssignHomeActivity.class));
+                                                startActivity(new Intent(AssignmentActivity.this, AssignHomeActivity.class).putExtra("serviceMode",serviceMode));
                                                 dialogInterface.dismiss();
                                             }
                                         }).show();

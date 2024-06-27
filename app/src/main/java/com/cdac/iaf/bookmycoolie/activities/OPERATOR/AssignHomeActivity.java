@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
@@ -36,7 +37,7 @@ public class AssignHomeActivity extends AppCompatActivity {
 
     TextView tv_pending,tv_ongoing, tv_finished,tv_cancelled;
 
-    Integer rvMode;
+    Integer serviceMode;
 
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
     Button home;
@@ -61,7 +62,8 @@ public class AssignHomeActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        Integer callmode = intent.getIntExtra("callmode",1);
+        serviceMode = intent.getIntExtra("serviceMode",0);
+        //Toast.makeText(this, "serviceMode "+serviceMode, Toast.LENGTH_LONG).show();
 
         try {
             securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AssignHomeActivity.this);
@@ -71,7 +73,7 @@ public class AssignHomeActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        rvPendingLoad(callmode);
+        rvPendingLoad(serviceMode);
         c1();
 
 
@@ -80,14 +82,14 @@ public class AssignHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                rvPendingLoad(callmode);
+                rvPendingLoad(serviceMode);
                 c1();
             }
         });
         tv_ongoing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rvOngoingLoad(callmode);
+                rvOngoingLoad(serviceMode);
                 c2();
 
 
@@ -98,7 +100,7 @@ public class AssignHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 c3();
-                rvCancelledCompletedLoad(callmode,3);
+                rvCancelledCompletedLoad(serviceMode,3);
 
             }
         });
@@ -106,7 +108,7 @@ public class AssignHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 c4();
-                rvCancelledCompletedLoad(callmode,4);
+                rvCancelledCompletedLoad(serviceMode,4);
 
             }
         });
@@ -126,7 +128,7 @@ public class AssignHomeActivity extends AppCompatActivity {
                 if(response.code()==200){
 
 
-                    UnassignedRequestListAdapter unassignedRequestListAdapter =  new UnassignedRequestListAdapter(AssignHomeActivity.this,response.body());
+                    UnassignedRequestListAdapter unassignedRequestListAdapter =  new UnassignedRequestListAdapter(AssignHomeActivity.this,response.body(),serviceMode);
                     rcv_requestList.setAdapter(unassignedRequestListAdapter);
 
                     System.out.println("Requests Unassigned :"+response.body().toString());
@@ -152,20 +154,20 @@ public class AssignHomeActivity extends AppCompatActivity {
         });
     }
 
-    void rvOngoingLoad(Integer callmode){
+    void rvOngoingLoad(Integer serviceMode){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AssignHomeActivity.this);
         rcv_requestList.setLayoutManager(linearLayoutManager);
 
         Call<ArrayList<PassengerReqResponses>> call = RestClient.getRetrofitClient().create(RestInterface.class)
                 .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),
-                        new PassengerRequestsModel(securedSharedPreferenceUtils.getLoginData().getStationId(), callmode, 2));
+                        new PassengerRequestsModel(securedSharedPreferenceUtils.getLoginData().getStationId(), serviceMode, 2));
         call.enqueue(new Callback<ArrayList<PassengerReqResponses>>() {
             @Override
             public void onResponse(Call<ArrayList<PassengerReqResponses>> call, Response<ArrayList<PassengerReqResponses>> response) {
                 if(response.code()==200){
 
 
-                    AssignedListAdapter assignedListAdapter =  new AssignedListAdapter(AssignHomeActivity.this,response.body());
+                    AssignedListAdapter assignedListAdapter =  new AssignedListAdapter(AssignHomeActivity.this,response.body(),serviceMode);
                     rcv_requestList.setAdapter(assignedListAdapter);
 
                     System.out.println("Requests Unassigned :"+response.body().toString());
@@ -242,12 +244,12 @@ public class AssignHomeActivity extends AppCompatActivity {
 
     }
 
-    void rvCancelledCompletedLoad(Integer callmode,Integer mode){
+    void rvCancelledCompletedLoad(Integer serviceMode,Integer mode){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AssignHomeActivity.this);
         rcv_requestList.setLayoutManager(linearLayoutManager);
 
         Call<ArrayList<PassengerReqResponses>> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new PassengerRequestsModel(securedSharedPreferenceUtils.getLoginData().getStationId(), callmode, mode));
+                .getPReqs(securedSharedPreferenceUtils.getLoginData().getJwtToken(),new PassengerRequestsModel(securedSharedPreferenceUtils.getLoginData().getStationId(), serviceMode, mode));
         call.enqueue(new Callback<ArrayList<PassengerReqResponses>>() {
             @Override
             public void onResponse(Call<ArrayList<PassengerReqResponses>> call, Response<ArrayList<PassengerReqResponses>> response) {

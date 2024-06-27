@@ -67,7 +67,7 @@ public class OpHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class));
                 //showPopupMenu(view);
-                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class).putExtra("callmode",1));
+                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class).putExtra("serviceMode",1));
 
             }
         });
@@ -75,7 +75,7 @@ public class OpHomeActivity extends AppCompatActivity {
         rqstchair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class).putExtra("callmode",3));
+                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class).putExtra("serviceMode",3));
 
             }
         });
@@ -83,7 +83,7 @@ public class OpHomeActivity extends AppCompatActivity {
         rqstcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class).putExtra("callmode",2));
+                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class).putExtra("serviceMode",2));
             }
         });
 

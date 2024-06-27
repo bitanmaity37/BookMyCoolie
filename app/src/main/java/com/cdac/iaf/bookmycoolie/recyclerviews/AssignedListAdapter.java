@@ -33,10 +33,12 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
 
     Context context;
     ArrayList<PassengerReqResponses> requests;
+    Integer serviceMode;
 
-    public AssignedListAdapter(Context context, ArrayList<PassengerReqResponses> requests) {
+    public AssignedListAdapter(Context context, ArrayList<PassengerReqResponses> requests, Integer serviceMode) {
         this.context = context;
         this.requests = requests;
+        this.serviceMode = serviceMode;
     }
 
 

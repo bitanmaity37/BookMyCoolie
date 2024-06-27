@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,7 @@ public class SelectedCoolieAdapter extends RecyclerView.Adapter<SelectedCoolieAd
 
         TextView cname;
         TextView cbatch;
+        Button btnrmv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,18 +62,23 @@ public class SelectedCoolieAdapter extends RecyclerView.Adapter<SelectedCoolieAd
 
             cname = itemView.findViewById(R.id.cname);
             cbatch = itemView.findViewById(R.id.cbatch);
+            btnrmv = itemView.findViewById(R.id.btnrmv);
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            btnrmv.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View view) {
-
+                public void onClick(View view) {
                     selectedCoolieIDs.remove(getAdapterPosition());
                     freeCoolieResponses.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(getAdapterPosition(), selectedCoolieIDs.size());
                     notifyItemRangeChanged(getAdapterPosition(), freeCoolieResponses.size());
                     notifyDataSetChanged();
+                }
+            });
 
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
 
                     return false;
                 }
