@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,9 @@ import com.cdac.iaf.bookmycoolie.utils.OrderStatusUtil;
 import com.cdac.iaf.bookmycoolie.utils.ServiceTypeUtil;
 
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,6 +55,9 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
     @Override
     public void onBindViewHolder(@NonNull OrderStatusViewHolder holder, int position) {
         OrderStatusModel orderStatus = orderStatusList.get(position);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+        Date bookingDate = new Date(orderStatus.getBookingDate().getTime());
+        Date recordDate = new Date(orderStatus.getRecordTracking().getTime());
         //String requestStatus = getStatusString(orderStatus.getRequestStatus());
         holder.requestId.setText(String.valueOf(orderStatus.getPassengerRequestId()));
         holder.requestStatus.setText(OrderStatusUtil.getOrderStatus(orderStatus.getRequestStatus()));
@@ -60,6 +66,40 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         holder.stationName.setText(orderStatus.getStationName());
         holder.noOfBags.setText(String.valueOf(orderStatus.getNoOfBags()));
         holder.serviceType.setText(ServiceTypeUtil.getServiceTypeName(orderStatus.getServiceType()));
+        holder.bookedAt.setText(sdf.format(bookingDate));
+        holder.recordTracking.setText(sdf.format(recordDate));
+
+        switch (OrderStatusUtil.getOrderStatus(orderStatus.getRequestStatus()).toLowerCase()){
+
+            case "pending":
+                holder.recordTrackingLayout.setVisibility(View.GONE);
+                holder.cancelButton.setVisibility(View.VISIBLE);
+                holder.cancelButton.setOnClickListener(v -> {
+                    orderStatusList.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, orderStatusList.size());
+                });
+                break;
+
+            case "assigned":
+                holder.cancelButton.setVisibility(View.GONE);
+                holder.recordTrackingLabel.setText("Assigned At");
+                break;
+
+            case "completed":
+                holder.cancelButton.setVisibility(View.GONE);
+                holder.recordTrackingLabel.setText("Completed At");
+                break;
+
+            case "cancelled":
+                holder.cancelButton.setVisibility(View.GONE);
+                holder.recordTrackingLabel.setText("Cancelled At");
+                break;
+
+            default:
+                    break;
+
+        }
 
         int colorId = OrderStatusUtil.getColor(orderStatus.getRequestStatus());
         holder.requestStatus.setTextColor(ContextCompat.getColor(context, colorId));
@@ -67,16 +107,11 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         // If you have a specific drawable for different statuses, you can set it here.
         holder.coolieImage.setText(MessageFormat.format("{0}.", (position + 1)));
 
-        if (orderStatus.getRequestStatus() != 1) {
-            holder.cancelButton.setVisibility(View.GONE);
+        /*if (!OrderStatusUtil.getOrderStatus(orderStatus.getRequestStatus()).equalsIgnoreCase("pending")) {
+
         } else {
-            holder.cancelButton.setVisibility(View.VISIBLE);
-            holder.cancelButton.setOnClickListener(v -> {
-                orderStatusList.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, orderStatusList.size());
-            });
-        }
+
+        }*/
 
         System.out.println("Request Status: " + orderStatus.getRequestStatus());
 
@@ -115,7 +150,9 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
     public class OrderStatusViewHolder extends RecyclerView.ViewHolder {
 
         TextView coolieImage;
-        TextView requestId, requestStatus, pickUpArea, dropOffArea, stationName, noOfBags, serviceType;
+        LinearLayout recordTrackingLayout;
+        TextView requestId, requestStatus, pickUpArea, dropOffArea,
+                stationName, noOfBags, serviceType, recordTrackingLabel, bookedAt, recordTracking;
         Button cancelButton;
 
         public OrderStatusViewHolder(@NonNull View itemView) {
@@ -129,6 +166,10 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
             noOfBags = itemView.findViewById(R.id.no_of_bags);
             serviceType = itemView.findViewById(R.id.service_type);
             cancelButton = itemView.findViewById(R.id.cancel_request_btn);
+            recordTrackingLabel = itemView.findViewById(R.id.record_tracking_label);
+            bookedAt = itemView.findViewById(R.id.booked_at);
+            recordTracking = itemView.findViewById(R.id.record_tracking);
+            recordTrackingLayout = itemView.findViewById(R.id.linear_layout_record_tracking);
         }
     }
 

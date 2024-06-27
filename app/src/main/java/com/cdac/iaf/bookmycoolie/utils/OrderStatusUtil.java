@@ -14,7 +14,7 @@ public class OrderStatusUtil {
         ORDER_STATUS.put(1, "PENDING");
         ORDER_STATUS.put(2, "ASSIGNED");
         ORDER_STATUS.put(3, "COMPLETED");
-        ORDER_STATUS.put(4, "CANCELED");
+        ORDER_STATUS.put(4, "CANCELLED");
 
         ORDER_STATUS_COLOR.put(1, R.color.pending);
         ORDER_STATUS_COLOR.put(2, R.color.assigned);

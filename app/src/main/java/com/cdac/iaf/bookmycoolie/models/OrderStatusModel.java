@@ -1,5 +1,7 @@
 package com.cdac.iaf.bookmycoolie.models;
 
+import java.sql.Timestamp;
+
 public class OrderStatusModel {
 
     private int passengerRequestId;
@@ -9,10 +11,13 @@ public class OrderStatusModel {
     private int serviceType;
     private int noOfBags;
     private String stationName;
+    private Timestamp bookingDate;
+    private Timestamp recordTracking;
 
     public OrderStatusModel(int passengerRequestId, String stationAreaDropAtName,
                             String stationAreaPickupFromName, int requestStatus,
-                            int serviceType, int noOfBags, String stationName) {
+                            int serviceType, int noOfBags, String stationName,
+                            Timestamp bookingDate, Timestamp recordTracking) {
         this.passengerRequestId = passengerRequestId;
         this.stationAreaDropAtName = stationAreaDropAtName;
         this.stationAreaPickupFromName = stationAreaPickupFromName;
@@ -20,6 +25,24 @@ public class OrderStatusModel {
         this.serviceType = serviceType;
         this.noOfBags = noOfBags;
         this.stationName = stationName;
+        this.bookingDate = bookingDate;
+        this.recordTracking = recordTracking;
+    }
+
+    public Timestamp getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Timestamp bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public Timestamp getRecordTracking() {
+        return recordTracking;
+    }
+
+    public void setRecordTracking(Timestamp recordTracking) {
+        this.recordTracking = recordTracking;
     }
 
     public int getPassengerRequestId() {
