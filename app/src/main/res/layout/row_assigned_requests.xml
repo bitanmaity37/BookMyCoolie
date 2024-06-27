@@ -3,6 +3,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -19,8 +20,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="PASSENGER: RAJIV SHUKLA"
-            android:fontFamily="@font/montserrat_medium"
-            />
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center_vertical"
+            android:textColor="@color/maincolor4"
+            android:textSize="15dp"
+            tools:ignore="SpUsage" />
         <LinearLayout
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
@@ -34,14 +38,18 @@
                 android:layout_weight="1"
                 android:id="@+id/reqid"
                 android:text="ID : 437"
-                android:fontFamily="@font/montserrat_medium"/>
+                android:gravity="center_vertical"
+                android:textColor="@color/maincolor4"
+                android:fontFamily="@font/montserrat_bold"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/psngrphn"
+                android:gravity="center_vertical"
+                android:textColor="@color/maincolor4"
                 android:text="PHONE : 8987675654"
-                android:fontFamily="@font/montserrat_medium"/>
+                android:fontFamily="@font/montserrat_bold"/>
 
         </LinearLayout>
 
@@ -52,7 +60,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="SERVICES: COOLIE + CART + CHAIR"
-            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center_vertical"
+            android:textColor="@color/maincolor4"
+            android:fontFamily="@font/montserrat_bold"
             />
 
 
@@ -70,7 +80,8 @@
                 android:layout_weight="2.5"
                 android:id="@+id/pltfrm"
                 android:text="PLATFORM : 21"
-                android:fontFamily="@font/montserrat_medium"/>
+                android:textColor="@color/maincolor4"
+                android:fontFamily="@font/montserrat_bold"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

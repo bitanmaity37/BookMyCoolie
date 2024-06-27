@@ -21,7 +21,7 @@ public class FreeCoolieResponse implements Serializable {
 
     @Override
     public String toString() {
-        return "ID: "+coolieId+", Name: " + userName+"("+coolieBatchId+")";
+        return "Name: " + userName+", Billa: "+coolieBatchId;
     }
 
     public Integer getCoolieId() {

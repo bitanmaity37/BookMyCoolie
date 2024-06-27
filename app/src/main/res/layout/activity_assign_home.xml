@@ -88,7 +88,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="FINISHED"
+                android:text="COMPLETED"
                 android:gravity="center"
                 android:textColor="@color/maincolor4"
                 android:textStyle="bold"
