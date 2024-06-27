@@ -61,7 +61,7 @@ public class AssignHomeActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        Integer callmode = intent.getIntExtra("callmode",0);
+        Integer callmode = intent.getIntExtra("callmode",1);
 
         try {
             securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AssignHomeActivity.this);

@@ -61,8 +61,8 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="COOLIE ID"
-            android:layout_weight="1"
+            android:text="SR \nNO."
+            android:layout_weight="0.4"
             android:gravity="center"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/maincolor4"
@@ -70,8 +70,8 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="COOLIE NAME"
-            android:layout_weight="1"
+            android:text="BILLA NO."
+            android:layout_weight="1.2"
             android:gravity="center"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/maincolor4"
@@ -80,8 +80,8 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="BILLA NO"
-            android:layout_weight="1"
+            android:text="NAME"
+            android:layout_weight="1.4"
             android:gravity="center"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/maincolor4"
@@ -89,7 +89,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="PRESENT?"
+            android:text="PRESENT"
             android:layout_weight="1"
             android:gravity="center"
             android:fontFamily="@font/montserrat_bold"

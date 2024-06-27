@@ -38,7 +38,6 @@ public class SelectedCoolieAdapter extends RecyclerView.Adapter<SelectedCoolieAd
 
     @Override
     public void onBindViewHolder(@NonNull SelectedCoolieAdapter.ViewHolder holder, int position) {
-        holder.cid.setText(freeCoolieResponses.get(holder.getAdapterPosition()).getCoolieId().toString());
         holder.cname.setText(freeCoolieResponses.get(holder.getAdapterPosition()).getUserName());
         holder.cbatch.setText(freeCoolieResponses.get(holder.getAdapterPosition()).getCoolieBatchId());
 
@@ -51,14 +50,14 @@ public class SelectedCoolieAdapter extends RecyclerView.Adapter<SelectedCoolieAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView cid;
+
         TextView cname;
         TextView cbatch;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            cid = itemView.findViewById(R.id.cid);
+
             cname = itemView.findViewById(R.id.cname);
             cbatch = itemView.findViewById(R.id.cbatch);
 

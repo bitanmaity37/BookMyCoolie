@@ -66,7 +66,24 @@ public class OpHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class));
-                showPopupMenu(view);
+                //showPopupMenu(view);
+                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class).putExtra("callmode",1));
+
+            }
+        });
+
+        rqstchair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class).putExtra("callmode",3));
+
+            }
+        });
+
+        rqstcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OpHomeActivity.this, AssignHomeActivity.class).putExtra("callmode",2));
             }
         });
 
@@ -74,7 +91,17 @@ public class OpHomeActivity extends AppCompatActivity {
         add_coolie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopupMenu2(view);
+                //showPopupMenu2(view);
+                startActivity(new Intent(OpHomeActivity.this, AddCoolieActivity.class));
+
+
+            }
+        });
+
+        listcoolies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OpHomeActivity.this, CoolieListActivity.class));
 
             }
         });
@@ -109,7 +136,6 @@ public class OpHomeActivity extends AppCompatActivity {
 
         popupMenu.show();
     }
-
     private void showPopupMenu2(View view) {
         PopupMenu popupMenu = new PopupMenu(OpHomeActivity.this, view);
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu_coolies, popupMenu.getMenu());

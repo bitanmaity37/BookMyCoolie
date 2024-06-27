@@ -2,6 +2,7 @@ package com.cdac.iaf.bookmycoolie.recyclerviews;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,16 +60,21 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
             throw new RuntimeException(e);
         }
 
-        holder.cid.setText(coolies.get(holder.getAdapterPosition()).getCoolieId().toString());
+        holder.cid.setText(String.valueOf(holder.getAdapterPosition()+1));
         holder.cname.setText(coolies.get(holder.getAdapterPosition()).getUserName());
         holder.cbatch.setText(coolies.get(holder.getAdapterPosition()).getCoolieBatchId());
         if(coolies.get(holder.getAdapterPosition()).getCoolieStatus()){
             holder.switch_attndnce.setChecked(true);
-            holder.switch_attndnce.setText("YES");
+            holder.switch_attndnce.setText("Y");
+           // holder.switch_attndnce.setTrack;
+            holder.switch_attndnce.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.completed)));
         }
         if(!coolies.get(holder.getAdapterPosition()).getCoolieStatus()){
             holder.switch_attndnce.setChecked(false);
-            holder.switch_attndnce.setText("NO");
+            holder.switch_attndnce.setText("N");
+           // holder.switch_attndnce.setTrackResource(context.getResources().getColor(R.color.canceled));
+            holder.switch_attndnce.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.canceled)));
+
         }
         holder.switch_attndnce.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -90,7 +96,9 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
                             try {
                                 if(response.code()==200 && response.body().string().equals("true")){
                                     progressDialog.dismiss();
-                                    holder.switch_attndnce.setText("YES");
+                                    holder.switch_attndnce.setText("Y");
+                                    holder.switch_attndnce.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.completed)));
+                                  //  holder.switch_attndnce.setTrackResource(context.getResources().getColor(R.color.completed));
                                     System.out.println("SAVED ATTENDNC TRUE");
                                 }
 
@@ -135,7 +143,9 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
                             try {
                                 if(response.code()==200 && response.body().string().equals("true")){
                                     progressDialog.dismiss();
-                                    holder.switch_attndnce.setText("NO");
+                                    holder.switch_attndnce.setText("N");
+                                    holder.switch_attndnce.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.canceled)));
+                                 //   holder.switch_attndnce.setTrackResource(context.getResources().getColor(R.color.canceled));
                                     System.out.println("SAVED ATTENDNC False");
                                 }
                                 if(response.code()==401){

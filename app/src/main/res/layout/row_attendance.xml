@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="4"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="2dp"
         android:background="@drawable/textview_border">
         <TextView
             android:layout_width="0dp"
@@ -55,12 +55,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:checked="true"
-                android:text="YES"
                 android:fontFamily="@font/montserrat_bold"
                 android:textColor="@color/maincolor4"
                 android:gravity="center"
                 android:layout_gravity="center"
-                app:trackTint="@color/surfiegreen"/>
+                app:trackTint="@color/completed"
+                />
         </LinearLayout>
 
     </LinearLayout>
