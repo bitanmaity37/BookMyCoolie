@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="30dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:weightSum="3"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
     android:layout_marginTop="5dp"
-    >
+    android:background="@drawable/textview_border">
 
-
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/cid"
-            android:gravity="center_horizontal"
-            android:textStyle="bold"
-            android:fontFamily="@font/ubuntu_bold"
-            android:textColor="@color/maincolor4"
-            android:background="@drawable/textview_border"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/cname"
-            android:gravity="center_horizontal"
-            android:textStyle="bold"
-            android:fontFamily="@font/ubuntu_bold"
-            android:textColor="@color/maincolor4"
-            android:background="@drawable/textview_border"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_weight="1.4"
             android:id="@+id/cbatch"
             android:gravity="center_horizontal"
             android:textStyle="bold"
             android:fontFamily="@font/ubuntu_bold"
-            android:textColor="@color/maincolor4"
-            android:background="@drawable/textview_border"/>
+            android:textColor="@color/maincolor4"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:id="@+id/cname"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="@color/maincolor4"/>
+
+        <Button
+            android:id="@+id/btnassgn"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            android:drawableTint="@color/black"
+            android:gravity="center"
+            app:icon="@drawable/baseline_remove_circle_24"
+            app:iconSize="20dp"
+            app:iconTint="@color/red"
+            />
+
 
 
 </LinearLayout>
