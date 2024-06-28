@@ -19,7 +19,7 @@
                 android:id="@+id/shpimv_coolie"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2.5"
+                android:layout_weight="2.0"
                 android:layout_marginEnd="5dp"
                 android:padding="5dp"
                 app:shapeAppearance="@style/RoundedImageView2" />
@@ -29,47 +29,85 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="7.5"
                 android:orientation="vertical"
-                android:weightSum="10"
+                android:weightSum="3"
                 android:padding="5dp">
-                <TextView
-                    android:id="@+id/tv_cname"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="NAME: RAJIV SHUKLA"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:textStyle="bold"
-                    android:textSize="15dp"
-                    android:textColor="@color/maincolor4"
-                    />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.05"
+                        android:src="@drawable/person"/>
+
                     <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:id="@+id/phn"
-                    android:text="MOBILE: 8987675654"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textSize="12dp"
-                    android:textColor="@color/maincolor2"/>
-
-
+                        android:layout_marginStart="3dp"
+                        android:gravity="center_vertical"
+                        android:id="@+id/tv_cname"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.95"
+                        android:layout_height="wrap_content"
+                        android:text="RAJIV SHUKLA"
+                        android:fontFamily="@font/rubik_bold"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
+                    android:weightSum="1"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.05"
+                        android:src="@drawable/phone_calling"/>
                     <TextView
+                        android:layout_marginStart="3dp"
                         android:gravity="center_vertical"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2.0"
+                        android:layout_weight="0.95"
+                        android:id="@+id/phn"
+                        android:text="8987675654"
+                        android:fontFamily="@font/rubik_medium"
+                        android:textSize="12dp"
+                        android:textColor="@color/grey"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
+                    android:weightSum="3">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        android:src="@drawable/id_card_1_svgrepo_com"/>
+                    <TextView
+                        android:layout_marginStart="3dp"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.85"
                         android:id="@+id/billa"
                         android:text="BILLA NO:"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:fontFamily="@font/rubik_regular"
                         android:textSize="12dp"
-                        android:textColor="@color/maincolor7"
+                        android:textColor="@color/grey2"
+                        android:paddingStart="2dp"
                         />
                     <LinearLayout
                         android:layout_width="0dp"

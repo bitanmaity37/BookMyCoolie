@@ -31,9 +31,11 @@ import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.FileUtil;
 import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
+import com.cdac.iaf.bookmycoolie.utils.RegEx;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -59,8 +61,11 @@ public class AddCoolieActivity extends AppCompatActivity {
     TextInputEditText tied_cname,
             tied_billano,
             tied_phno;
+    TextInputLayout til_cname;
 
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+
+    Integer flagName, flagPhone;
 
 
     @Override
@@ -69,6 +74,8 @@ public class AddCoolieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_coolie);
 
         home =findViewById(R.id.home);
+        flagName =0;
+        flagPhone = 0;
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,61 +103,72 @@ public class AddCoolieActivity extends AppCompatActivity {
         tied_cname = findViewById(R.id.tied_cname);
                 tied_billano = findViewById(R.id.tied_billano);
         tied_phno = findViewById(R.id.tied_phno);
+        til_cname = findViewById(R.id.til_cname);
 
         btn_rgstrc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                ProgressDialog progressDialog = new ProgressDialog(AddCoolieActivity.this);
-                progressDialog.setCancelable(false);
-                progressDialog.setTitle("Please Wait!!");
-                progressDialog.show();
 
-                System.out.println("Image before send"+capturedPhoto);
 
-                Call<SimpleUserIDResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                                                .addCoolie(
-                                                        securedSharedPreferenceUtils.getLoginData().getJwtToken(),
-                                                        new AddCoolieRequest(
-                                                                tied_phno.getText().toString().trim(),
-                                                                tied_cname.getText().toString().trim(),
-                                                                1, 3, securedSharedPreferenceUtils.getLoginData().getStationId(),
-                                                                tied_billano.getText().toString().trim(),
-                                                                capturedPhoto));
-                call.enqueue(new Callback<SimpleUserIDResponse>() {
-                    @Override
-                    public void onResponse(Call<SimpleUserIDResponse> call, Response<SimpleUserIDResponse> response) {
+                if(validator()){
+                    ProgressDialog progressDialog = new ProgressDialog(AddCoolieActivity.this);
+                    progressDialog.setCancelable(false);
+                    progressDialog.setTitle("Please Wait!!");
+                    progressDialog.show();
 
-                        progressDialog.dismiss();
+                    System.out.println("Image before send"+capturedPhoto);
 
-                        if (response.code()==200){
+                    Call<SimpleUserIDResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
+                            .addCoolie(
+                                    securedSharedPreferenceUtils.getLoginData().getJwtToken(),
+                                    new AddCoolieRequest(
+                                            tied_phno.getText().toString().trim(),
+                                            tied_cname.getText().toString().trim(),
+                                            1, 3, securedSharedPreferenceUtils.getLoginData().getStationId(),
+                                            tied_billano.getText().toString().trim(),
+                                            capturedPhoto));
+                    call.enqueue(new Callback<SimpleUserIDResponse>() {
+                        @Override
+                        public void onResponse(Call<SimpleUserIDResponse> call, Response<SimpleUserIDResponse> response) {
 
-                            System.out.println("Coolie ID "+response.body());
-                            Toast.makeText(AddCoolieActivity.this, "COOLIE ADDED", Toast.LENGTH_LONG).show();
-                            tied_cname.setText("");
-                            tied_cname.setEnabled(false);
-                            shapeableImageView.setImageDrawable(getResources().getDrawable(R.drawable.baseline_person_24));
-                        }
+                            progressDialog.dismiss();
 
-                        if(response.code()==401){
+                            if (response.code()==200){
 
-                            try {
-                                InvalidateUser.invalidate(AddCoolieActivity.this);
-
-                            } catch (GeneralSecurityException e) {
-                                throw new RuntimeException(e);
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
+                                System.out.println("Coolie ID "+response.body());
+                                Toast.makeText(AddCoolieActivity.this, "COOLIE ADDED", Toast.LENGTH_LONG).show();
+                                tied_cname.setText("");
+                                tied_cname.setEnabled(false);
+                                shapeableImageView.setImageDrawable(getResources().getDrawable(R.drawable.baseline_person_24));
                             }
 
-                        }
-                    }
+                            if(response.code()==401){
 
-                    @Override
-                    public void onFailure(Call<SimpleUserIDResponse> call, Throwable t) {
-                        progressDialog.dismiss();
-                    }
-                });
+                                try {
+                                    InvalidateUser.invalidate(AddCoolieActivity.this);
+
+                                } catch (GeneralSecurityException e) {
+                                    throw new RuntimeException(e);
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SimpleUserIDResponse> call, Throwable t) {
+                            progressDialog.dismiss();
+                        }
+                    });
+                }
+                else{
+                    //til_cname.setError("Name is invalid or blank");
+                }
+
+
+
 
             }
         });
@@ -198,6 +216,38 @@ public class AddCoolieActivity extends AppCompatActivity {
                 cameraIntentMaker(2);
             }
         });*/
+
+    }
+
+    private Boolean validator(){
+        boolean isValid = true;
+
+        if(tied_cname.getText().toString().matches(new RegEx().namePattern) && !tied_cname.getText().toString().isEmpty()){
+            til_cname.setError("");
+        }
+        else{
+            System.out.println("here");
+            isValid=false;
+            til_cname.setError("NAME IS INVALID OR BLANK");
+        }
+
+
+
+        if(tied_phno.getText().toString().matches(new RegEx().mobilePattern)){
+
+        }
+        else{
+            isValid = false;
+        }
+
+        if(!tied_billano.getText().toString().isEmpty() && tied_billano.getText().toString().matches(new RegEx().billaPattern)){
+
+        }
+        else {
+            isValid = false;
+        }
+
+        return isValid;
 
     }
 

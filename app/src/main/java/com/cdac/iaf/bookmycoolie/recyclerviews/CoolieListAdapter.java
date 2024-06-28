@@ -47,9 +47,9 @@ public class CoolieListAdapter extends RecyclerView.Adapter<CoolieListAdapter.Vi
                 holder.shpimv_coolie.setImageBitmap(decodedBitmap);
             }
         }
-        holder.tv_cname.setText("NAME: "+coolies.get(holder.getAdapterPosition()).getUserName());
-        holder.billa.setText("BILLA NO: "+coolies.get(holder.getAdapterPosition()).getCoolieBatchId());
-        holder.phn.setText("PHONE NO: "+coolies.get(holder.getAdapterPosition()).getUserMobile());
+        holder.tv_cname.setText(coolies.get(holder.getAdapterPosition()).getUserName().trim());
+        holder.billa.setText(coolies.get(holder.getAdapterPosition()).getCoolieBatchId().trim());
+        holder.phn.setText(coolies.get(holder.getAdapterPosition()).getUserMobile().trim());
 
         holder.btnmdfy.setOnClickListener(new View.OnClickListener() {
             @Override

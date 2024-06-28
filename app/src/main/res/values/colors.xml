@@ -16,7 +16,7 @@
     <color name="maincolor2">#01579B</color>
     <color name="maincolor3">#72BCE9</color>
 
-    <color name="maincolor4">#033F6E</color>
+    <color name="maincolor4">#2C455D</color>
     <color name="maincolor5">#7E3017</color>
     <color name="maincolor6">#2B5678</color>
 
@@ -45,6 +45,9 @@
     <color name="navbar_color">#2C455D</color>
     <color name="light_blue">#DAE4EE</color>
     <color name="dark_blue">#192735</color>
+
+    <color name="grey">#414243</color>
+    <color name="grey2">#2A2B2C</color>
 
 
 </resources>

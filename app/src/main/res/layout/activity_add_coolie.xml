@@ -106,8 +106,8 @@
                     android:maxLength="30"
                     android:textColor="@color/maincolor4"
                     android:textSize="17sp"
-                    app:errorEnabled="true"
-                    app:startIconContentDescription="Hello" />
+                    app:startIconContentDescription="Hello"
+                    android:maxLines="1"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -146,7 +146,8 @@
                     android:textColor="@color/maincolor4"
                     android:textSize="17sp"
                     app:errorEnabled="true"
-                    app:startIconContentDescription="Hello" />
+                    app:startIconContentDescription="Hello"
+                    android:maxLines="1"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -188,7 +189,8 @@
                     android:textColor="@color/maincolor4"
                     android:textSize="17sp"
                     app:errorEnabled="true"
-                    app:startIconContentDescription="Hello" />
+                    app:startIconContentDescription="Hello"
+                    android:maxLines="1"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
