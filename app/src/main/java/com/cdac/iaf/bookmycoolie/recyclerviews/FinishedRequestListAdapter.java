@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
+import com.cdac.iaf.bookmycoolie.utils.TimeConversionUtil;
 
 import java.util.ArrayList;
 
@@ -19,10 +21,13 @@ public class FinishedRequestListAdapter extends RecyclerView.Adapter<FinishedReq
     Context context;
     ArrayList<PassengerReqResponses> requests;
 
+    String mode;
 
-    public FinishedRequestListAdapter(Context context, ArrayList<PassengerReqResponses> requests) {
+
+    public FinishedRequestListAdapter(Context context, ArrayList<PassengerReqResponses> requests, String mode) {
         this.context = context;
         this.requests = requests;
+        this.mode = mode;
         System.out.println("In Here+++++++++++++++++++++++++++++++++"+requests.toString());
     }
 
@@ -36,10 +41,15 @@ public class FinishedRequestListAdapter extends RecyclerView.Adapter<FinishedReq
 
     @Override
     public void onBindViewHolder(@NonNull FinishedRequestListAdapter.ViewHolder holder, int position) {
-        System.out.println("requests assigned: "+ requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime());
-        holder.reqid.setText("REQUEST NO: "+requests.get(holder.getAdapterPosition()).getPassengerRequestId());
-        holder.reqtype.setText("SERVICE: "+requests.get(holder.getAdapterPosition()).getServiceTypeName()+", WEIGHT: "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+"KG. BAGS: "+requests.get(holder.getAdapterPosition()).getNoOfBags());
-        holder.reqpsngr.setText("PASSENGER: "+requests.get(holder.getAdapterPosition()).getPassengerName());
+        System.out.println("requests: "+ requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime());
+
+        holder.reqid.setText("Request No: "+requests.get(holder.getAdapterPosition()).getPassengerRequestId());
+
+        // holder.reqtype.setText("Service: "+requests.get(holder.getAdapterPosition()).getServiceTypeName()+", Weight: "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+"Kgs. Bags: "+requests.get(holder.getAdapterPosition()).getNoOfBags());
+
+        holder.reqtype.setText(requests.get(holder.getAdapterPosition()).getServiceTypeName()+" required for "+requests.get(holder.getAdapterPosition()).getNoOfBags()+" bags of approx. "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+" kgs ");
+
+        holder.reqpsngr.setText(requests.get(holder.getAdapterPosition()).getPassengerName());
         /*holder.psngrphn.setText("DATE: "+requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime().substring(1,10)+
                                 "Time: "+requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime().substring(11,16)+
                                 "to "+requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime().substring(11,16));*/
@@ -47,14 +57,25 @@ public class FinishedRequestListAdapter extends RecyclerView.Adapter<FinishedReq
         String b = requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime();
 
         if (a != null && b!= null){
-            holder.psngrphn.setText("Date: "+a.substring(0,10)+" Time: "+a.substring(11,16));
+            holder.psngrphn.setText(TimeConversionUtil.getFullDate(a.substring(0,10)) +" "+a.substring(11,16)+" to "+b.substring(11,16));
         } else {
             holder.psngrphn.setText("Date & Time not available");
         }
 
         //holder.psngrphn.setText(a.substring(6));
-        holder.pltfrm.setText("PICKUP: "+requests.get(holder.getAdapterPosition()).getStationAreaPickupFromName()+
-                " DROP: "+requests.get(holder.getAdapterPosition()).getStationAreaDropAtName());
+        holder.pltfrm.setText(requests.get(holder.getAdapterPosition()).getStationAreaPickupFromName());
+        holder.pltfrmdrop.setText(requests.get(holder.getAdapterPosition()).getStationAreaDropAtName());
+        switch (mode){
+            case "completed":
+                holder.remarks.setVisibility(View.GONE);
+                holder.remarks.setTextColor(ContextCompat.getColor(context, R.color.black));
+                break;
+            case "cancelled":
+                holder.remarks.setVisibility(View.VISIBLE);
+                holder.remarks.setText("COOLIES ARE NOT AVAILABLE");
+                holder.remarks.setTextColor(ContextCompat.getColor(context, R.color.red));
+                break;
+        }
     }
 
     @Override
@@ -68,7 +89,8 @@ public class FinishedRequestListAdapter extends RecyclerView.Adapter<FinishedReq
         TextView reqid;
         TextView psngrphn;
         TextView reqtype;
-        TextView pltfrm;
+        TextView pltfrm, pltfrmdrop;
+        TextView remarks;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -77,6 +99,8 @@ public class FinishedRequestListAdapter extends RecyclerView.Adapter<FinishedReq
             psngrphn = itemView.findViewById(R.id.psngrphn);
             reqtype = itemView.findViewById(R.id.reqtype);
             pltfrm = itemView.findViewById(R.id.pltfrm);
+            remarks = itemView.findViewById(R.id.remarks);
+            pltfrmdrop = itemView.findViewById(R.id.pltfrmdrop);
         }
     }
 }

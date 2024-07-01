@@ -19,6 +19,7 @@ import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
+import com.cdac.iaf.bookmycoolie.utils.TimeConversionUtil;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.IOException;
@@ -59,10 +60,15 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("requests assigned: "+ requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime());
-        holder.reqid.setText("REQUEST NO: "+requests.get(holder.getAdapterPosition()).getPassengerRequestId());
-        holder.reqtype.setText("SERVICE: "+requests.get(holder.getAdapterPosition()).getServiceTypeName()+", WEIGHT: "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+"KG. BAGS: "+requests.get(holder.getAdapterPosition()).getNoOfBags());
-        holder.reqpsngr.setText("PASSENGER: "+requests.get(holder.getAdapterPosition()).getPassengerName());
+        System.out.println("requests: "+ requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime());
+
+        holder.reqid.setText("Request No: "+requests.get(holder.getAdapterPosition()).getPassengerRequestId());
+
+        // holder.reqtype.setText("Service: "+requests.get(holder.getAdapterPosition()).getServiceTypeName()+", Weight: "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+"Kgs. Bags: "+requests.get(holder.getAdapterPosition()).getNoOfBags());
+
+        holder.reqtype.setText(requests.get(holder.getAdapterPosition()).getServiceTypeName()+" required for "+requests.get(holder.getAdapterPosition()).getNoOfBags()+" bags of approx. "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+" kgs ");
+
+        holder.reqpsngr.setText(requests.get(holder.getAdapterPosition()).getPassengerName());
         /*holder.psngrphn.setText("DATE: "+requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime().substring(1,10)+
                                 "Time: "+requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime().substring(11,16)+
                                 "to "+requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime().substring(11,16));*/
@@ -70,14 +76,14 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
         String b = requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime();
 
         if (a != null && b!= null){
-            holder.psngrphn.setText("Date: "+a.substring(0,10)+" Time: "+a.substring(11,16));
+            holder.psngrphn.setText(TimeConversionUtil.getFullDate(a.substring(0,10)) +" "+a.substring(11,16)+" to "+b.substring(11,16));
         } else {
             holder.psngrphn.setText("Date & Time not available");
         }
 
         //holder.psngrphn.setText(a.substring(6));
-        holder.pltfrm.setText("PICKUP: "+requests.get(holder.getAdapterPosition()).getStationAreaPickupFromName()+
-                " DROP: "+requests.get(holder.getAdapterPosition()).getStationAreaDropAtName());
+        holder.pltfrm.setText(requests.get(holder.getAdapterPosition()).getStationAreaPickupFromName());
+        holder.pltfrmdrop.setText(requests.get(holder.getAdapterPosition()).getStationAreaDropAtName());
 
         holder.btncmplt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +145,7 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
         TextView reqid;
         TextView psngrphn;
         TextView reqtype;
-        TextView pltfrm;
+        TextView pltfrm, pltfrmdrop;
         Button btncmplt;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -150,6 +156,7 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
             reqtype = itemView.findViewById(R.id.reqtype);
             pltfrm = itemView.findViewById(R.id.pltfrm);
             btncmplt = itemView.findViewById(R.id.btncmplt);
+            pltfrmdrop = itemView.findViewById(R.id.pltfrmdrop);
         }
     }
 }

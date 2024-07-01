@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,11 +42,14 @@ public class AssignHomeActivity extends AppCompatActivity {
 
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
     Button home;
+    LinearLayout ll_home;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_home);
         rcv_requestList = findViewById(R.id.rcv_requestList);
+
+        ll_home = findViewById(R.id.ll_home);
 
         tv_pending = findViewById(R.id.tv_pending);
         tv_ongoing = findViewById(R.id.tv_ongoing);
@@ -100,7 +104,7 @@ public class AssignHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 c3();
-                rvCancelledCompletedLoad(serviceMode,3);
+                rvCancelledCompletedLoad(serviceMode,3,"completed");
 
             }
         });
@@ -108,7 +112,7 @@ public class AssignHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 c4();
-                rvCancelledCompletedLoad(serviceMode,4);
+                rvCancelledCompletedLoad(serviceMode,4,"cancelled");
 
             }
         });
@@ -198,53 +202,59 @@ public class AssignHomeActivity extends AppCompatActivity {
     void rvCancelledLoad(){}
 
     void c1(){
-        tv_pending.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
+        tv_pending.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.black));
         tv_ongoing.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
         tv_finished.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
         tv_cancelled.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
 
-        tv_pending.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
+        tv_pending.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.pending));
         tv_ongoing.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
         tv_finished.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
         tv_cancelled.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
+       // rcv_requestList.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.pending));
     }
     void c2(){
         tv_pending.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
-        tv_ongoing.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
+        tv_ongoing.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.black));
         tv_finished.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
         tv_cancelled.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
 
         tv_pending.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
-        tv_ongoing.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
+        tv_ongoing.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.assigned));
         tv_finished.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
         tv_cancelled.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
+
+       // rcv_requestList.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.assigned));
     }
     void c3(){
         tv_pending.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
         tv_ongoing.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
-        tv_finished.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
+        tv_finished.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.black));
         tv_cancelled.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
 
         tv_pending.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
         tv_ongoing.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
-        tv_finished.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
+        tv_finished.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.completed));
         tv_cancelled.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
+       // rcv_requestList.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.completed));
 
     }
     void c4(){
         tv_pending.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
         tv_ongoing.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
         tv_finished.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
-        tv_cancelled.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
+        tv_cancelled.setTextColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.black));
 
         tv_pending.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
         tv_ongoing.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
         tv_finished.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
-        tv_cancelled.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.maincolor4));
+        tv_cancelled.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.canceled));
+
+       // rcv_requestList.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.canceled));
 
     }
 
-    void rvCancelledCompletedLoad(Integer serviceMode,Integer mode){
+    void rvCancelledCompletedLoad(Integer serviceMode,Integer mode, String rvmode){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AssignHomeActivity.this);
         rcv_requestList.setLayoutManager(linearLayoutManager);
 
@@ -256,7 +266,7 @@ public class AssignHomeActivity extends AppCompatActivity {
                 if(response.code()==200){
 
 
-                    FinishedRequestListAdapter assignedListAdapter =  new FinishedRequestListAdapter(AssignHomeActivity.this,response.body());
+                    FinishedRequestListAdapter assignedListAdapter =  new FinishedRequestListAdapter(AssignHomeActivity.this,response.body(),rvmode);
                     rcv_requestList.setAdapter(assignedListAdapter);
 
                     //System.out.println("Requests Unassigned :"+response.body().toString());

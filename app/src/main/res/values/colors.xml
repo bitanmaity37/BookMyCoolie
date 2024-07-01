@@ -48,6 +48,8 @@
 
     <color name="grey">#414243</color>
     <color name="grey2">#2A2B2C</color>
+    <color name="grey3">#505659</color>
+    <color name="black2">#2E2C2C</color>
 
 
 </resources>

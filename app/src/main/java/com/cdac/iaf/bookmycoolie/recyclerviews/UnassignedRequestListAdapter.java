@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.activities.OPERATOR.AssignmentActivity;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
+import com.cdac.iaf.bookmycoolie.utils.TimeConversionUtil;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class UnassignedRequestListAdapter extends RecyclerView.Adapter<Unassigne
 
         holder.reqid.setText("Request No: "+requests.get(holder.getAdapterPosition()).getPassengerRequestId());
 
-        holder.reqtype.setText("Service: "+requests.get(holder.getAdapterPosition()).getServiceTypeName()+", Weight: "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+"Kgs. Bags: "+requests.get(holder.getAdapterPosition()).getNoOfBags());
+       // holder.reqtype.setText("Service: "+requests.get(holder.getAdapterPosition()).getServiceTypeName()+", Weight: "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+"Kgs. Bags: "+requests.get(holder.getAdapterPosition()).getNoOfBags());
 
         holder.reqtype.setText(requests.get(holder.getAdapterPosition()).getServiceTypeName()+" required for "+requests.get(holder.getAdapterPosition()).getNoOfBags()+" bags of approx. "+requests.get(holder.getAdapterPosition()).getApproxTotalWeightage()+" kgs ");
 
@@ -58,7 +59,7 @@ public class UnassignedRequestListAdapter extends RecyclerView.Adapter<Unassigne
         String b = requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime();
 
         if (a != null && b!= null){
-            holder.psngrphn.setText(a.substring(0,10)+" "+a.substring(11,16));
+            holder.psngrphn.setText(TimeConversionUtil.getFullDate(a.substring(0,10)) +" "+a.substring(11,16)+" to "+b.substring(11,16));
         } else {
             holder.psngrphn.setText("Date & Time not available");
         }

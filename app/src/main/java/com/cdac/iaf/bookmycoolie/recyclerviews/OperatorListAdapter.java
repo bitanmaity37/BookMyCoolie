@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdac.iaf.bookmycoolie.R;
@@ -44,11 +45,11 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull OperatorListAdapter.ViewHolder holder, int position) {
-        holder.optid.setText("ID: "+operators.get(position).getUserEmpId());
-        holder.phn.setText("PH: "+operators.get(holder.getAdapterPosition()).getUserMobile());
-        holder.email.setText("EMAIL: "+operators.get(holder.getAdapterPosition()).getUserEmailId());
-        holder.stn.setText("STN: "+operators.get(holder.getAdapterPosition()).getStationName());
-        holder.optname.setText("NAME: "+operators.get(holder.getAdapterPosition()).getUserName());
+        holder.optid.setText(operators.get(position).getUserEmpId());
+        holder.phn.setText(operators.get(holder.getAdapterPosition()).getUserMobile());
+        holder.email.setText(operators.get(holder.getAdapterPosition()).getUserEmailId());
+        holder.stn.setText(operators.get(holder.getAdapterPosition()).getStationName());
+        holder.optname.setText(operators.get(holder.getAdapterPosition()).getUserName());
         holder.btnmdfy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +65,7 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
             }
         });
 
-        holder.btndlt.setOnClickListener(new View.OnClickListener() {
+        /*holder.btndlt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(context);
@@ -90,7 +91,7 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
                 });
                 materialAlertDialogBuilder.show();
             }
-        });
+        });*/
     }
 
     @Override
@@ -101,7 +102,9 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView optid,phn,email,stn, optname;
-        Button btnmdfy,btndlt;
+        Button btnmdfy;
+
+        SwitchCompat switch_oprtractv;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -112,7 +115,9 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
             optname = itemView.findViewById(R.id.optname);
 
             btnmdfy = itemView.findViewById(R.id.btnmdfy);
-                    btndlt = itemView.findViewById(R.id.btndlt);
+            switch_oprtractv = itemView.findViewById(R.id.switch_oprtractv);
+
+
         }
     }
 }
