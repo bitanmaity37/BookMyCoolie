@@ -24,6 +24,7 @@ import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.chaos.view.PinView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
@@ -33,7 +34,7 @@ import retrofit2.Response;
 
 public class SignUPPassengerActivity extends AppCompatActivity {
 
-    Button getOTPButton, verifyButton, registerButton;
+    Button getOTPButton, verifyButton, registerButton,btnLogout;
     LinearLayout ll_register, ll_otp, ll_registerdtls;
 
     TextInputEditText tied_phone, tied_name, tied_pwd, tied_email, tied_eid;
@@ -54,7 +55,12 @@ public class SignUPPassengerActivity extends AppCompatActivity {
         getOTPButton = findViewById(R.id.getOTPButton);
         verifyButton = findViewById(R.id.verifyButton);
         registerButton = findViewById(R.id.registerButton);
+        btnLogout = findViewById(R.id.logout);
         tied_eid = findViewById(R.id.tied_eid);
+        TextInputLayout til_eid = findViewById(R.id.til_eid);
+
+        til_eid.setVisibility(View.GONE);
+        btnLogout.setVisibility(View.GONE);
 
 
         ll_register = findViewById(R.id.ll_register);
@@ -126,7 +132,7 @@ public class SignUPPassengerActivity extends AppCompatActivity {
                 if(otpSent && numberVerified){
                     Call<SimpleUserIDResponse> call3 = RestClient.getRetrofitClient().create(RestInterface.class)
                             .registerPsngr(new RegisterPassengerDetailsModel(tied_email.getText().toString().trim(),
-                                    tied_eid.getText().toString().trim(),
+                                    "344500",
                                     true,
                                     Mobile,
                                     tied_name.getText().toString(),

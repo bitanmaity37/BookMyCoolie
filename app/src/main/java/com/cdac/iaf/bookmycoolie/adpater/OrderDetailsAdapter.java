@@ -53,9 +53,9 @@ public class OrderDetailsAdapter extends  RecyclerView.Adapter<OrderDetailsAdapt
         String mobileNumber = orderDetailsModel.getUserMobile();
         String maskedMobileNumber = "*******"+mobileNumber.substring(mobileNumber.length() - 3);
 
-        holder.coolieName.setText(String.format("Name:  %s", orderDetailsModel.getUserName()));
+        holder.coolieName.setText(String.format("%s", orderDetailsModel.getUserName()));
         holder.coolieBillaNo.setText(String.format("Billa no.:  %s", orderDetailsModel.getCoolieBatchId()));
-        holder.cooliePhoneNo.setText(String.format("Mobile:  %s", maskedMobileNumber));
+        holder.cooliePhoneNo.setText(String.format("%s", maskedMobileNumber));
 
         String base64Image = orderDetailsModel.getCooliePhoto();
         System.out.println("in adapter base64Image: "+base64Image);
@@ -76,7 +76,7 @@ public class OrderDetailsAdapter extends  RecyclerView.Adapter<OrderDetailsAdapt
 
             if(!OrderStatusUtil.getOrderStatus(status).equalsIgnoreCase("COMPLETED")){
                 holder.callButton.setVisibility(View.VISIBLE);
-                holder.cooliePhoneNo.setText(String.format("Mobile:  %s", mobileNumber));
+                holder.cooliePhoneNo.setText(String.format("%s", mobileNumber));
                 holder.callButton.setOnClickListener(v -> {
                     String phoneNumber = holder.cooliePhoneNo.getText().toString().trim();
                     phoneNumber = phoneNumber.replaceAll("[^\\d]", "");

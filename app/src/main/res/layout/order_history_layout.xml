@@ -17,7 +17,7 @@
         android:text="1"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:fontFamily="@font/rubik_regular"
         android:textColor="@color/black" />
 
    <!-- <ImageView
@@ -37,45 +37,29 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/request_id_label"
+            android:id="@+id/station_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="4"
-            android:maxLines="1"
+            android:layout_height="match_parent"
             android:paddingTop="16dp"
-            android:paddingEnd="10dp"
-            android:text="Request Id"
-            android:textStyle="bold"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:layout_toEndOf="@id/coolie_image"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:paddingEnd="16dp"
+            android:text="Station Name"
+            android:fontFamily="@font/rubik_regular"
+            android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/request_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="5"
+            android:layout_weight="2"
             android:maxLines="1"
             android:paddingTop="16dp"
             android:paddingEnd="10dp"
             android:text="Request Id"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/order_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/request_id"
-            android:layout_toEndOf="@id/coolie_image"
-            android:layout_weight="3"
-            android:maxLines="1"
-            android:paddingTop="16dp"
-            android:paddingEnd="10dp"
-            android:textStyle="bold"
-            android:text="Order Status"
-            android:textAlignment="textEnd"
+            android:fontFamily="@font/rubik_regular"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             android:textColor="@color/black" />
 
@@ -89,36 +73,12 @@
         android:layout_toEndOf="@id/coolie_image"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/station_name_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="2"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:paddingEnd="10dp"
-            android:text="Station Name"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/station_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@id/coolie_image"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:paddingEnd="16dp"
-            android:text="Station Name"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black" />
     </LinearLayout>
 
 
     <LinearLayout
-        android:id="@+id/linear_layout_pickup_status"
+        android:id="@+id/linear_layout_dropoff_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_layout_statName_status"
@@ -126,174 +86,90 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/pickup_area_label"
+            android:id="@+id/service_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linear_layout_statName_status"
+            android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_toEndOf="@id/coolie_image"
-            android:layout_weight="2"
             android:maxLines="1"
-            android:paddingEnd="16dp"
-            android:textStyle="bold"
-            android:text="Pickup From"
+            android:paddingEnd="10dp"
+            android:fontFamily="@font/rubik_medium"
+            android:text="Request type"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/pickup_area"
+            android:id="@+id/no_of_bags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linear_layout_statName_status"
-            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
             android:layout_toEndOf="@id/coolie_image"
-            android:layout_weight="1"
             android:maxLines="1"
-            android:paddingEnd="16dp"
-            android:text="Pickup From"
+            android:paddingEnd="10dp"
+            android:text="No. of bags"
             android:textAppearance="?attr/textAppearanceBody1"
+            android:fontFamily="@font/rubik_regular"
             android:textColor="@color/black" />
+
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_layout_dropoff_status"
+    <RelativeLayout
+        android:id="@+id/linear_layout_pickup_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear_layout_pickup_status"
+        android:layout_below="@id/linear_layout_dropoff_status"
         android:layout_toEndOf="@id/coolie_image"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/dropping_area_label"
-            android:layout_width="match_parent"
+            android:id="@+id/pickup_area"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_below="@id/linear_layout_pickup_status"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@id/coolie_image"
+            android:layout_weight="1"
             android:maxLines="1"
-            android:paddingEnd="16dp"
-            android:text="Drop At"
-            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:paddingEnd="8dp"
+            android:text="Pickup From"
+            android:fontFamily="@font/rubik_regular"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/arrow_right"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/pickup_area"
+            android:layout_weight="1.5"
+            android:src="@drawable/arrow_right"/>
 
         <TextView
             android:id="@+id/dropping_area"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_below="@id/linear_layout_pickup_status"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@id/coolie_image"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@id/arrow_right"
             android:maxLines="1"
-            android:paddingEnd="16dp"
-            android:text="drop"
+            android:fontFamily="@font/rubik_regular"
+            android:paddingStart="8dp"
+            android:textAlignment="textEnd"
+            android:text="drop at"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="@color/black" />
 
-    </LinearLayout>
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linear_layout_noofbag_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear_layout_dropoff_status"
+        android:layout_below="@id/linear_layout_pickup_status"
         android:layout_toEndOf="@id/coolie_image"
         android:orientation="horizontal">
-
-    <TextView
-        android:id="@+id/no_of_bags_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:layout_below="@id/linear_layout_dropoff_status"
-        android:layout_gravity="center_vertical"
-        android:layout_toEndOf="@id/coolie_image"
-        android:maxLines="1"
-        android:paddingEnd="10dp"
-        android:text="Bags "
-        android:textStyle="bold"
-        android:textAppearance="?attr/textAppearanceBody1"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:id="@+id/no_of_bags"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_below="@id/linear_layout_dropoff_status"
-        android:layout_gravity="center_vertical"
-        android:layout_toEndOf="@id/coolie_image"
-        android:maxLines="1"
-        android:paddingEnd="10dp"
-        android:text="No. of bags"
-        android:textAppearance="?attr/textAppearanceBody1"
-        android:textColor="@color/black" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear_layout_servtype_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linear_layout_noofbag_status"
-        android:layout_toEndOf="@id/coolie_image"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:id="@+id/service_type_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_below="@id/no_of_bags"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@id/coolie_image"
-            android:maxLines="1"
-            android:paddingEnd="10dp"
-            android:text="Service "
-            android:textStyle="bold"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/service_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_below="@id/no_of_bags"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@id/coolie_image"
-            android:maxLines="1"
-            android:paddingEnd="10dp"
-            android:text="Service type"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear_layout_booked_at"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linear_layout_servtype_status"
-        android:layout_toEndOf="@id/coolie_image"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:id="@+id/booked_at_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_below="@id/no_of_bags"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@id/coolie_image"
-            android:maxLines="1"
-            android:paddingEnd="10dp"
-            android:text="Booked At "
-            android:textStyle="bold"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/booked_at"
@@ -305,11 +181,47 @@
             android:layout_toEndOf="@id/coolie_image"
             android:maxLines="1"
             android:paddingEnd="10dp"
-            android:text="Service type"
+            android:fontFamily="@font/rubik_light"
+            android:textSize="12dp"
+            android:text="Booked on:"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="@color/black" />
 
+        <TextView
+            android:id="@+id/order_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/request_id"
+            android:layout_toEndOf="@id/coolie_image"
+            android:layout_weight="2"
+            android:maxLines="1"
+            android:paddingEnd="10dp"
+            android:fontFamily="@font/rubik_regular"
+            android:textStyle="bold"
+            android:text="Order Status"
+            android:textSize="14dp"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="@color/black" />
+
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_servtype_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_layout_noofbag_status"
+        android:layout_toEndOf="@id/coolie_image"
+        android:orientation="horizontal"
+        />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_booked_at"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_layout_servtype_status"
+        android:layout_toEndOf="@id/coolie_image"
+        android:orientation="horizontal"
+        />
 
     <LinearLayout
         android:id="@+id/linear_layout_record_tracking"
@@ -318,37 +230,7 @@
         android:layout_below="@id/linear_layout_booked_at"
         android:layout_toEndOf="@id/coolie_image"
         android:orientation="horizontal"
-        >
-        <TextView
-            android:id="@+id/record_tracking_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_below="@id/no_of_bags"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@id/coolie_image"
-            android:maxLines="1"
-            android:paddingEnd="10dp"
-            android:text="Booked At "
-            android:textStyle="bold"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/record_tracking"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_below="@id/no_of_bags"
-            android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@id/coolie_image"
-            android:maxLines="1"
-            android:paddingEnd="10dp"
-            android:text="Service type"
-            android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black" />
-
-    </LinearLayout>
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/cancel_request_btn"

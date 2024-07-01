@@ -59,17 +59,17 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         Date bookingDate = new Date(orderStatus.getBookingDate().getTime());
         Date recordDate = new Date(orderStatus.getRecordTracking().getTime());
         //String requestStatus = getStatusString(orderStatus.getRequestStatus());
-        holder.requestId.setText(String.valueOf(orderStatus.getPassengerRequestId()));
+        holder.requestId.setText(String.format("ID:%s", String.valueOf(orderStatus.getPassengerRequestId())));
         holder.requestStatus.setText(OrderStatusUtil.getOrderStatus(orderStatus.getRequestStatus()));
         holder.pickUpArea.setText(orderStatus.getStationAreaPickupFromName());
         holder.dropOffArea.setText(orderStatus.getStationAreaDropAtName());
         holder.stationName.setText(orderStatus.getStationName());
-        holder.noOfBags.setText(String.valueOf(orderStatus.getNoOfBags()));
+        holder.noOfBags.setText(String.format("%s bags",String.valueOf(orderStatus.getNoOfBags())));
         holder.serviceType.setText(ServiceTypeUtil.getServiceTypeName(orderStatus.getServiceType()));
-        holder.bookedAt.setText(sdf.format(bookingDate));
-        holder.recordTracking.setText(sdf.format(recordDate));
+        holder.bookedAt.setText(String.format("Booked on: %s", sdf.format(bookingDate)));
+        //holder.recordTracking.setText(sdf.format(recordDate));
 
-        switch (OrderStatusUtil.getOrderStatus(orderStatus.getRequestStatus()).toLowerCase()){
+        /*switch (OrderStatusUtil.getOrderStatus(orderStatus.getRequestStatus()).toLowerCase()){
 
             case "pending":
                 holder.recordTrackingLayout.setVisibility(View.GONE);
@@ -99,7 +99,7 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
             default:
                     break;
 
-        }
+        }*/
 
         int colorId = OrderStatusUtil.getColor(orderStatus.getRequestStatus());
         holder.requestStatus.setTextColor(ContextCompat.getColor(context, colorId));
@@ -107,11 +107,16 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         // If you have a specific drawable for different statuses, you can set it here.
         holder.coolieImage.setText(MessageFormat.format("{0}.", (position + 1)));
 
-        /*if (!OrderStatusUtil.getOrderStatus(orderStatus.getRequestStatus()).equalsIgnoreCase("pending")) {
-
+        if (OrderStatusUtil.getOrderStatus(orderStatus.getRequestStatus()).equalsIgnoreCase("pending")) {
+            holder.cancelButton.setVisibility(View.VISIBLE);
+            holder.cancelButton.setOnClickListener(v -> {
+                orderStatusList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, orderStatusList.size());
+            });
         } else {
-
-        }*/
+            holder.cancelButton.setVisibility(View.GONE);
+        }
 
         System.out.println("Request Status: " + orderStatus.getRequestStatus());
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -15,9 +16,9 @@ public class CarouselLayout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carousel_layout);
 
-        ImageView imageView = findViewById(R.id.list_item_image);
+        TextView imageView = findViewById(R.id.test_text);
 
-        Glide.with(CarouselLayout.this).load(getIntent().getStringExtra("image")).into(imageView);
+       // Glide.with(CarouselLayout.this).load(getIntent().getStringExtra("image")).into(imageView);
 
     }
 }

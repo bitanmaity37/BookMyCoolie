@@ -88,9 +88,13 @@ public class BookCartService {
         callGetSationList.enqueue(new Callback<ArrayList<StationModel>>() {
             @Override
             public void onResponse(Call<ArrayList<StationModel>> call, Response<ArrayList<StationModel>> response) {
-                System.out.println("station list: " + response.body());
-                stationList = response.body();
-                setStationList();
+                if(response.isSuccessful() || response.code() == 200){
+                    System.out.println("station list: " + response.body());
+                    stationList = response.body();
+                    setStationList();
+                }else{
+                    Toast.makeText(context, "No Station found!!", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -197,7 +201,7 @@ public class BookCartService {
 
                 startTimeInput.setText(formattedDate);
 
-                Toast.makeText(context, " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
             });
 
         });
@@ -235,7 +239,7 @@ public class BookCartService {
 
                 endTimePicker.setText(formattedDate);
 
-                Toast.makeText(context, "Timestamp tentativeStartTime =" + tentativeEndTime + " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Timestamp tentativeStartTime =" + tentativeEndTime + " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
             });
 
         });
@@ -280,7 +284,9 @@ public class BookCartService {
                     public void onResponse(Call<CoolieResponseModel> call, Response<CoolieResponseModel> response) {
                         System.out.println("response.body().getRequestStatus(): " + response.code());
                         System.out.println("response.body().getRequestStatus(): " + response.body().getPassengerRequestId());
-                        Toast.makeText(context, "response.body().getRequestStatus(): " + response.code(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "response.body().getRequestStatus(): " + response.code(), Toast.LENGTH_SHORT).show();
+                        resetFormFields();
+                        coolieBottomSheetDialog.dismiss();
                     }
 
                     @Override
@@ -294,5 +300,35 @@ public class BookCartService {
         }
     }
 
+    private void resetFormFields() {
+        if (autoCompleteStationList != null) {
+            autoCompleteStationList.setText("");
+        }
+        if (autoCompleteStationAreaPickup != null) {
+            autoCompleteStationAreaPickup.setText("");
+        }
+        if (autoCompleteStationAreaDropAt != null) {
+            autoCompleteStationAreaDropAt.setText("");
+        }
+        if (startTimeInput != null) {
+            startTimeInput.setText("");
+        }
+        if (endTimePicker != null) {
+            endTimePicker.setText("");
+        }
+        TextInputEditText getNoOfCartsReq = coolieBottomSheetDialog.findViewById(R.id.carts_required_input);
+        TextInputEditText getNoOfBags = coolieBottomSheetDialog.findViewById(R.id.no_of_bags_input);
+        TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
+
+        if (getNoOfCartsReq != null) {
+            getNoOfCartsReq.setText("");
+        }
+        if (getNoOfBags != null) {
+            getNoOfBags.setText("");
+        }
+        if (approxWeight != null) {
+            approxWeight.setText("");
+        }
+    }
 
 }

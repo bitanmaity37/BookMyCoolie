@@ -34,7 +34,7 @@ import retrofit2.Response;
 
 public class AdminLoginActivity extends AppCompatActivity {
 
-    Button btn_admlogin, btn_signup, btn_admnpage, btn_oprtrpage, btn_psngrpage;
+    Button btn_admlogin, btn_signup, btn_admnpage, btn_oprtrpage, btn_psngrpage,btnLogout;
     TextInputEditText tied_admname, tied_admpwd;
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
@@ -48,6 +48,8 @@ public class AdminLoginActivity extends AppCompatActivity {
         tied_admpwd = findViewById(R.id.tied_admpwd);
         btn_signup = findViewById(R.id.btn_signup);
         btn_admlogin = findViewById(R.id.btn_admlogin);
+        btnLogout = findViewById(R.id.logout);
+        btnLogout.setVisibility(View.GONE);
 
         try {
             securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AdminLoginActivity.this);

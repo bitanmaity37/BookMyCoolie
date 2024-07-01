@@ -200,7 +200,7 @@ public class BookCoolieService {
 
                 startTimeInput.setText(formattedDate);
 
-                Toast.makeText(context, " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
             });
 
         });
@@ -238,7 +238,7 @@ public class BookCoolieService {
 
                 endTimePicker.setText(formattedDate);
 
-                Toast.makeText(context, "Timestamp tentativeStartTime =" + tentativeEndTime + " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Timestamp tentativeStartTime =" + tentativeEndTime + " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
             });
 
         });
@@ -292,7 +292,9 @@ public class BookCoolieService {
                     public void onResponse(Call<CoolieResponseModel> call, Response<CoolieResponseModel> response) {
                         System.out.println("response.body().getRequestStatus(): " + response.code());
                         System.out.println("response.body().getRequestStatus(): " + response.body().getPassengerRequestId());
-                        Toast.makeText(context, "response.body().getRequestStatus(): " + response.code(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "response.body().getRequestStatus(): " + response.code(), Toast.LENGTH_SHORT).show();
+                        resetFormFields();
+                        coolieBottomSheetDialog.dismiss();
                     }
 
                     @Override
@@ -303,6 +305,44 @@ public class BookCoolieService {
 
                 Toast.makeText(context, "submitBookCoolieForm", Toast.LENGTH_SHORT).show();
             });
+        }
+    }
+
+    private void resetFormFields() {
+        if (coolieBottomSheetDialog != null) {
+            // Reset AutoCompleteTextViews
+            if (autoCompleteStationList != null) {
+                autoCompleteStationList.setText("");
+                autoCompleteStationList.clearListSelection();
+            }
+            if (autoCompleteStationAreaPickup != null) {
+                autoCompleteStationAreaPickup.setText("");
+                autoCompleteStationAreaPickup.clearListSelection();
+            }
+            if (autoCompleteStationAreaDropAt != null) {
+                autoCompleteStationAreaDropAt.setText("");
+                autoCompleteStationAreaDropAt.clearListSelection();
+            }
+
+            // Reset TextInputEditTexts
+            if (startTimeInput != null) {
+                startTimeInput.setText("");
+            }
+            if (endTimePicker != null) {
+                endTimePicker.setText("");
+            }
+
+            TextInputEditText getNoOfBags = coolieBottomSheetDialog.findViewById(R.id.no_of_bags_input);
+            TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
+            if (getNoOfBags != null) {
+                getNoOfBags.setText("");
+            }
+            if (approxWeight != null) {
+                approxWeight.setText("");
+            }
+
+            // Reset request model
+            coolieRequestModel = new CoolieRequestModel();
         }
     }
 

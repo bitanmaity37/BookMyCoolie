@@ -13,6 +13,6 @@
     <string name="passenger_faq">FAQs</string>
     <string name="passenger_contact">Contact Us</string>
     <string name="passenger_order_history">History</string>
-    <string name="passenger_order_details">Order Details</string>
+    <string name="passenger_order_details">Request Details</string>
 
 </resources>

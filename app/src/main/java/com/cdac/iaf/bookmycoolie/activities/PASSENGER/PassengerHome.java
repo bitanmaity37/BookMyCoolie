@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.cdac.iaf.bookmycoolie.databinding.ActivityPassengerHomeBinding;
 import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
+import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -43,6 +46,7 @@ public class PassengerHome extends AppCompatActivity {
     RecyclerView recyclerView;
     String authToken;
     ActivityPassengerHomeBinding binding;
+    Button btnLogout;
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
     @Override
@@ -58,6 +62,20 @@ public class PassengerHome extends AppCompatActivity {
             throw new RuntimeException(e);
         }
         authToken = securedSharedPreferenceUtils.getLoginData().getJwtToken();
+        btnLogout = findViewById(R.id.logout);
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    InvalidateUser.invalidate(PassengerHome.this);
+                } catch (GeneralSecurityException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         TextView navbarTitle = findViewById(R.id.navbar_title);
         navbarTitle.setText(R.string.passenger_home);
@@ -117,11 +135,11 @@ public class PassengerHome extends AppCompatActivity {
         });
 
         logoutButton();
-        //setCarouselImages();
+        setCarouselImages();
     }
 
 
-    /*public void setCarouselImages() {
+    public void setCarouselImages() {
 
         recyclerView = findViewById(R.id.carousel_recycler_view);
         ArrayList<String> arrayList = new ArrayList<>();
@@ -143,7 +161,7 @@ public class PassengerHome extends AppCompatActivity {
             }
         });
 
-    }*/
+    }
 
     public void logoutButton(){
 

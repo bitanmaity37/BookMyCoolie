@@ -21,8 +21,8 @@
             android:maxLines="1"
             android:padding="5dp"
             android:text="Station Name: "
-            android:textStyle="bold"
-            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="18dp"
             android:textColor="@color/black" />
 
         <LinearLayout
@@ -37,7 +37,7 @@
 
             <ImageView
                 android:id="@+id/mobile_no_icon"
-                android:layout_width="50dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/phone_fill" />
 
@@ -47,8 +47,10 @@
                 android:layout_height="match_parent"
                 android:maxLines="1"
                 android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:textSize="16dp"
                 android:text="0123456789"
-                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:fontFamily="@font/rubik_regular"
                 android:textColor="@color/black" />
 
         </LinearLayout>
@@ -66,7 +68,7 @@
 
             <ImageView
                 android:id="@+id/email_id_icon"
-                android:layout_width="50dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/mail_fill" />
 
@@ -76,8 +78,10 @@
                 android:layout_height="match_parent"
                 android:maxLines="1"
                 android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:textSize="16dp"
                 android:text="operator@gmail.com "
-                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:fontFamily="@font/rubik_regular"
                 android:textColor="@color/black" />
 
         </LinearLayout>

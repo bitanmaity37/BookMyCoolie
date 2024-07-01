@@ -59,6 +59,7 @@
                     android:maxLines="1"
                     android:paddingEnd="10dp"
                     android:text="Bhanu Pratap Singh"
+                    android:fontFamily="@font/rubik_regular"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
@@ -91,6 +92,7 @@
                     android:maxLines="1"
                     android:paddingEnd="10dp"
                     android:text="1234567890"
+                    android:fontFamily="@font/rubik_light"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
@@ -122,6 +124,7 @@
                     android:layout_weight="55"
                     android:paddingEnd="10dp"
                     android:text="1234567890"
+                    android:fontFamily="@font/rubik_light"
                     android:textAppearance="?attr/textAppearanceSubtitle1"
                     android:textColor="@color/black"
                     android:textStyle="bold" />

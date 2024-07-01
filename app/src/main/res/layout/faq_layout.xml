@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingTop="8dp"
+                android:fontFamily="@font/rubik_regular"
                 android:text="1."
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -38,10 +39,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:maxLines="1"
-                android:paddingTop="6dp"
+                android:paddingTop="8dp"
                 android:paddingEnd="5dp"
                 android:text="How to find an apprenticeship?"
-                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:fontFamily="@font/rubik_regular"
                 android:textColor="@color/black" />
 
 
@@ -75,6 +76,7 @@
                 android:padding="8dp"
                 android:text="We provide an official service to search through available apprenticeships. To get started, create an account here, specify the desired region, and your preferences. You will be able to search through all officially registered open apprenticeships."
                 android:textColor="@color/black"
+                android:fontFamily="@font/rubik_regular"
                 android:textSize="14sp" />
 
         </androidx.cardview.widget.CardView>

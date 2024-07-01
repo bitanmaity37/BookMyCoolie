@@ -25,8 +25,22 @@
         android:paddingBottom="10dp"
         android:layout_weight="1"
         android:textSize="18dp"
-        android:textStyle="bold"
+        android:fontFamily="@font/rubik_medium"
         android:textColor="@color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/navbar_color"
+        android:drawableTint="@color/black"
+        android:gravity="center"
+        app:icon="@drawable/logout"
+        app:iconSize="20dp"
+        app:iconTint="@color/white"
+        app:rippleColor="@color/white"
+        android:id="@+id/logout"/>
 
     <!--<ImageView
         android:id="@+id/logout_btn"
