@@ -3,10 +3,12 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:cardElevation="20dp">
+    app:cardElevation="20dp"
+    android:background="@android:color/transparent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,11 +20,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="PASSENGER: RAJIV SHUKLA"
-            android:fontFamily="@font/montserrat_bold"
+            android:text="RAJIV SHUKLA"
+            android:fontFamily="@font/rubik_bold"
             android:gravity="center_vertical"
-            android:textColor="@color/maincolor4"
+            android:textColor="@color/black"
+            android:textSize="17sp"
             />
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerInsetStart="2dp"
+            app:dividerInsetEnd="2dp"
+            app:dividerColor="@color/black"
+            app:dividerThickness="1dp"/>
         <LinearLayout
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
@@ -36,18 +46,21 @@
                 android:layout_weight="0.75"
                 android:id="@+id/reqid"
                 android:text="ID : 437"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/rubik_light"
                 android:gravity="center_vertical"
-                android:textColor="@color/maincolor4"/>
+                android:textColor="@color/grey"
+                android:textSize="16dp"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.25"
                 android:id="@+id/psngrphn"
-                android:text="Date &amp; Time"
-                android:fontFamily="@font/montserrat_bold"
+                android:text="2024/28/06 10:00"
+                android:fontFamily="@font/rubik_light"
                 android:gravity="center_vertical"
-                android:textColor="@color/maincolor4"/>
+                android:textColor="@color/grey"
+                android:textSize="16dp"
+                tools:ignore="SpUsage" />
 
         </LinearLayout>
 
@@ -57,9 +70,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="SERVICES: COOLIE + CART + CHAIR"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="@font/rubik_medium"
             android:gravity="center_vertical"
-            android:textColor="@color/maincolor4"
+            android:textColor="@color/black"
+            android:textSize="15dp"
             />
 
 
@@ -68,19 +82,42 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
-            android:weightSum="3">
+            android:weightSum="3"
+            android:gravity="center">
             <TextView
                 android:gravity="center_vertical"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.350"
                 android:id="@+id/pltfrm"
                 android:text="PLATFORM : 21"
-                android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/maincolor4"/>
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/grey"
+                android:textSize="14dp"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"/>
+            </LinearLayout>
+            <TextView
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.350"
+                android:id="@+id/pltfrmdrop"
+                android:text="PLATFORM : 21"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/grey"
+                android:textSize="13dp"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:gravity="end">
 
@@ -88,6 +125,17 @@
             </LinearLayout>
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="*Coolies were not available"
+            android:fontFamily="@font/rubik_regular"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

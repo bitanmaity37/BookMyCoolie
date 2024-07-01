@@ -171,9 +171,9 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
             noOfBags = itemView.findViewById(R.id.no_of_bags);
             serviceType = itemView.findViewById(R.id.service_type);
             cancelButton = itemView.findViewById(R.id.cancel_request_btn);
-            recordTrackingLabel = itemView.findViewById(R.id.record_tracking_label);
+            //recordTrackingLabel = itemView.findViewById(R.id.record_tracking_label);
             bookedAt = itemView.findViewById(R.id.booked_at);
-            recordTracking = itemView.findViewById(R.id.record_tracking);
+            //recordTracking = itemView.findViewById(R.id.record_tracking);
             recordTrackingLayout = itemView.findViewById(R.id.linear_layout_record_tracking);
         }
     }

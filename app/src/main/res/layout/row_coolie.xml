@@ -58,6 +58,13 @@
                         android:textColor="@color/black"
                         />
                 </LinearLayout>
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dividerInsetStart="2dp"
+                    app:dividerInsetEnd="2dp"
+                    app:dividerColor="@color/black"
+                    app:dividerThickness="1dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -127,19 +134,18 @@
                             app:icon="@drawable/baseline_edit_note_24"
                             app:iconSize="20dp"
                             app:iconTint="@color/maincolor" />
-                        <Button
-                            android:id="@+id/btndlt"
-                            style="@style/Widget.Material3.Button.IconButton.Filled"
-
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:layout_marginEnd="2dp"
+                            android:id="@+id/switch_coolieactv"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:backgroundTint="@color/white"
-                            android:drawableTint="@color/black"
+                            android:layout_height="match_parent"
+                            android:checked="true"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/maincolor4"
                             android:gravity="center"
-                            app:icon="@drawable/baseline_delete_forever_24"
-                            app:iconSize="20dp"
-                            app:iconTint="@color/red" />
+                            android:layout_gravity="center"
+                            app:trackTint="@color/completed"
+                            />
                     </LinearLayout>
 
                 </LinearLayout>

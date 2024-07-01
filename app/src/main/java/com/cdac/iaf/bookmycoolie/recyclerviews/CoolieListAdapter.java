@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdac.iaf.bookmycoolie.R;
@@ -58,12 +59,6 @@ public class CoolieListAdapter extends RecyclerView.Adapter<CoolieListAdapter.Vi
             }
         });
 
-        holder.btndlt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
 
@@ -81,7 +76,7 @@ public class CoolieListAdapter extends RecyclerView.Adapter<CoolieListAdapter.Vi
                 TextView phn;
                 TextView billa;
                 Button btnmdfy;
-                Button btndlt;
+                SwitchCompat switch_coolieactv;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -90,7 +85,7 @@ public class CoolieListAdapter extends RecyclerView.Adapter<CoolieListAdapter.Vi
             phn = itemView.findViewById(R.id.phn);
                     billa = itemView.findViewById(R.id.billa);
             btnmdfy = itemView.findViewById(R.id.btnmdfy);
-                    btndlt = itemView.findViewById(R.id.btndlt);
+                    switch_coolieactv = itemView.findViewById(R.id.switch_coolieactv);
         }
     }
 }

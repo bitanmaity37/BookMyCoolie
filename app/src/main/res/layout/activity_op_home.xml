@@ -88,21 +88,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="4"
+                android:weightSum="3"
                 android:orientation="horizontal"
                 android:gravity="center">
                 <LinearLayout
-                    android:layout_margin="5dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/add_coolie"
                         android:layout_width="match_parent"
                         android:layout_margin="5dp"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         app:strokeWidth="5dp"
                         app:strokeColor="@color/white"
                         app:cardElevation="10dp"
@@ -114,29 +117,34 @@
                             android:layout_height="wrap_content"
                             android:scaleType="centerCrop"
                             android:src="@drawable/addcoolie" />
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/maincolor4"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="ADD \nCOOLIES"
+                            android:layout_marginTop="110dp"
+                            android:textSize="12dp"
+                            tools:ignore="HardcodedText,SpUsage"/>
                     </com.google.android.material.card.MaterialCardView>
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/maincolor4"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="ADD \nCOOLIES"
-                        android:textSize="12dp"
-                        tools:ignore="HardcodedText,SpUsage" />
+
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_margin="5dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/listcoolies"
                         android:layout_width="match_parent"
                         android:layout_margin="5dp"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         app:strokeWidth="5dp"
                         app:strokeColor="@color/white"
                         app:cardElevation="10dp"
@@ -148,29 +156,34 @@
                             android:layout_height="wrap_content"
                             android:scaleType="centerCrop"
                             android:src="@drawable/team" />
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/maincolor4"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="COOLIES \nLIST"
+                            android:layout_marginTop="110dp"
+                            android:textSize="12dp"
+                            tools:ignore="HardcodedText,SpUsage"/>
                     </com.google.android.material.card.MaterialCardView>
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/maincolor4"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="COOLIES \nLIST"
-                        android:textSize="12dp"
-                        tools:ignore="HardcodedText,SpUsage" />
+
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_margin="5dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/mngattndnce"
                         android:layout_width="match_parent"
                         android:layout_margin="5dp"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         app:strokeWidth="5dp"
                         app:strokeColor="@color/white"
                         app:cardElevation="10dp"
@@ -182,16 +195,18 @@
                             android:layout_height="wrap_content"
                             android:scaleType="centerCrop"
                             android:src="@drawable/coolieattndnce" />
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/maincolor4"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="ATTENDANCE \n"
+                            android:layout_marginTop="110dp"
+                            android:textSize="12dp"
+                            tools:ignore="HardcodedText,SpUsage"/>
                     </com.google.android.material.card.MaterialCardView>
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/maincolor4"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="MARK ATTENDANCE"
-                        android:textSize="12dp"
-                        tools:ignore="HardcodedText,SpUsage" />
+
                 </LinearLayout>
             </LinearLayout>
             <TextView
@@ -214,21 +229,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="4"
+                android:weightSum="3"
                 android:orientation="horizontal"
                 android:gravity="center">
                 <LinearLayout
-                    android:layout_margin="5dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/rqstcoolie"
                         android:layout_width="match_parent"
                         android:layout_margin="5dp"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         app:strokeWidth="5dp"
                         app:strokeColor="@color/white"
                         app:cardElevation="10dp"
@@ -240,29 +258,34 @@
                             android:layout_height="wrap_content"
                             android:scaleType="centerCrop"
                             android:src="@drawable/reqcoolie" />
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/maincolor4"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="COOLIE \nREQUESTS"
+                            android:layout_marginTop="110dp"
+                            android:textSize="12dp"
+                            tools:ignore="HardcodedText,SpUsage"/>
                     </com.google.android.material.card.MaterialCardView>
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/maincolor4"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="COOLIE REQUESTS"
-                        android:textSize="12dp"
-                        tools:ignore="HardcodedText,SpUsage" />
+
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_margin="5dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/rqstcart"
                         android:layout_width="match_parent"
                         android:layout_margin="5dp"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         app:strokeWidth="5dp"
                         app:strokeColor="@color/white"
                         app:cardElevation="10dp"
@@ -274,29 +297,34 @@
                             android:layout_height="wrap_content"
                             android:scaleType="centerCrop"
                             android:src="@drawable/carts" />
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/maincolor4"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="CART \nREQUESTS"
+                            android:layout_marginTop="110dp"
+                            android:textSize="12dp"
+                            tools:ignore="HardcodedText,SpUsage"/>
                     </com.google.android.material.card.MaterialCardView>
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/maincolor4"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="CART REQUESTS"
-                        android:textSize="12dp"
-                        tools:ignore="HardcodedText,SpUsage" />
+
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_margin="5dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/rqstchair"
                         android:layout_width="match_parent"
                         android:layout_margin="5dp"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         app:strokeWidth="5dp"
                         app:strokeColor="@color/white"
                         app:cardElevation="10dp"
@@ -308,16 +336,18 @@
                             android:layout_height="wrap_content"
                             android:scaleType="centerCrop"
                             android:src="@drawable/chair" />
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/maincolor4"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="CHAIR \nREQUESTS"
+                            android:layout_marginTop="110dp"
+                            android:textSize="12dp"
+                            tools:ignore="HardcodedText,SpUsage" />
                     </com.google.android.material.card.MaterialCardView>
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/maincolor4"
-                        android:fontFamily="@font/ubuntu_bold"
-                        android:text="CHAIR REQUESTS"
-                        android:textSize="12dp"
-                        tools:ignore="HardcodedText,SpUsage" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
