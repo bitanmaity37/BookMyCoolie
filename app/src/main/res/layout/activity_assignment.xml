@@ -66,28 +66,308 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_showreqid"
+
+            <LinearLayout
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:padding="10dp"
-                android:text="REQUEST ID: "
-                android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/maincolor4"
-                />
-            <TextView
-                android:id="@+id/tv_showreqdet"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="2dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/reqid"/>
+                <TextView
+                    android:id="@+id/reqid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:text="AAAAA"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/personmark"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/cart2"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/wheelchair2"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:id="@+id/reqtype"
+                    android:text="REQUEST TYPE"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:padding="10dp"
-                android:text="Passenger : \nDetails : \nCoolie : \nSTATION : "
-                android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/maincolor4"
-                />
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="2dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/datefrm"/>
+                <TextView
+                    android:id="@+id/frmdt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:text="FROM DATE"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/dateto"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:id="@+id/todt"
+                    android:text="TO DATE"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="2dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/clock1"/>
+                <TextView
+                    android:id="@+id/frmtime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:text="FROM TIME"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/clock2"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:id="@+id/totime"
+                    android:text="TO TIME"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="2dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/pickup"/>
+                <TextView
+                    android:id="@+id/pickup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:text="PICKUP FROM"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/drop"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:id="@+id/drop"
+                    android:text="DROP AT"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="2dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/bag"/>
+                <TextView
+                    android:id="@+id/bags"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:text="NO> OF BAGS"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/weight"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:id="@+id/weight"
+                    android:text="KGS"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="2dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/reqid"/>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:text="P NAME"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/phone_calling"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:id="@+id/bookfor"
+                    android:text="BOOK FOR"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="2dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/reqid"/>
+                <TextView
+                    android:id="@+id/bookdt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:text="BOOK DATE"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/phone_calling"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:id="@+id/price"
+                    android:text="COST APPROX"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    />
+
+            </LinearLayout>
+
+
 
 
 
@@ -173,49 +453,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/rvcoolie"/>
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
-                android:text="*Long press to remove coolie"
-                android:textAlignment="textEnd"
-                android:fontFamily="@font/ubuntu_medium"
-                android:layout_marginEnd="5dp"/>
-            <com.google.android.material.button.MaterialButton
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+                <com.google.android.material.button.MaterialButton
 
-                android:id="@+id/btn_assigncr"
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/ubuntu_regular"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="ASSIGN"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:backgroundTint="@color/maincolor"
-                app:rippleColor="@color/maincolor3"
-                app:elevation="5dp"/>
+                    android:id="@+id/btn_assigncr"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/ubuntu_regular"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:text="ASSIGN"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/maincolor"
+                    app:rippleColor="@color/maincolor3"
+                    app:elevation="5dp"/>
 
-            <com.google.android.material.button.MaterialButton
+                <com.google.android.material.button.MaterialButton
 
-                android:id="@+id/btn_cancel"
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/ubuntu_regular"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:gravity="center"
-                android:text="CANCEL"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:backgroundTint="@color/red"
+                    android:id="@+id/btn_cancel"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/rubik_bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:text="CANCEL"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/red"
 
-                app:rippleColor="@color/buttoncolor"
-                app:elevation="5dp"/>
+                    app:rippleColor="@color/buttoncolor"
+                    app:elevation="5dp"/>
+            </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
