@@ -80,43 +80,52 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/reqid"/>
+                    android:src="@drawable/id"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/reqid"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:text="AAAAA"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/personmark"/>
+                    android:src="@drawable/personmark"
+                    android:id="@+id/markcoolie"
+                    android:gravity="center_vertical"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/cart2"/>
+                    android:src="@drawable/cart2"
+                    android:id="@+id/markcart"
+                    android:gravity="center_vertical"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/wheelchair2"/>
+                    android:src="@drawable/wheelchair2"
+                    android:id="@+id/markwc"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:id="@+id/reqtype"
                     android:text="REQUEST TYPE"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
 
             </LinearLayout>
@@ -131,33 +140,37 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/datefrm"/>
+                    android:src="@drawable/datefrm"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/frmdt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:text="FROM DATE"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/dateto"/>
+                    android:src="@drawable/dateto"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:id="@+id/todt"
                     android:text="TO DATE"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
 
             </LinearLayout>
@@ -172,33 +185,37 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/clock1"/>
+                    android:src="@drawable/clock1"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/frmtime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:text="FROM TIME"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/clock2"/>
+                    android:src="@drawable/clock2"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:id="@+id/totime"
                     android:text="TO TIME"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
 
             </LinearLayout>
@@ -213,33 +230,37 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/pickup"/>
+                    android:src="@drawable/pickup"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/pickup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:text="PICKUP FROM"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/drop"/>
+                    android:src="@drawable/drop"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:id="@+id/drop"
                     android:text="DROP AT"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
 
             </LinearLayout>
@@ -254,33 +275,37 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/bag"/>
+                    android:src="@drawable/bag"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/bags"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
-                    android:text="NO> OF BAGS"
-                    android:fontFamily="@font/rubik_medium"
+                    android:text="NO OF BAGS"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/weight"/>
+                    android:src="@drawable/weight"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:id="@+id/weight"
                     android:text="KGS"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
 
             </LinearLayout>
@@ -295,33 +320,84 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/reqid"/>
+                    android:src="@drawable/pname"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:text="P NAME"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/phone_calling"/>
+                    android:src="@drawable/bookfor"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:id="@+id/bookfor"
                     android:text="BOOK FOR"
-                    android:fontFamily="@font/rubik_medium"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="2dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/inr"
+                    android:gravity="center_vertical"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:id="@+id/price"
+                    android:text="COST APPROX"
+                    android:fontFamily="@font/rubik_regular"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    android:gravity="center_vertical"
+                    />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/ticket"
+                    android:gravity="center_vertical"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:id="@+id/pnr"
+                    android:text="PNR"
+                    android:fontFamily="@font/rubik_regular"
+                    android:textSize="14dp"
+                    android:textColor="@color/grey2"
+                    android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
 
             </LinearLayout>
@@ -336,36 +412,41 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/reqid"/>
+                    android:src="@drawable/trainno"
+                    android:gravity="center_vertical"/>
                 <TextView
-                    android:id="@+id/bookdt"
+                    android:id="@+id/trnno"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
-                    android:text="BOOK DATE"
-                    android:fontFamily="@font/rubik_medium"
+                    android:text="TRAIN NO"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.1"
-                    android:src="@drawable/phone_calling"/>
+                    android:src="@drawable/trainname"
+                    android:gravity="center_vertical"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
-                    android:id="@+id/price"
-                    android:text="COST APPROX"
-                    android:fontFamily="@font/rubik_medium"
+                    android:id="@+id/trnname"
+                    android:text="TRAIN NAME"
+                    android:fontFamily="@font/rubik_regular"
                     android:textSize="14dp"
                     android:textColor="@color/grey2"
                     android:paddingStart="2dp"
+                    android:gravity="center_vertical"
                     />
 
             </LinearLayout>
+
 
 
 
@@ -402,7 +483,7 @@
                     android:id="@+id/mact_dd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:fontFamily="@font/rubik_regular"
                     app:startIconContentDescription="Hello"
                     android:textColor="@color/maincolor4"
                     android:textSize="12sp"
@@ -420,25 +501,34 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
+                    android:layout_weight="1.3"
                     android:id="@+id/cbatch"
                     android:text="Billa No"
                     android:gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ubuntu_bold"
+                    android:fontFamily="@font/rubik_bold"
                     android:textColor="@color/maincolor4"
                     android:background="@drawable/textview_border"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.6"
+                    android:layout_weight="1.3"
                     android:id="@+id/cname"
                     android:text="Coolie Name"
                     android:gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:fontFamily="@font/ubuntu_bold"
+                    android:fontFamily="@font/rubik_bold"
                     android:textColor="@color/maincolor4"
                     android:background="@drawable/textview_border"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:background="@drawable/textview_border"
+                    android:visibility="gone"
+                    />
+
 
 
             </LinearLayout>
@@ -448,7 +538,8 @@
                 android:text="No Coolies Selected"
                 android:textAlignment="center"
                 android:textStyle="bold"
-                android:id="@+id/noCoolietv"/>
+                android:id="@+id/noCoolietv"
+                android:fontFamily="@font/rubik_extrabold"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -466,13 +557,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="@font/ubuntu_regular"
+                    android:fontFamily="@font/rubik_black"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:gravity="center"
                     android:text="ASSIGN"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/maincolor"
                     app:rippleColor="@color/maincolor3"
@@ -485,13 +576,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:fontFamily="@font/rubik_bold"
+                    android:fontFamily="@font/rubik_black"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:gravity="center"
                     android:text="CANCEL"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/red"
 
