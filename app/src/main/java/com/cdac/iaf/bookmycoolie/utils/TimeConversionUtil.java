@@ -39,4 +39,21 @@ public class TimeConversionUtil {
         }
     }
 
+    public static String getFullDate2(String date){
+        try {
+            // Create a SimpleDateFormat object for parsing the input date
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            // Parse the input date string into a Date object
+            Date date2 = inputFormat.parse(date);
+
+            // Create a SimpleDateFormat object for formatting the date
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFormat = new SimpleDateFormat("dd MM yyyy");
+            // Format the Date object into the desired string format
+            return outputFormat.format(date2);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

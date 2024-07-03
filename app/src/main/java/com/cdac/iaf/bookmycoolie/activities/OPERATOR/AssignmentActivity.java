@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
+import com.cdac.iaf.bookmycoolie.utils.TimeConversionUtil;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.IOException;
@@ -43,7 +45,7 @@ public class AssignmentActivity extends AppCompatActivity {
     ArrayList<Integer> selectedCoolieIDs = new ArrayList<>();
     ArrayList<String> selectedOpts = new ArrayList<>();
     Integer selectedRequestID;
-    TextView tv_showreqid, tv_showreqdet,noCoolietv;
+    TextView noCoolietv;
 
     Button btn_assigncr;
     Intent intentFromRow;
@@ -55,7 +57,11 @@ public class AssignmentActivity extends AppCompatActivity {
     Button btn_getCoolie, btn_cancel, home;
     Integer serviceMode;
 
+    TextView reqid, reqtype, frmdt, todt,frmtime,totime,pickup,
+            drop, bags, weight, name, bookfor, bookdt, price, pnr, trnno, trnname;
+
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+    ImageView markcoolie, markcart, markwc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +84,29 @@ public class AssignmentActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        tv_showreqid = findViewById(R.id.tv_showreqid);
-        tv_showreqdet = findViewById(R.id.tv_showreqdet);
+
+        markcoolie = findViewById(R.id.markcoolie);
+                markcart = findViewById(R.id.markcart);
+        markwc = findViewById(R.id.markwc);
+        reqid = findViewById(R.id.reqid);
+        reqtype = findViewById(R.id.reqtype);
+        frmdt = findViewById(R.id.frmdt);
+        todt = findViewById(R.id.todt);
+        frmtime = findViewById(R.id.frmtime);
+        totime = findViewById(R.id.totime);
+        pickup = findViewById(R.id.pickup);
+        drop = findViewById(R.id.drop);
+        bags = findViewById(R.id.bags);
+        weight = findViewById(R.id.weight);
+        name = findViewById(R.id.name);
+        bookfor = findViewById(R.id.bookfor);
+        price = findViewById(R.id.price);
+
+
+        pnr = findViewById(R.id.pnr);
+                trnno = findViewById(R.id.trnno);
+        trnname = findViewById(R.id.trnname);
+
         btn_assigncr = findViewById(R.id.btn_assigncr);
         rvcoolie = findViewById(R.id.rvcoolie);
         noCoolietv = findViewById(R.id.noCoolietv);
@@ -99,24 +126,65 @@ public class AssignmentActivity extends AppCompatActivity {
         String b = request.getBookingTentativeEndTime();
 
         if (a != null && b!= null){
-            a="From Date: "+a.substring(0,10)+" Time: "+a.substring(11,16);
-            b="To Date "+b.substring(0,10)+" Time: "+b.substring(11,16);
+            /*a="From Date: "+a.substring(0,10)+" Time: "+a.substring(11,16);
+            b="To Date "+b.substring(0,10)+" Time: "+b.substring(11,16);*/
+            frmdt.setText(TimeConversionUtil.getFullDate2(a.substring(0,10)));
+            todt.setText(TimeConversionUtil.getFullDate2(b.substring(0,10)));
+            frmtime.setText(a.substring(11,16));
+            totime.setText(b.substring(11,16));
         } else {
             a="TO DATE NOT AVAILABLE";
             b="FROM DATE NOT AVAILABLE";
+
+            frmdt.setText("NA");
+            todt.setText("NA");
+            frmtime.setText("NA");
+            totime.setText("NA");
+
         }
 
-        String details=     "DETAILS OF REQUEST:"+
+        /*String details=     "DETAILS OF REQUEST:"+
                             "\n\nSERVICE TYPE: "+request.getServiceTypeName()+
                             "\n"+a+
                             "\n"+b+
                             "\nPICK UP FROM: "+request.getStationAreaPickupFromName()+
                             "\nDROP AT: "+request.getStationAreaDropAtName()+
                             "\nBAGS: "+request.getNoOfBags()+" WEIGHT: "+request.getApproxTotalWeightage()+" kgs "+
-                            "\nBOOKING DATE: "+request.getBookingDate().substring(0,10);
+                            "\nBOOKING DATE: "+request.getBookingDate().substring(0,10);*/
 
-        tv_showreqid.setText("REQUEST ID: "+request.getPassengerRequestId()+" \nNAME: "+request.getPassengerName()+" FOR: "+request.getBookingFor());
-        tv_showreqdet.setText(details);
+        reqid.setText(request.getPassengerRequestId().toString());
+        reqtype.setText(request.getServiceTypeName());
+        pickup.setText(request.getStationAreaPickupFromName());
+        drop.setText(request.getStationAreaDropAtName());
+        bags.setText(request.getNoOfBags().toString());
+        weight.setText(request.getApproxTotalWeightage().toString());
+        name.setText(request.getPassengerName());
+        bookfor.setText(request.getBookingFor());
+
+        price.setText("200 approx.");
+
+        pnr.setText("503848929294848");
+                trnno.setText("12312");
+        trnname.setText("AZAD HIND EXP.");
+
+        switch (request.getServiceTypeName()){
+            case "COOLIE":
+                markcoolie.setVisibility(View.VISIBLE);
+                markcart.setVisibility(View.GONE);
+                markwc.setVisibility(View.GONE);
+                break;
+            case "CART":
+                markcoolie.setVisibility(View.GONE);
+                markcart.setVisibility(View.VISIBLE);
+                markwc.setVisibility(View.GONE);
+                break;
+            case "WHEEL CHAIR":
+                markcoolie.setVisibility(View.GONE);
+                markcart.setVisibility(View.GONE);
+                markwc.setVisibility(View.VISIBLE);
+                break;
+        }
+
 
 
 

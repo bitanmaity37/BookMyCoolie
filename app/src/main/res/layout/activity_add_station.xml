@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ADMIN.AddStationActivity">
+    <LinearLayout
+        android:paddingStart="10dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/maincolor4"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:weightSum="1">
+
+        <TextView
+            android:paddingStart="3dp"
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.97"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center|left"
+            android:paddingLeft="8dp"
+            android:text="ADD STATION"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/maincolor4"
+            android:drawableTint="@color/black"
+            android:gravity="center"
+            app:icon="@drawable/baseline_home_24"
+            app:iconSize="20dp"
+            app:iconTint="@color/white"
+            app:rippleColor="@color/white"
+            android:id="@+id/home"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_stnname"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:focusedByDefault="false"
+            android:foregroundTint="@color/white"
+            android:hint="NAME"
+            android:textColorHint="@color/maincolor4"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxStrokeColor="@color/maincolor4"
+            app:counterOverflowTextColor="@color/maincolor4"
+            app:counterTextColor="@color/maincolor4"
+            app:cursorColor="@color/maincolor4"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/white"
+            app:hintEnabled="true"
+            app:hintTextColor="@color/maincolor4"
+            app:placeholderTextColor="@color/maincolor6"
+            app:prefixTextColor="@color/maincolor4"
+            app:suffixTextColor="@color/maincolor4">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tied_stnname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_regular"
+                android:inputType="text"
+                android:textColor="@color/maincolor4"
+                android:textSize="14dp"
+                app:errorEnabled="true"
+                app:startIconContentDescription="Hello" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_stncode"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:focusedByDefault="false"
+            android:foregroundTint="@color/white"
+            android:hint="CODE"
+            android:textColorHint="@color/maincolor4"
+            app:boxCornerRadiusTopStart="5dp"
+            app:boxStrokeColor="@color/maincolor4"
+            app:counterOverflowTextColor="@color/maincolor4"
+            app:counterTextColor="@color/maincolor4"
+            app:cursorColor="@color/maincolor4"
+            app:errorEnabled="true"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/white"
+            app:hintEnabled="true"
+            app:hintTextColor="@color/maincolor4"
+            app:placeholderTextColor="@color/maincolor6"
+            app:prefixTextColor="@color/maincolor4"
+            app:suffixTextColor="@color/maincolor4">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tied_stncode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_regular"
+                android:inputType="text"
+                android:textColor="@color/maincolor4"
+                android:textSize="14dp"
+                app:errorEnabled="true"
+                app:startIconContentDescription="Hello" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_cartc"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:focusedByDefault="false"
+                android:foregroundTint="@color/white"
+                android:hint="NO. OF CARTS"
+                android:textColorHint="@color/maincolor4"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxStrokeColor="@color/maincolor4"
+                app:counterOverflowTextColor="@color/maincolor4"
+                app:counterTextColor="@color/maincolor4"
+                app:cursorColor="@color/maincolor4"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/white"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/maincolor4"
+                app:placeholderTextColor="@color/maincolor6"
+                app:prefixTextColor="@color/maincolor4"
+                app:suffixTextColor="@color/maincolor4">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tied_cartc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_regular"
+                    android:inputType="number"
+                    android:textColor="@color/maincolor4"
+                    android:textSize="14dp"
+                    app:errorEnabled="true"
+                    app:startIconContentDescription="Hello" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_chairc"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:focusedByDefault="false"
+                android:foregroundTint="@color/white"
+                android:hint="NO. OF CHAIRS"
+                android:textColorHint="@color/maincolor4"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxStrokeColor="@color/maincolor4"
+                app:counterOverflowTextColor="@color/maincolor4"
+                app:counterTextColor="@color/maincolor4"
+                app:cursorColor="@color/maincolor4"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/white"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/maincolor4"
+                app:placeholderTextColor="@color/maincolor6"
+                app:prefixTextColor="@color/maincolor4"
+                app:suffixTextColor="@color/maincolor4">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tied_chairc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_regular"
+                    android:inputType="number"
+                    android:textColor="@color/maincolor4"
+                    android:textSize="14dp"
+                    app:errorEnabled="true"
+                    app:startIconContentDescription="Hello" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD PLATFORMS"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@color/maincolor4"
+            android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_pltfrm"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.4"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:focusedByDefault="false"
+                android:foregroundTint="@color/white"
+                android:hint="PLATFORM NAME"
+                android:textColorHint="@color/maincolor4"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxStrokeColor="@color/maincolor4"
+                app:counterOverflowTextColor="@color/maincolor4"
+                app:counterTextColor="@color/maincolor4"
+                app:cursorColor="@color/maincolor4"
+                app:errorEnabled="true"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/white"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/maincolor4"
+                app:placeholderTextColor="@color/maincolor6"
+                app:prefixTextColor="@color/maincolor4"
+                app:suffixTextColor="@color/maincolor4">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tied_platform"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubik_regular"
+                    android:inputType="number"
+                    android:textColor="@color/maincolor4"
+                    android:textSize="14dp"
+                    app:errorEnabled="true"
+                    app:startIconContentDescription="Hello" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:layout_marginEnd="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="0.6"
+                android:backgroundTint="@color/maincolor4"
+                android:text="ADD"
+                android:id="@+id/btn_addpltfrm"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"/>
+
+
+
+
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_addoptsave"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/rubik_bold"
+            android:gravity="center"
+            android:text="SAVE"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/maincolor4"
+            app:cornerRadius="5dp"
+            app:elevation="5dp"
+            app:rippleColor="@color/maincolor" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
