@@ -1,6 +1,8 @@
 package com.cdac.iaf.bookmycoolie.restapi;
 
 import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
+import com.cdac.iaf.bookmycoolie.models.EditCoolieRequest;
+import com.cdac.iaf.bookmycoolie.models.STATION.AddStationRequest;
 import com.cdac.iaf.bookmycoolie.models.SimpleUserIDResponse;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
@@ -122,5 +124,11 @@ public interface RestInterface {
 
     @POST("/passenger/add")
     Call<SimpleUserIDResponse> registerPsngr(@Body RegisterPassengerDetailsModel registerPassengerDetailsModel);
+
+    @POST("admin/addStation")
+    Call<SimpleResponse> addStation(@Header("Authorization") String authorization, @Body AddStationRequest addStationRequest);
+
+    @POST("coolie/update")
+    Call<SimpleResponse> modCoolie(@Header("Authorization") String authorization, @Body EditCoolieRequest coolie);
 
 }

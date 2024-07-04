@@ -15,6 +15,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.models.Coolie;
 import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.google.android.material.card.MaterialCardView;
 
@@ -92,7 +93,13 @@ public class OpHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //showPopupMenu2(view);
-                startActivity(new Intent(OpHomeActivity.this, AddCoolieActivity.class));
+
+                Intent intent = new Intent(OpHomeActivity.this, AddCoolieActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("selectedCoolie", new Coolie());
+                intent.putExtra("bundle",bundle);
+                intent.putExtra("serviceMode",1);
+                startActivity(intent);
 
 
             }

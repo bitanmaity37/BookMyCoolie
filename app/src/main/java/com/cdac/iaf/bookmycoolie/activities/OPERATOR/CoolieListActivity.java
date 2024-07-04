@@ -33,12 +33,16 @@ public class CoolieListActivity extends AppCompatActivity {
 
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
     Button home;
+    Intent getIntent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coolie_list);
+
+
+
         rcv_cList = findViewById(R.id.rcv_cList);
 
         rcv_cList = findViewById(R.id.rcv_cList);

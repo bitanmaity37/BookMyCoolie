@@ -2,8 +2,10 @@ package com.cdac.iaf.bookmycoolie.recyclerviews;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.OPERATOR.AddCoolieActivity;
 import com.cdac.iaf.bookmycoolie.models.Coolie;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -55,7 +58,17 @@ public class CoolieListAdapter extends RecyclerView.Adapter<CoolieListAdapter.Vi
         holder.btnmdfy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            //context.startActivity(new Intent(context, AddCoolieActivity.class).putExtra("mode",2));
+            Intent intent = new Intent(context, AddCoolieActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("selectedCoolie", new Coolie(coolies.get(holder.getAdapterPosition()).getCoolieId(),
+                        coolies.get(holder.getAdapterPosition()).getCooliePhoto(),
+                        coolies.get(holder.getAdapterPosition()).getUserMobile(),
+                        coolies.get(holder.getAdapterPosition()).getUserName(),
+                        coolies.get(holder.getAdapterPosition()).getCoolieBatchId()));
+                intent.putExtra("bundle",bundle);
+                intent.putExtra("serviceMode",2);
+                context.startActivity(intent);
             }
         });
 

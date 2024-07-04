@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -21,11 +22,16 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
+import com.cdac.iaf.bookmycoolie.models.Coolie;
+import com.cdac.iaf.bookmycoolie.models.EditCoolieRequest;
+import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
+import com.cdac.iaf.bookmycoolie.models.SimpleResponse;
 import com.cdac.iaf.bookmycoolie.models.SimpleUserIDResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
@@ -66,6 +72,11 @@ public class AddCoolieActivity extends AppCompatActivity {
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
     Integer flagName, flagPhone;
+    TextView tv_cid;
+    Intent intentFromRow;
+    Integer activityMode;
+    Coolie coolie;
+
 
 
     @Override
@@ -76,13 +87,7 @@ public class AddCoolieActivity extends AppCompatActivity {
         home =findViewById(R.id.home);
         flagName =0;
         flagPhone = 0;
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AddCoolieActivity.this, OpHomeActivity.class));
-                finishAffinity();
-            }
-        });
+
 
         try {
             securedSharedPreferenceUtils =new SecuredSharedPreferenceUtils(AddCoolieActivity.this);
@@ -101,77 +106,12 @@ public class AddCoolieActivity extends AppCompatActivity {
         btn_rgstrc = findViewById(R.id.btn_rgstrc);
 
         tied_cname = findViewById(R.id.tied_cname);
-                tied_billano = findViewById(R.id.tied_billano);
+        tied_billano = findViewById(R.id.tied_billano);
         tied_phno = findViewById(R.id.tied_phno);
         til_cname = findViewById(R.id.til_cname);
-
-        btn_rgstrc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        tv_cid = findViewById(R.id.tv_cid);
 
 
-
-                if(validator()){
-                    ProgressDialog progressDialog = new ProgressDialog(AddCoolieActivity.this);
-                    progressDialog.setCancelable(false);
-                    progressDialog.setTitle("Please Wait!!");
-                    progressDialog.show();
-
-                    System.out.println("Image before send"+capturedPhoto);
-
-                    Call<SimpleUserIDResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
-                            .addCoolie(
-                                    securedSharedPreferenceUtils.getLoginData().getJwtToken(),
-                                    new AddCoolieRequest(
-                                            tied_phno.getText().toString().trim(),
-                                            tied_cname.getText().toString().trim(),
-                                            1, 3, securedSharedPreferenceUtils.getLoginData().getStationId(),
-                                            tied_billano.getText().toString().trim(),
-                                            capturedPhoto));
-                    call.enqueue(new Callback<SimpleUserIDResponse>() {
-                        @Override
-                        public void onResponse(Call<SimpleUserIDResponse> call, Response<SimpleUserIDResponse> response) {
-
-                            progressDialog.dismiss();
-
-                            if (response.code()==200){
-
-                                System.out.println("Coolie ID "+response.body());
-                                Toast.makeText(AddCoolieActivity.this, "COOLIE ADDED", Toast.LENGTH_LONG).show();
-                                tied_cname.setText("");
-                                tied_cname.setEnabled(false);
-                                shapeableImageView.setImageDrawable(getResources().getDrawable(R.drawable.baseline_person_24));
-                            }
-
-                            if(response.code()==401){
-
-                                try {
-                                    InvalidateUser.invalidate(AddCoolieActivity.this);
-
-                                } catch (GeneralSecurityException e) {
-                                    throw new RuntimeException(e);
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<SimpleUserIDResponse> call, Throwable t) {
-                            progressDialog.dismiss();
-                        }
-                    });
-                }
-                else{
-                    //til_cname.setError("Name is invalid or blank");
-                }
-
-
-
-
-            }
-        });
 
         captimg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,6 +157,154 @@ public class AddCoolieActivity extends AppCompatActivity {
             }
         });*/
 
+
+        intentFromRow = getIntent();
+        Bundle args = intentFromRow.getBundleExtra("bundle");
+        coolie = (Coolie) args.getSerializable("selectedCoolie");
+        activityMode = intentFromRow.getIntExtra("serviceMode",0);
+        System.out.println("mode "+activityMode+" "+coolie.toString());
+
+        switch (activityMode){
+            case 1:
+                tv_cid.setVisibility(View.GONE);
+                btn_rgstrc.setText("ADD COOLIE");
+                System.out.println("In Fill");
+                break;
+            case 2:
+                btn_rgstrc.setText("UPDATE COOLIE");
+                tv_cid.setVisibility(View.VISIBLE);
+                tied_cname.setText(coolie.getUserName());
+                        tied_billano.setText(coolie.getCoolieBatchId());
+                tied_phno.setText(coolie.getUserMobile());
+                        tv_cid.setText("COOLIE ID : "+coolie.getCoolieId());
+                        btn_rgstrc.setText("UPDATE");
+                        shapeableImageView.setImageBitmap(decodeBase64ToBitmap(coolie.getCooliePhoto()));
+                System.out.println("In Edit");
+
+
+                break;
+        }
+        btn_rgstrc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(validator()){
+                    ProgressDialog progressDialog = new ProgressDialog(AddCoolieActivity.this);
+                    progressDialog.setCancelable(false);
+                    progressDialog.setTitle("Please Wait!!");
+                    progressDialog.show();
+
+                    System.out.println("Image before send"+capturedPhoto);
+
+                    switch (activityMode){
+                        case 1:
+                            Call<SimpleUserIDResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
+                                    .addCoolie(
+                                            securedSharedPreferenceUtils.getLoginData().getJwtToken(),
+                                            new AddCoolieRequest(
+                                                    tied_phno.getText().toString().trim(),
+                                                    tied_cname.getText().toString().trim(),
+                                                    1, 3, securedSharedPreferenceUtils.getLoginData().getStationId(),
+                                                    tied_billano.getText().toString().trim(),
+                                                    capturedPhoto));
+                            call.enqueue(new Callback<SimpleUserIDResponse>() {
+                                @Override
+                                public void onResponse(Call<SimpleUserIDResponse> call, Response<SimpleUserIDResponse> response) {
+
+                                    progressDialog.dismiss();
+
+                                    if (response.code()==200){
+
+                                        System.out.println("Coolie ID "+response.body());
+                                        Toast.makeText(AddCoolieActivity.this, "COOLIE ADDED", Toast.LENGTH_LONG).show();
+                                        tied_cname.setText("");
+                                        tied_cname.setEnabled(false);
+                                        shapeableImageView.setImageDrawable(getResources().getDrawable(R.drawable.baseline_person_24));
+                                    }
+
+                                    if(response.code()==401){
+
+                                        try {
+                                            InvalidateUser.invalidate(AddCoolieActivity.this);
+
+                                        } catch (GeneralSecurityException e) {
+                                            throw new RuntimeException(e);
+                                        } catch (IOException e) {
+                                            throw new RuntimeException(e);
+                                        }
+
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<SimpleUserIDResponse> call, Throwable t) {
+                                    progressDialog.dismiss();
+                                }
+                            });
+                            break;
+                        case 2:
+                            System.out.println("OK "+coolie.getCoolieId());
+                            Call<SimpleResponse> call1 = RestClient.getRetrofitClient().create(RestInterface.class)
+                                    .modCoolie(securedSharedPreferenceUtils.getLoginData().getJwtToken(),
+                                            new EditCoolieRequest(35,
+                                                    0,
+                                                    tied_cname.getText().toString().trim(),
+                                                    tied_billano.getText().toString().trim(),
+                                                    capturedPhoto
+                                                    ));
+                            call1.enqueue(new Callback<SimpleResponse>() {
+                                @Override
+                                public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response) {
+                                    if (response.code()==200){
+
+                                        System.out.println("Coolie ID "+response.body());
+                                        Toast.makeText(AddCoolieActivity.this, "COOLIE UPDATED", Toast.LENGTH_LONG).show();
+                                        tied_cname.setText("");
+                                        tied_cname.setEnabled(false);
+                                        tied_billano.setText("");
+                                        tied_billano.setEnabled(false);
+                                        tied_phno.setText("");
+                                        tied_phno.setEnabled(false);
+                                        tv_cid.setText("");
+                                        shapeableImageView.setImageDrawable(getResources().getDrawable(R.drawable.baseline_person_24));
+                                    }
+
+                                    if(response.code()==401){
+
+                                        try {
+                                            InvalidateUser.invalidate(AddCoolieActivity.this);
+
+                                        } catch (GeneralSecurityException e) {
+                                            throw new RuntimeException(e);
+                                        } catch (IOException e) {
+                                            throw new RuntimeException(e);
+                                        }
+
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<SimpleResponse> call, Throwable t) {
+                                    progressDialog.dismiss();
+                                }
+                            });
+                            break;
+                    }
+
+
+                }
+                else{
+                    //til_cname.setError("Name is invalid or blank");
+                }
+
+
+
+
+            }
+        });
+
+
+
     }
 
     private Boolean validator(){
@@ -249,6 +337,14 @@ public class AddCoolieActivity extends AppCompatActivity {
 
         return isValid;
 
+    }
+
+    public static Bitmap decodeBase64ToBitmap(String base64String) {
+        // Decode the Base64 string to a byte array
+        byte[] decodedBytes = Base64.decode(base64String, Base64.NO_WRAP);
+
+        // Convert the byte array to a Bitmap
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
     /*@Override
@@ -395,6 +491,7 @@ public class AddCoolieActivity extends AppCompatActivity {
                     }
                 }
             });*/
+
     private Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
         Matrix matrix = new Matrix();
         switch (orientation) {
@@ -412,7 +509,6 @@ public class AddCoolieActivity extends AppCompatActivity {
         }
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
-
     private void cameraIntentMaker(int mode){
 
 
@@ -433,7 +529,6 @@ public class AddCoolieActivity extends AppCompatActivity {
         }*/
 
     }
-
     @Override
     public void onBackPressed() {
         startActivity(new Intent(AddCoolieActivity.this, OpHomeActivity.class));

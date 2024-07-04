@@ -23,6 +23,9 @@ public class Coolie implements Serializable {
                 '}';
     }
 
+    public Coolie() {
+    }
+
     public Coolie(Integer coolieId, String cooliePhoto, String userMobile, String userName, String coolieBatchId) {
         this.coolieId = coolieId;
         this.cooliePhoto = cooliePhoto;
