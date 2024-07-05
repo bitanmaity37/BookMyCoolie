@@ -63,6 +63,8 @@ public class CoolieListActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
+        System.out.println(securedSharedPreferenceUtils.getLoginData().getUserId());
+
         Call<ArrayList<Coolie>> call = RestClient.getRetrofitClient()
                                         .create(RestInterface.class).getCoolies(securedSharedPreferenceUtils.getLoginData().getJwtToken(),
                                                                 new GetCoolieRequest(securedSharedPreferenceUtils.getLoginData().getUserId()));
@@ -70,11 +72,15 @@ public class CoolieListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Coolie>> call, Response<ArrayList<Coolie>> response) {
 
-                System.out.println("Response code "+response.code());
 
 
                 if(response.code() == 200){
                     coolies = response.body();
+
+                    for (int i = 0; i < coolies.size(); i++) {
+                        System.out.println("coolie user status "+coolies.get(i).getUserId()+" "+coolies.get(i).getUserStatus());
+                    }
+
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CoolieListActivity.this);
                     rcv_cList.setLayoutManager(linearLayoutManager);
                     CoolieListAdapter coolieListAdapter = new CoolieListAdapter(CoolieListActivity.this,coolies);

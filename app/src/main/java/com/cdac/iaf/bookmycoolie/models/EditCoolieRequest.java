@@ -12,18 +12,14 @@ public class EditCoolieRequest implements Serializable {
     Integer userStatus;
     @SerializedName("userName")
     String userName;
+
+    @SerializedName("userMobile")
+    String userMobile;
+
     @SerializedName("coolieBatchId")
     String coolieBatchId;
     @SerializedName("cooliePhoto")
     String cooliePhoto;
-
-    public EditCoolieRequest(Integer userId, Integer userStatus, String userName, String coolieBatchId, String cooliePhoto) {
-        this.userId = userId;
-        this.userStatus = userStatus;
-        this.userName = userName;
-        this.coolieBatchId = coolieBatchId;
-        this.cooliePhoto = cooliePhoto;
-    }
 
     @Override
     public String toString() {
@@ -31,9 +27,22 @@ public class EditCoolieRequest implements Serializable {
                 "userId=" + userId +
                 ", userStatus=" + userStatus +
                 ", userName='" + userName + '\'' +
+                ", userMobile='" + userMobile + '\'' +
                 ", coolieBatchId='" + coolieBatchId + '\'' +
                 ", cooliePhoto='" + cooliePhoto + '\'' +
                 '}';
+    }
+
+    public EditCoolieRequest() {
+    }
+
+    public EditCoolieRequest(Integer userId, Integer userStatus, String userName, String userMobile, String coolieBatchId, String cooliePhoto) {
+        this.userId = userId;
+        this.userStatus = userStatus;
+        this.userName = userName;
+        this.userMobile = userMobile;
+        this.coolieBatchId = coolieBatchId;
+        this.cooliePhoto = cooliePhoto;
     }
 
     public Integer getUserId() {
@@ -58,6 +67,14 @@ public class EditCoolieRequest implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getUserMobile() {
+        return userMobile;
+    }
+
+    public void setUserMobile(String userMobile) {
+        this.userMobile = userMobile;
     }
 
     public String getCoolieBatchId() {

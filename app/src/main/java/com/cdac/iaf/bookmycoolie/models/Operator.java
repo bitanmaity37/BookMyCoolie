@@ -17,14 +17,17 @@ public class Operator implements Serializable {
     String userMobile;
     @SerializedName("userName")
     String userName;
+    @SerializedName("userStatus")
+    Integer userStatus;
 
-    public Operator(String stationName, Integer userId, String userEmailId, String userEmpId, String userMobile, String userName) {
+    public Operator(String stationName, Integer userId, String userEmailId, String userEmpId, String userMobile, String userName, Integer userStatus) {
         this.stationName = stationName;
         this.userId = userId;
         this.userEmailId = userEmailId;
         this.userEmpId = userEmpId;
         this.userMobile = userMobile;
         this.userName = userName;
+        this.userStatus = userStatus;
     }
 
     public String getStationName() {
@@ -75,6 +78,14 @@ public class Operator implements Serializable {
         this.userName = userName;
     }
 
+    public Integer getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
+    }
+
     @Override
     public String toString() {
         return "Operator{" +
@@ -84,6 +95,7 @@ public class Operator implements Serializable {
                 ", userEmpId='" + userEmpId + '\'' +
                 ", userMobile='" + userMobile + '\'' +
                 ", userName='" + userName + '\'' +
+                ", userStatus=" + userStatus +
                 '}';
     }
 }

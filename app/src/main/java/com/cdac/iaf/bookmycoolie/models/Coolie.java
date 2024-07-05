@@ -6,32 +6,58 @@ import java.io.Serializable;
 
 public class Coolie implements Serializable {
 
+
+    @SerializedName("userId")
+    Integer userId;
+    @SerializedName("coolieId")
     Integer coolieId;
+    @SerializedName("cooliePhoto")
     String cooliePhoto;
+    @SerializedName("userMobile")
     String userMobile;
+    @SerializedName("userName")
     String userName;
+    @SerializedName("coolieBatchId")
     String coolieBatchId;
 
-    @Override
-    public String toString() {
-        return "Coolie{" +
-                "coolieId=" + coolieId +
-                ", cooliePhoto='" + cooliePhoto + '\'' +
-                ", userMobile='" + userMobile + '\'' +
-                ", userName='" + userName + '\'' +
-                ", coolieBatchId=" + coolieBatchId +
-                '}';
-    }
+    @SerializedName("userStatus")
+    Integer userStatus;
+
+
 
     public Coolie() {
     }
 
-    public Coolie(Integer coolieId, String cooliePhoto, String userMobile, String userName, String coolieBatchId) {
+
+    public Coolie(Integer userId, Integer coolieId, String cooliePhoto, String userMobile, String userName, String coolieBatchId, Integer userStatus) {
+        this.userId = userId;
         this.coolieId = coolieId;
         this.cooliePhoto = cooliePhoto;
         this.userMobile = userMobile;
         this.userName = userName;
         this.coolieBatchId = coolieBatchId;
+        this.userStatus = userStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Coolie{" +
+                "userId=" + userId +
+                ", coolieId=" + coolieId +
+                ", cooliePhoto='" + cooliePhoto + '\'' +
+                ", userMobile='" + userMobile + '\'' +
+                ", userName='" + userName + '\'' +
+                ", coolieBatchId='" + coolieBatchId + '\'' +
+                ", userStatus=" + userStatus +
+                '}';
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getCoolieId() {
@@ -72,5 +98,13 @@ public class Coolie implements Serializable {
 
     public void setCoolieBatchId(String coolieBatchId) {
         this.coolieBatchId = coolieBatchId;
+    }
+
+    public Integer getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(Integer userStatus) {
+        this.userStatus = userStatus;
     }
 }

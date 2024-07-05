@@ -162,7 +162,7 @@ public class AddCoolieActivity extends AppCompatActivity {
         Bundle args = intentFromRow.getBundleExtra("bundle");
         coolie = (Coolie) args.getSerializable("selectedCoolie");
         activityMode = intentFromRow.getIntExtra("serviceMode",0);
-        System.out.println("mode "+activityMode+" "+coolie.toString());
+
 
         switch (activityMode){
             case 1:
@@ -179,6 +179,7 @@ public class AddCoolieActivity extends AppCompatActivity {
                         tv_cid.setText("COOLIE ID : "+coolie.getCoolieId());
                         btn_rgstrc.setText("UPDATE");
                         shapeableImageView.setImageBitmap(decodeBase64ToBitmap(coolie.getCooliePhoto()));
+                        capturedPhoto=coolie.getCooliePhoto();
                 System.out.println("In Edit");
 
 
@@ -194,7 +195,7 @@ public class AddCoolieActivity extends AppCompatActivity {
                     progressDialog.setTitle("Please Wait!!");
                     progressDialog.show();
 
-                    System.out.println("Image before send"+capturedPhoto);
+                   // System.out.println("Image before send"+capturedPhoto);
 
                     switch (activityMode){
                         case 1:
@@ -243,12 +244,13 @@ public class AddCoolieActivity extends AppCompatActivity {
                             });
                             break;
                         case 2:
-                            System.out.println("OK "+coolie.getCoolieId());
                             Call<SimpleResponse> call1 = RestClient.getRetrofitClient().create(RestInterface.class)
                                     .modCoolie(securedSharedPreferenceUtils.getLoginData().getJwtToken(),
-                                            new EditCoolieRequest(35,
-                                                    0,
+                                            new EditCoolieRequest(
+                                                    coolie.getCoolieId(),
+                                                    coolie.getUserStatus(),
                                                     tied_cname.getText().toString().trim(),
+                                                    tied_phno.getText().toString().trim(),
                                                     tied_billano.getText().toString().trim(),
                                                     capturedPhoto
                                                     ));
@@ -257,6 +259,7 @@ public class AddCoolieActivity extends AppCompatActivity {
                                 public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response) {
                                     if (response.code()==200){
 
+                                        progressDialog.dismiss();
                                         System.out.println("Coolie ID "+response.body());
                                         Toast.makeText(AddCoolieActivity.this, "COOLIE UPDATED", Toast.LENGTH_LONG).show();
                                         tied_cname.setText("");
@@ -270,7 +273,7 @@ public class AddCoolieActivity extends AppCompatActivity {
                                     }
 
                                     if(response.code()==401){
-
+                                        progressDialog.dismiss();
                                         try {
                                             InvalidateUser.invalidate(AddCoolieActivity.this);
 

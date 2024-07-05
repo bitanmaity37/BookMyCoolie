@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="120dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <com.google.android.material.card.MaterialCardView
@@ -40,7 +40,7 @@
                     android:gravity="center_vertical">
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.05"
                         android:src="@drawable/person"/>
 
@@ -75,7 +75,7 @@
                     android:gravity="center_vertical">
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.05"
                         android:src="@drawable/phone_calling"/>
                     <TextView
@@ -96,11 +96,11 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:layout_marginTop="2dp"
-                    android:weightSum="3">
+                    android:weightSum="3"
+                    android:gravity="center_vertical">
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.15"
                         android:src="@drawable/id_card_1_svgrepo_com"/>
                     <TextView
@@ -108,7 +108,7 @@
                         android:gravity="center_vertical"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.85"
+                        android:layout_weight="1.5"
                         android:id="@+id/billa"
                         android:text="BILLA NO:"
                         android:fontFamily="@font/rubik_regular"
@@ -118,8 +118,8 @@
                         />
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.35"
                         android:gravity="end">
                         <Button
                             android:id="@+id/btnmdfy"
@@ -135,12 +135,11 @@
                             app:iconSize="20dp"
                             app:iconTint="@color/maincolor" />
                         <androidx.appcompat.widget.SwitchCompat
-                            android:layout_marginEnd="2dp"
                             android:id="@+id/switch_coolieactv"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:checked="true"
-                            android:fontFamily="@font/montserrat_bold"
+                            android:fontFamily="@font/rubik_medium"
                             android:textColor="@color/maincolor4"
                             android:gravity="center"
                             android:layout_gravity="center"
