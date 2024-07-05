@@ -226,46 +226,7 @@
                         app:errorEnabled="true"
                         app:startIconContentDescription="Hello" />
                 </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_eid"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/white"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:focusedByDefault="false"
-                    android:foregroundTint="@color/white"
-                    android:hint="EMPLOYEE ID"
-                    android:textColorHint="@color/maincolor4"
-                    app:boxStrokeColor="@color/maincolor4"
-                    app:counterOverflowTextColor="@color/maincolor4"
-                    app:counterTextColor="@color/maincolor4"
-                    app:cursorColor="@color/maincolor4"
-                    app:errorEnabled="true"
-                    app:helperTextEnabled="true"
-                    app:helperTextTextColor="@color/white"
-                    app:hintEnabled="true"
-                    app:hintTextColor="@color/maincolor4"
-                    app:placeholderTextColor="@color/maincolor6"
-                    app:prefixTextColor="@color/maincolor4"
-                    app:suffixTextColor="@color/maincolor4">
 
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tied_eid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:inputType="text"
-                        android:textColor="@color/maincolor4"
-                        android:textSize="14sp"
-                        app:errorEnabled="true"
-                        app:startIconContentDescription="Hello" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_email"

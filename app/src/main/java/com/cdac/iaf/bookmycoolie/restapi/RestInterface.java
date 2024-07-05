@@ -5,6 +5,7 @@ import com.cdac.iaf.bookmycoolie.models.ChangeUserStatus;
 import com.cdac.iaf.bookmycoolie.models.EditCoolieRequest;
 import com.cdac.iaf.bookmycoolie.models.EditOpRequest;
 import com.cdac.iaf.bookmycoolie.models.STATION.AddStationRequest;
+import com.cdac.iaf.bookmycoolie.models.STATION.AllStationResponse;
 import com.cdac.iaf.bookmycoolie.models.SimpleUserIDResponse;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
@@ -139,5 +140,8 @@ public interface RestInterface {
 
     @POST("operator/update")
     Call<SimpleResponse> modOps(@Header("Authorization") String authorization, @Body EditOpRequest operator);
+
+    @GET("admin/getAllStations")
+    Call<ArrayList<AllStationResponse>> getStns(@Header("Authorization") String authorization);
 
 }

@@ -69,7 +69,13 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
             throw new RuntimeException(e);
         }
 
-        holder.optid.setText(operators.get(position).getUserEmpId());
+        if(operators.get(position).getUserEmpId() == null){
+            holder.optid.setText("Employee id not available");
+        }
+        else{
+            holder.optid.setText(operators.get(position).getUserEmpId());
+        }
+
         holder.phn.setText(operators.get(holder.getAdapterPosition()).getUserMobile());
         holder.email.setText(operators.get(holder.getAdapterPosition()).getUserEmailId());
         holder.stn.setText(operators.get(holder.getAdapterPosition()).getStationName());
