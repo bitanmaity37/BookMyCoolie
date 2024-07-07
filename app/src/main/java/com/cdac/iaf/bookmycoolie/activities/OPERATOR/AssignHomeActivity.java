@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
@@ -248,7 +247,7 @@ public class AssignHomeActivity extends AppCompatActivity {
         tv_pending.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
         tv_ongoing.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
         tv_finished.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.white));
-        tv_cancelled.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.canceled));
+        tv_cancelled.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.cancelled));
 
        // rcv_requestList.setBackgroundColor(ContextCompat.getColor(AssignHomeActivity.this, R.color.canceled));
 

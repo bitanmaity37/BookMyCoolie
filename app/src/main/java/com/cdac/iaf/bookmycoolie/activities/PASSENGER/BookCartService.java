@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import com.cdac.iaf.bookmycoolie.R;
@@ -18,7 +19,6 @@ import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
-import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.TimeConversionUtil;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
@@ -26,11 +26,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,20 +50,19 @@ public class BookCartService {
     TextInputEditText startTimeInput;
     TextInputEditText endTimePicker;
     BottomSheetDialog coolieBottomSheetDialog;
-    BottomSheetDialog cartBottomSheetDialog;
     StationModel selectedStation = new StationModel();
     StationAreaModel selectedStationAreaPickUp = new StationAreaModel();
     StationAreaModel selectedStationAreaDropAt = new StationAreaModel();
     CoolieRequestModel coolieRequestModel = new CoolieRequestModel();
     Context context;
     FragmentManager fragmentManager;
-    SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+    int userId;
 
-    public BookCartService(Context context, String authToken, FragmentManager fragmentManager, SecuredSharedPreferenceUtils securedSharedPreferenceUtils) {
+    public BookCartService(Context context, String authToken, FragmentManager fragmentManager, int userId) {
         this.authToken = authToken;
         this.context = context;
         this.fragmentManager = fragmentManager;
-        this.securedSharedPreferenceUtils = securedSharedPreferenceUtils;
+        this.userId = userId;
     }
 
     public void showCoolieBottomSheet() {
@@ -77,8 +76,6 @@ public class BookCartService {
         setTentativeStartTimePicker();
         setTentativeEndTimePicker();
         submitBookCoolieForm();
-
-        //getStationAreaByStationId();
     }
 
     public void getAllStation() {
@@ -88,25 +85,24 @@ public class BookCartService {
         callGetSationList.enqueue(new Callback<ArrayList<StationModel>>() {
             @Override
             public void onResponse(Call<ArrayList<StationModel>> call, Response<ArrayList<StationModel>> response) {
-                if(response.isSuccessful() || response.code() == 200){
+                if (response.isSuccessful() || response.code() == 200) {
                     System.out.println("station list: " + response.body());
                     stationList = response.body();
                     setStationList();
-                }else{
+                } else {
                     Toast.makeText(context, "No Station found!!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<StationModel>> call, Throwable t) {
-                System.out.println("station list: error " + t.getMessage());
+                Toast.makeText(context, "Error while fetching station!", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     public void setStationList() {
-        System.out.println("setStationList: " + stationList);
         if (autoCompleteStationList == null) {
             autoCompleteStationList = coolieBottomSheetDialog.findViewById(R.id.select_station_input);
         }
@@ -116,35 +112,31 @@ public class BookCartService {
         autoCompleteStationList.setOnItemClickListener((parent, view, position, id) -> {
             selectedStation = (StationModel) parent.getItemAtPosition(position);
             coolieRequestModel.setStationId(selectedStation.getStationId()); //setting station id in request model
-            System.out.println("stationModel: " + selectedStation.getStationId());
             getStationAreaByStationId(selectedStation.getStationId());
         });
     }
 
     public void getStationAreaByStationId(int stationId) {
-        System.out.println("getStationAreaByStationId: " + stationId);
         callGetSationArea = RestClient.getRetrofitClient().create(RestInterface.class).getStationAreaByStationId(authToken, stationId);
-
         callGetSationArea.enqueue(new Callback<ArrayList<StationAreaModel>>() {
             @Override
             public void onResponse(Call<ArrayList<StationAreaModel>> call, Response<ArrayList<StationAreaModel>> response) {
-                System.out.println("station area list: " + response.body().toString());
-                stationAreaModelList = response.body();
-                setStationAreaPickUp(stationAreaModelList);
-                setStationAreaDropAt(stationAreaModelList);
+                if (response.isSuccessful() && response.body() != null) {
+                    stationAreaModelList = response.body();
+                    setStationAreaPickUp(stationAreaModelList);
+                }else
+                    Toast.makeText(context, "No Station Area found!!", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onFailure(Call<ArrayList<StationAreaModel>> call, Throwable t) {
-
+                Toast.makeText(context, "Error while fetching station area!", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     public void setStationAreaPickUp(ArrayList<StationAreaModel> stationAreaModelList) {
-
-        autoCompleteStationAreaPickup = coolieBottomSheetDialog.findViewById(R.id.select_pickup_input);
+        if (autoCompleteStationAreaPickup != null)
+            autoCompleteStationAreaPickup = coolieBottomSheetDialog.findViewById(R.id.select_pickup_input);
         ArrayAdapter<StationAreaModel> adapterPickUpArea = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, stationAreaModelList);
         autoCompleteStationAreaPickup.setAdapter(adapterPickUpArea);
 
@@ -152,14 +144,25 @@ public class BookCartService {
             selectedStationAreaPickUp = (StationAreaModel) parent.getItemAtPosition(position);
             coolieRequestModel.setStationAreaPickupFrom(selectedStationAreaPickUp.getStationAreaMasterMappingId());
             System.out.println("selectedStationAreaPickUp: " + selectedStationAreaPickUp.getStationAreaMasterMappingId());
+            setStationAreaDropAt(stationAreaModelList);
         });
-
     }
 
     public void setStationAreaDropAt(ArrayList<StationAreaModel> stationAreaModelList) {
+        //reseting the field
+        if (autoCompleteStationAreaDropAt != null) {
+            autoCompleteStationAreaDropAt.setText("");
+            autoCompleteStationAreaDropAt.clearListSelection();
+        }
 
         autoCompleteStationAreaDropAt = coolieBottomSheetDialog.findViewById(R.id.select_dropping_input);
-        ArrayAdapter<StationAreaModel> adapterDropAtArea = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, stationAreaModelList);
+
+        ArrayList<StationAreaModel> filteredDropAtAreaList = new ArrayList<>(stationAreaModelList);
+        if (selectedStationAreaPickUp != null) {
+            filteredDropAtAreaList.remove(selectedStationAreaPickUp);
+        }
+
+        ArrayAdapter<StationAreaModel> adapterDropAtArea = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, filteredDropAtAreaList);
         autoCompleteStationAreaDropAt.setAdapter(adapterDropAtArea);
 
         autoCompleteStationAreaDropAt.setOnItemClickListener((parent, view, position, id) -> {
@@ -167,11 +170,9 @@ public class BookCartService {
             coolieRequestModel.setStationAreaDropAt(selectedStationAreaDropAt.getStationAreaMasterMappingId());
             System.out.println("selectedStationAreaDropAt: " + selectedStationAreaDropAt.getStationAreaMasterMappingId());
         });
-
     }
 
     public void setTentativeStartTimePicker() {
-
         startTimeInput = coolieBottomSheetDialog.findViewById(R.id.approx_start_time_input);
         Calendar calendar = Calendar.getInstance();
 
@@ -185,7 +186,6 @@ public class BookCartService {
             startTime.show(fragmentManager, "MATERIAL_TIME_PICKER");
 
             startTime.addOnPositiveButtonClickListener(v1 -> {
-
                 // Set the hour and minute from the picker
                 calendar.set(Calendar.HOUR_OF_DAY, startTime.getHour());
                 calendar.set(Calendar.MINUTE, startTime.getMinute());
@@ -195,21 +195,14 @@ public class BookCartService {
                 String tentativeStartTime = TimeConversionUtil.convertTime(calendar);
                 coolieRequestModel.setBookingTentativeStartTime(tentativeStartTime);
 
-
-                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
                 String formattedDate = dateFormat.format(calendar.getTime());
-
                 startTimeInput.setText(formattedDate);
-
-                //Toast.makeText(context, " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
             });
-
         });
-
     }
 
     public void setTentativeEndTimePicker() {
-
         endTimePicker = coolieBottomSheetDialog.findViewById(R.id.approx_end_time_input);
         Calendar calendar = Calendar.getInstance();
 
@@ -223,8 +216,6 @@ public class BookCartService {
             startTime.show(fragmentManager, "MATERIAL_TIME_PICKER");
 
             startTime.addOnPositiveButtonClickListener(v1 -> {
-
-
                 // Set the hour and minute from the picker
                 calendar.set(Calendar.HOUR_OF_DAY, startTime.getHour());
                 calendar.set(Calendar.MINUTE, startTime.getMinute());
@@ -234,16 +225,11 @@ public class BookCartService {
                 String tentativeEndTime = TimeConversionUtil.convertTime(calendar);
                 coolieRequestModel.setBookingTentativeEndTime(tentativeEndTime);
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
                 String formattedDate = dateFormat.format(calendar.getTime());
-
                 endTimePicker.setText(formattedDate);
-
-                //Toast.makeText(context, "Timestamp tentativeStartTime =" + tentativeEndTime + " formattedDate = " + formattedDate, Toast.LENGTH_SHORT).show();
             });
-
         });
-
     }
 
     public void submitBookCoolieForm() {
@@ -251,84 +237,121 @@ public class BookCartService {
 
         if (submitButton != null) {
             submitButton.setOnClickListener(v -> {
+
                 TextInputEditText getNoOfCartsReq = coolieBottomSheetDialog.findViewById(R.id.carts_required_input);
                 TextInputEditText getNoOfBags = coolieBottomSheetDialog.findViewById(R.id.no_of_bags_input);
                 TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
-                if (getNoOfBags != null) {
+
+                if (validateInputs(getNoOfBags, approxWeight, getNoOfCartsReq)) {
                     coolieRequestModel.setNoOfCart(Integer.parseInt(getNoOfCartsReq.getText().toString()));
-                }
-                if (getNoOfBags != null) {
                     coolieRequestModel.setNoOfBags(Integer.parseInt(getNoOfBags.getText().toString()));
-                }
-                if (approxWeight != null) {
                     coolieRequestModel.setApproxTotalWeightage(Integer.parseInt(approxWeight.getText().toString()));
+
+                    Date date = new Date();
+                    String formattedDate = TimeConversionUtil.convertTime(date);
+
+                    coolieRequestModel.setBookingDate(formattedDate);
+                    coolieRequestModel.setBookingFor("John Doe");
+                    coolieRequestModel.setBookingType("Round Trip");
+                    coolieRequestModel.setRecordTracking(formattedDate);
+                    coolieRequestModel.setServiceType(2);
+                    coolieRequestModel.setRequestStatus(1);
+                    coolieRequestModel.setUserMaster(userId);
+
+                    Call<CoolieResponseModel> callSubmitBookCoolieForm = RestClient.getRetrofitClient().create(RestInterface.class).submitBookCoolieForm(authToken, coolieRequestModel);
+                    callSubmitBookCoolieForm.enqueue(new Callback<CoolieResponseModel>() {
+                        @Override
+                        public void onResponse(@NonNull Call<CoolieResponseModel> call, @NonNull Response<CoolieResponseModel> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                Toast.makeText(context, "Cart booked successfully!", Toast.LENGTH_SHORT).show();
+                                resetFormFields();
+                                coolieBottomSheetDialog.dismiss();
+                            } else
+                                Toast.makeText(context, "Failed to book cart! Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<CoolieResponseModel> call, @NonNull Throwable t) {
+                            Toast.makeText(context, "Error while booking cart service!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-
-                Date date = new Date();
-                String formattedDate = TimeConversionUtil.convertTime(date);
-
-                coolieRequestModel.setBookingDate(formattedDate);
-                coolieRequestModel.setBookingFor("John Doe");
-                coolieRequestModel.setBookingType("Round Trip");
-                coolieRequestModel.setRecordTracking(formattedDate);
-                coolieRequestModel.setServiceType(2);
-                coolieRequestModel.setRequestStatus(1);
-                coolieRequestModel.setUserMaster(securedSharedPreferenceUtils.getLoginData().getUserId());
-
-                System.out.println("coolieRequestModel: " + coolieRequestModel.toString());
-
-                Call<CoolieResponseModel> callSubmitBookCoolieForm = RestClient.getRetrofitClient().create(RestInterface.class).submitBookCoolieForm(authToken, coolieRequestModel);
-
-                callSubmitBookCoolieForm.enqueue(new Callback<CoolieResponseModel>() {
-                    @Override
-                    public void onResponse(Call<CoolieResponseModel> call, Response<CoolieResponseModel> response) {
-                        System.out.println("response.body().getRequestStatus(): " + response.code());
-                        System.out.println("response.body().getRequestStatus(): " + response.body().getPassengerRequestId());
-                        //Toast.makeText(context, "response.body().getRequestStatus(): " + response.code(), Toast.LENGTH_SHORT).show();
-                        resetFormFields();
-                        coolieBottomSheetDialog.dismiss();
-                    }
-
-                    @Override
-                    public void onFailure(Call<CoolieResponseModel> call, Throwable t) {
-
-                    }
-                });
-
-                Toast.makeText(context, "submitBookCoolieForm", Toast.LENGTH_SHORT).show();
             });
         }
     }
 
-    private void resetFormFields() {
-        if (autoCompleteStationList != null) {
-            autoCompleteStationList.setText("");
-        }
-        if (autoCompleteStationAreaPickup != null) {
-            autoCompleteStationAreaPickup.setText("");
-        }
-        if (autoCompleteStationAreaDropAt != null) {
-            autoCompleteStationAreaDropAt.setText("");
-        }
-        if (startTimeInput != null) {
-            startTimeInput.setText("");
-        }
-        if (endTimePicker != null) {
-            endTimePicker.setText("");
-        }
-        TextInputEditText getNoOfCartsReq = coolieBottomSheetDialog.findViewById(R.id.carts_required_input);
-        TextInputEditText getNoOfBags = coolieBottomSheetDialog.findViewById(R.id.no_of_bags_input);
-        TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
+    private boolean validateInputs(TextInputEditText getNoOfBags, TextInputEditText
+            approxWeight, TextInputEditText getNoOfCartsReq) {
+        boolean isValid = true;
 
-        if (getNoOfCartsReq != null) {
-            getNoOfCartsReq.setText("");
+        if (coolieRequestModel.getStationId() == 0) {
+            Toast.makeText(context, "Please select a station.", Toast.LENGTH_SHORT).show();
+            isValid = false;
+        } else if (coolieRequestModel.getStationAreaPickupFrom() == 0) {
+            Toast.makeText(context, "Please select a pickup area.", Toast.LENGTH_SHORT).show();
+            isValid = false;
+        } else if (coolieRequestModel.getStationAreaDropAt() == 0) {
+            Toast.makeText(context, "Please select a drop-off area.", Toast.LENGTH_SHORT).show();
+            isValid = false;
+        } else if (startTimeInput.getText() == null || startTimeInput.getText().toString().isEmpty()) {
+            startTimeInput.setError("Start time is required.");
+            isValid = false;
+        } else if (endTimePicker.getText() == null || endTimePicker.getText().toString().isEmpty()) {
+            endTimePicker.setError("End time is required.");
+            isValid = false;
+        } else if (getNoOfCartsReq.getText() == null || getNoOfCartsReq.getText().toString().isEmpty()) {
+            getNoOfCartsReq.setError("Number of carts is required.");
+            isValid = false;
+        } else if (getNoOfBags.getText() == null || getNoOfBags.getText().toString().isEmpty()) {
+            getNoOfBags.setError("Number of bags is required.");
+            isValid = false;
+        } else if (approxWeight.getText() == null || approxWeight.getText().toString().isEmpty()) {
+            approxWeight.setError("Approximate weight is required.");
+            isValid = false;
         }
-        if (getNoOfBags != null) {
-            getNoOfBags.setText("");
-        }
-        if (approxWeight != null) {
-            approxWeight.setText("");
-        }
+
+        return isValid;
     }
 
+    private void resetFormFields() {
+        if (coolieBottomSheetDialog != null) {
+            // Reset AutoCompleteTextViews
+            if (autoCompleteStationList != null) {
+                autoCompleteStationList.setText("");
+                autoCompleteStationList.clearListSelection();
+            }
+            if (autoCompleteStationAreaPickup != null) {
+                autoCompleteStationAreaPickup.setText("");
+                autoCompleteStationAreaPickup.clearListSelection();
+            }
+            if (autoCompleteStationAreaDropAt != null) {
+                autoCompleteStationAreaDropAt.setText("");
+                autoCompleteStationAreaDropAt.clearListSelection();
+            }
+
+            // Reset TextInputEditTexts
+            if (startTimeInput != null) {
+                startTimeInput.setText("");
+            }
+            if (endTimePicker != null) {
+                endTimePicker.setText("");
+            }
+
+            TextInputEditText getNoOfCartsReq = coolieBottomSheetDialog.findViewById(R.id.carts_required_input);
+            TextInputEditText getNoOfBags = coolieBottomSheetDialog.findViewById(R.id.no_of_bags_input);
+            TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
+            if (getNoOfCartsReq != null) {
+                getNoOfCartsReq.setText("");
+            }
+            if (getNoOfBags != null) {
+                getNoOfBags.setText("");
+            }
+            if (approxWeight != null) {
+                approxWeight.setText("");
+            }
+
+            // Reset request model
+            coolieRequestModel = new CoolieRequestModel();
+        }
+    }
 }

@@ -48,7 +48,7 @@ public class CarouselAdapter extends RecyclerView.Adapter<CarouselAdapter.ViewHo
         TextView imageView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.test_text);
+            imageView = itemView.findViewById(R.id.station_name);
         }
     }
 

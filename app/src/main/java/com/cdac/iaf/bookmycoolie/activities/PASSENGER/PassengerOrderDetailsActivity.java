@@ -57,18 +57,18 @@ public class PassengerOrderDetailsActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.home) {
                 // Handle profile item click
                 startActivity(new Intent(PassengerOrderDetailsActivity.this, PassengerHome.class));
-                Toast.makeText(PassengerOrderDetailsActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerOrderDetailsActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (item.getItemId() == R.id.faq_item) {
                 // Handle FAQ item click
                 startActivity(new Intent(PassengerOrderDetailsActivity.this, PassengerFaqActivity.class));
-                Toast.makeText(PassengerOrderDetailsActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerOrderDetailsActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (item.getItemId() == R.id.contact_item) {
                 // Handle contact item click
 
                 startActivity(new Intent(PassengerOrderDetailsActivity.this, PassengerContactUsActivity.class));
-                Toast.makeText(PassengerOrderDetailsActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerOrderDetailsActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             }
             return false;
@@ -80,7 +80,7 @@ public class PassengerOrderDetailsActivity extends AppCompatActivity {
         reqId = getIntent().getIntExtra("reqId", 0);
         status = getIntent().getIntExtra("status",0);
         Intent  intent = getIntent();
-        Toast.makeText(this, "reqId" + intent.getSerializableExtra("reqId"), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "reqId" + intent.getSerializableExtra("reqId"), Toast.LENGTH_SHORT).show();
 
         fetchOrderDetailsByReqId();
 

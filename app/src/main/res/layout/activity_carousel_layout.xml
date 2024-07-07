@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/carousel_item_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
     android:layout_marginEnd="4dp"
     android:foreground="?attr/selectableItemBackground"
     android:paddingLeft="8dp"
     android:paddingTop="8dp"
     android:paddingRight="8dp"
-    android:paddingBottom="8dp"
+    android:paddingBottom="4dp"
     app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
 
     <!--<ImageView
@@ -28,11 +28,158 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:cardCornerRadius="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="12dp"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <TextView
-                    android:id="@+id/test_text"
-                    android:layout_width="match_parent"
+                    android:id="@+id/station_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/rubik_regular"
+                    android:maxLines="1"
+                    android:text="Station Name"
+                    android:textSize="13sp"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/request_id"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Test text"/>
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_regular"
+                    android:maxLines="1"
+                    android:text="Request Id"
+                    android:textSize="13sp"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/linear_layout_pickup_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/pickup_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:paddingEnd="8dp"
+                    android:text="Pickup From"
+                    android:textSize="12dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/arrow_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/pickup_area"
+                    android:layout_weight="1.5"
+                    android:padding="2dp"
+                    android:src="@drawable/arrow_right" />
+
+                <TextView
+                    android:id="@+id/dropping_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_toEndOf="@id/arrow_right"
+                    android:layout_weight="1"
+                    android:paddingStart="8dp"
+                    android:text="drop at"
+                    android:textSize="12dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"/>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/coolie_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/rubik_regular"
+                    android:maxLines="1"
+                    android:text="Coolie Name"
+                    android:textSize="13sp"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/mobile_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_regular"
+                    android:maxLines="1"
+                    android:textSize="13sp"
+                    android:text="0123456789"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/billa_number"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/rubik_regular"
+                    android:maxLines="1"
+                    android:textSize="13sp"
+                    android:text="Billa No: 254655484"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/request_status"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rubik_regular"
+                    android:maxLines="1"
+                    android:textSize="12sp"
+                    android:text="pending"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </com.google.android.material.card.MaterialCardView>
+
+
 </com.google.android.material.carousel.MaskableFrameLayout>

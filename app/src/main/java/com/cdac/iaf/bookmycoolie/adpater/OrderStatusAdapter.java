@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,7 +103,9 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         }*/
 
         int colorId = OrderStatusUtil.getColor(orderStatus.getRequestStatus());
+        int bgColorId = OrderStatusUtil.getBgColor(orderStatus.getRequestStatus());
         holder.requestStatus.setTextColor(ContextCompat.getColor(context, colorId));
+        //holder.orderDetailsCard.setBackgroundColor(ContextCompat.getColor(context, bgColorId));
 
         // If you have a specific drawable for different statuses, you can set it here.
         holder.coolieImage.setText(MessageFormat.format("{0}.", (position + 1)));
@@ -118,7 +121,7 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
             holder.cancelButton.setVisibility(View.GONE);
         }
 
-        System.out.println("Request Status: " + orderStatus.getRequestStatus());
+        //System.out.println("Request Status: " + orderStatus.getRequestStatus());
 
         holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(holder.requestId, orderStatusList.get(position).getPassengerRequestId(), orderStatus.getRequestStatus()));
 
@@ -159,6 +162,7 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         TextView requestId, requestStatus, pickUpArea, dropOffArea,
                 stationName, noOfBags, serviceType, recordTrackingLabel, bookedAt, recordTracking;
         Button cancelButton;
+        RelativeLayout orderDetailsCard;
 
         public OrderStatusViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -175,6 +179,7 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
             bookedAt = itemView.findViewById(R.id.booked_at);
             //recordTracking = itemView.findViewById(R.id.record_tracking);
             recordTrackingLayout = itemView.findViewById(R.id.linear_layout_record_tracking);
+            orderDetailsCard = itemView.findViewById(R.id.order_history_details_card);
         }
     }
 

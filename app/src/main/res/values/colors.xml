@@ -39,7 +39,12 @@
     <color name="pending">#FFC107</color> <!-- Yellow -->
     <color name="assigned">#2196F3</color> <!-- Orange -->
     <color name="completed">#4CAF50</color> <!-- Green -->
-    <color name="canceled">#F44336</color> <!-- Red -->
+    <color name="cancelled">#F44336</color> <!-- Red -->
+
+    <color name="assigned_card">#a6d5fa</color>
+    <color name="pending_card">#ffe69c</color>
+    <color name="completed_card">#b7dfb9</color>
+    <color name="cancelled_card">#fbb4af</color>
 
 
     <color name="navbar_color">#2C455D</color>

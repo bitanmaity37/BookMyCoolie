@@ -16,7 +16,7 @@ public class CarouselLayout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carousel_layout);
 
-        TextView imageView = findViewById(R.id.test_text);
+        TextView imageView = findViewById(R.id.station_name);
 
        // Glide.with(CarouselLayout.this).load(getIntent().getStringExtra("image")).into(imageView);
 

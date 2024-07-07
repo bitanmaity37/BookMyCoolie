@@ -73,21 +73,6 @@
             android:src="@drawable/c4" />
     </ViewFlipper>-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/carousel_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="196dp"
-        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topAppBar"
-        app:layout_constraintVertical_bias="0.0">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-
 
     <!--<com.google.android.material.card.MaterialCardView
         android:id="@+id/cards"
@@ -103,68 +88,180 @@
         app:layout_constraintTop_toBottomOf="@+id/topAppBar"
         app:layout_constraintVertical_bias="0.036">-->
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/carousel_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serivces_card"
+        app:layout_constraintVertical_bias="0.819">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
     <LinearLayout
         android:id="@+id/services_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/serivces_card"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carousel_recycler_view"
-        app:layout_constraintVertical_bias="0.036">
+        app:layout_constraintTop_toBottomOf="@+id/topAppBar"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/rubik_medium"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
             android:text="Services:"
             android:textColor="#274060"
-            android:paddingTop="10dp"
-            android:paddingStart="10dp"
-            android:textSize="20dp"
-            android:fontFamily="@font/rubik_medium" />
+            android:textSize="20dp" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            app:dividerInsetStart="10dp"
-            app:dividerInsetEnd="10dp"
             app:dividerColor="@color/light_blue"
-            app:dividerThickness="1dp"/>
+            app:dividerInsetEnd="10dp"
+            app:dividerInsetStart="10dp"
+            app:dividerThickness="1dp" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/serivces_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/services_label"
+        app:layout_constraintVertical_bias="0.036">
+
         <LinearLayout
-            android:id="@+id/serivces_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/services_label"
-            app:layout_constraintVertical_bias="0.036">
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/book_a_coolie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginEnd="15dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:padding="15dp"
+                            android:src="@drawable/person_door_man_svgrepo_com" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="Coolie"
+                            android:textAlignment="center"
+                            android:textColor="#274060"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/book_a_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:padding="15dp"
+                            android:src="@drawable/carts" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="Cart"
+                            android:textAlignment="center"
+                            android:textColor="#274060"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="horizontal">
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/book_a_coolie"
+                        android:id="@+id/book_a_chair"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -182,176 +279,72 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="80dp"
                                 android:padding="15dp"
-                                android:src="@drawable/person_door_man_svgrepo_com" />
+                                android:src="@drawable/chair" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Coolie"
+                                android:fontFamily="@font/rubik_medium"
+                                android:text="Chair"
                                 android:textAlignment="center"
                                 android:textColor="#274060"
-                                android:textSize="20dp"
-                                android:fontFamily="@font/rubik_medium" />
+                                android:textSize="20dp" />
 
                         </LinearLayout>
 
                     </com.google.android.material.card.MaterialCardView>
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/book_a_cart"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="2dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="80dp"
-                                android:padding="15dp"
-                                android:src="@drawable/carts" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Cart"
-                                android:textAlignment="center"
-                                android:textColor="#274060"
-                                android:textSize="20dp"
-                                android:fontFamily="@font/rubik_medium" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
 
 
                 </LinearLayout>
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-
-
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/order_history_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:layout_margin="10dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="2dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/book_a_chair"
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:padding="15dp"
+                            android:src="@drawable/time_management_hourglass_svgrepo_com" />
+
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:layout_marginEnd="15dp"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="15dp"
-                            app:cardElevation="2dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="80dp"
-                                    android:padding="15dp"
-                                    android:src="@drawable/chair" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Chair"
-                                    android:textAlignment="center"
-                                    android:textColor="#274060"
-                                    android:textSize="20dp"
-                                    android:fontFamily="@font/rubik_medium" />
-
-                            </LinearLayout>
-
-                        </com.google.android.material.card.MaterialCardView>
-
-
+                            android:fontFamily="@font/rubik_medium"
+                            android:text="History"
+                            android:textAlignment="center"
+                            android:textColor="#274060"
+                            android:textSize="20dp" />
 
                     </LinearLayout>
 
-                </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/order_history_card"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="2dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="80dp"
-                                android:padding="15dp"
-                                android:src="@drawable/time_management_hourglass_svgrepo_com" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="History"
-                                android:textAlignment="center"
-                                android:textColor="#274060"
-                                android:textSize="20dp"
-                                android:fontFamily="@font/rubik_medium" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-
-
-                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
+    </LinearLayout>
 
 
     <LinearLayout
@@ -386,7 +379,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        app:menu="@menu/navigation_bar_menu">
 
         <include
             android:id="@+id/custom_toolbar"

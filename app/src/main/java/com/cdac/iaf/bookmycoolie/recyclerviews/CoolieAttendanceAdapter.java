@@ -73,7 +73,7 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
             holder.switch_attndnce.setChecked(false);
             holder.switch_attndnce.setText("N");
            // holder.switch_attndnce.setTrackResource(context.getResources().getColor(R.color.canceled));
-            holder.switch_attndnce.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.canceled)));
+            holder.switch_attndnce.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.cancelled)));
 
         }
         holder.switch_attndnce.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -144,7 +144,7 @@ public class CoolieAttendanceAdapter extends RecyclerView.Adapter<CoolieAttendan
                                 if(response.code()==200 && response.body().string().equals("true")){
                                     progressDialog.dismiss();
                                     holder.switch_attndnce.setText("N");
-                                    holder.switch_attndnce.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.canceled)));
+                                    holder.switch_attndnce.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.cancelled)));
                                  //   holder.switch_attndnce.setTrackResource(context.getResources().getColor(R.color.canceled));
                                     System.out.println("SAVED ATTENDNC False");
                                 }

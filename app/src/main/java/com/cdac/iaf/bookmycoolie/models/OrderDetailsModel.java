@@ -61,7 +61,6 @@ public class OrderDetailsModel {
         return "OrderDetailsModel{" +
                 "coolieId=" + coolieId +
                 ", coolieBatchId='" + coolieBatchId + '\'' +
-                ", cooliePhoto='" + cooliePhoto + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userMobile='" + userMobile + '\'' +
                 '}';
