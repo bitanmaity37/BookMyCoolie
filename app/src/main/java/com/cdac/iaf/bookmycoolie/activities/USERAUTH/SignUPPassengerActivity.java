@@ -37,7 +37,7 @@ public class SignUPPassengerActivity extends AppCompatActivity {
     Button getOTPButton, verifyButton, registerButton,btnLogout;
     LinearLayout ll_register, ll_otp, ll_registerdtls;
 
-    TextInputEditText tied_phone, tied_name, tied_pwd, tied_email, tied_eid;
+    TextInputEditText tied_phone, tied_name, tied_pwd, tied_email;
 
     PinView pinView;
     TextView tv_otptxt, resend;
@@ -56,10 +56,7 @@ public class SignUPPassengerActivity extends AppCompatActivity {
         verifyButton = findViewById(R.id.verifyButton);
         registerButton = findViewById(R.id.registerButton);
         btnLogout = findViewById(R.id.logout);
-        tied_eid = findViewById(R.id.tied_eid);
-        TextInputLayout til_eid = findViewById(R.id.til_eid);
 
-        til_eid.setVisibility(View.GONE);
         btnLogout.setVisibility(View.GONE);
 
 
@@ -132,7 +129,7 @@ public class SignUPPassengerActivity extends AppCompatActivity {
                 if(otpSent && numberVerified){
                     Call<SimpleUserIDResponse> call3 = RestClient.getRetrofitClient().create(RestInterface.class)
                             .registerPsngr(new RegisterPassengerDetailsModel(tied_email.getText().toString().trim(),
-                                    "344500",
+                                    "",
                                     true,
                                     Mobile,
                                     tied_name.getText().toString(),

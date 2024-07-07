@@ -1,6 +1,11 @@
 package com.cdac.iaf.bookmycoolie.restapi;
 
 import com.cdac.iaf.bookmycoolie.models.AddCoolieRequest;
+import com.cdac.iaf.bookmycoolie.models.ChangeUserStatus;
+import com.cdac.iaf.bookmycoolie.models.EditCoolieRequest;
+import com.cdac.iaf.bookmycoolie.models.EditOpRequest;
+import com.cdac.iaf.bookmycoolie.models.STATION.AddStationRequest;
+import com.cdac.iaf.bookmycoolie.models.STATION.AllStationResponse;
 import com.cdac.iaf.bookmycoolie.models.SimpleUserIDResponse;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorRequest;
 import com.cdac.iaf.bookmycoolie.models.AddOperatorResponse;
@@ -122,5 +127,21 @@ public interface RestInterface {
 
     @POST("/passenger/add")
     Call<SimpleUserIDResponse> registerPsngr(@Body RegisterPassengerDetailsModel registerPassengerDetailsModel);
+
+    @POST("admin/addStation")
+    Call<SimpleResponse> addStation(@Header("Authorization") String authorization, @Body AddStationRequest addStationRequest);
+
+    @POST("coolie/update")
+    Call<SimpleResponse> modCoolie(@Header("Authorization") String authorization, @Body EditCoolieRequest coolie);
+
+
+    @POST("general/changeStatusById")
+    Call<SimpleResponse> changeStatus(@Header("Authorization") String authorization, @Body ChangeUserStatus changeUserStatus);
+
+    @POST("operator/update")
+    Call<SimpleResponse> modOps(@Header("Authorization") String authorization, @Body EditOpRequest operator);
+
+    @GET("admin/getAllStations")
+    Call<ArrayList<AllStationResponse>> getStns(@Header("Authorization") String authorization);
 
 }

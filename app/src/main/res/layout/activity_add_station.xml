@@ -234,7 +234,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ADD PLATFORMS"
+            android:text="ADD PLATFORMS/ AREAS"
             android:fontFamily="@font/rubik_medium"
             android:textColor="@color/maincolor4"
             android:gravity="center"/>
@@ -242,7 +242,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp">
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_pltfrm"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -278,7 +280,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/rubik_regular"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:textColor="@color/maincolor4"
                     android:textSize="14dp"
                     app:errorEnabled="true"
@@ -297,7 +299,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="5dp"
+            android:id="@+id/rv_pltfrm"/>
 
 
 

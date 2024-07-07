@@ -46,7 +46,7 @@ import retrofit2.Response;
 
 public class AdminHomeActivity extends AppCompatActivity {
 
-    MaterialCardView btn_addopt, listops;
+    MaterialCardView btn_addopt, listops, addstn, liststns;
 
     TextInputEditText tied_empid,tied_ophn,tied_oemail,tied_opwd, tied_name;
       AutoCompleteTextView act_stndd;
@@ -68,6 +68,18 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         listops = findViewById(R.id.listops);
 
+        addstn = findViewById(R.id.addstn);
+
+        liststns = findViewById(R.id.liststns);
+
+        liststns.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminHomeActivity.this,StationListActivity.class));
+            }
+        });
+
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +100,13 @@ public class AdminHomeActivity extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        addstn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminHomeActivity.this,AddStationActivity.class));
+            }
+        });
 
         listops.setOnClickListener(new View.OnClickListener() {
             @Override

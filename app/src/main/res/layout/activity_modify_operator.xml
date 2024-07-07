@@ -16,6 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+
         <TextView
             android:paddingStart="3dp"
             android:id="@+id/textView"
@@ -42,14 +44,123 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <TextView
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView2"
             android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="3dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:fontFamily="@font/ubuntu_bold"
-            android:padding="14dp"
-            android:text="MODIFY AN OPERATOR"
-            android:textStyle="bold" />
+            android:layout_marginTop="25dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="15px"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:strokeColor="@color/maincolor6"
+            app:strokeWidth="0.5dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="7dp">
+                <TextView
+                    android:id="@+id/optname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OPERATOR DETAILS"
+                    android:fontFamily="@font/rubik_bold"
+                    android:textSize="17dp"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"
+                    />
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dividerInsetStart="2dp"
+                    app:dividerInsetEnd="2dp"
+                    app:dividerColor="@color/black"
+                    app:dividerThickness="1dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:padding="2dp">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/id"
+                        android:gravity="center_vertical"/>
+                    <TextView
+                        android:id="@+id/opid"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:text="AAAAA"
+                        android:fontFamily="@font/rubik_regular"
+                        android:textSize="14dp"
+                        android:textColor="@color/grey2"
+                        android:paddingStart="2dp"
+                        android:gravity="center_vertical"
+                        />
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/statn"
+                        android:gravity="center_vertical"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:id="@+id/stn"
+                        android:text="STATION NAME"
+                        android:fontFamily="@font/rubik_regular"
+                        android:textSize="14dp"
+                        android:textColor="@color/grey2"
+                        android:paddingStart="2dp"
+                        android:gravity="center_vertical"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:padding="2dp">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/email"
+                        android:gravity="center_vertical"/>
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.9"
+                        android:text="EMAIL"
+                        android:fontFamily="@font/rubik_regular"
+                        android:textSize="14dp"
+                        android:textColor="@color/grey2"
+                        android:paddingStart="2dp"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_name"
@@ -84,10 +195,12 @@
                 android:id="@+id/tied_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
-                android:inputType="text"
+                android:fontFamily="@font/rubik_regular"
+                android:inputType="textPersonName"
+                android:maxLength="40"
+                android:maxLines="1"
                 android:textColor="@color/maincolor4"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:errorEnabled="true"
                 app:startIconContentDescription="Hello" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -125,94 +238,18 @@
                 android:id="@+id/tied_ophn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
-                android:inputType="text"
+                android:fontFamily="@font/rubik_regular"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:maxLength="10"
                 android:textColor="@color/maincolor4"
-                android:textSize="14sp"
-                app:errorEnabled="true"
-                app:startIconContentDescription="Hello" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_oemail"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/white"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:focusedByDefault="false"
-            android:foregroundTint="@color/white"
-            android:hint="EMAIL"
-            android:textColorHint="@color/maincolor4"
-            app:boxCornerRadiusTopStart="5dp"
-            app:boxStrokeColor="@color/maincolor4"
-            app:counterOverflowTextColor="@color/maincolor4"
-            app:counterTextColor="@color/maincolor4"
-            app:cursorColor="@color/maincolor4"
-            app:errorEnabled="true"
-            app:helperTextEnabled="true"
-            app:helperTextTextColor="@color/white"
-            app:hintEnabled="true"
-            app:hintTextColor="@color/maincolor4"
-            app:placeholderTextColor="@color/maincolor6"
-            app:prefixTextColor="@color/maincolor4"
-            app:suffixTextColor="@color/maincolor4">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tied_oemail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
-                android:inputType="text"
-                android:textColor="@color/maincolor4"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 app:errorEnabled="true"
                 app:startIconContentDescription="Hello" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_stnlist"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/white"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:focusedByDefault="false"
-            android:foregroundTint="@color/white"
-            android:hint="SELECT STATION"
-            android:textColorHint="@color/maincolor4"
-            app:boxCornerRadiusTopStart="5dp"
-            app:boxStrokeColor="@color/maincolor4"
-            app:counterOverflowTextColor="@color/maincolor4"
-            app:counterTextColor="@color/maincolor4"
-            app:errorEnabled="true"
-            app:helperTextEnabled="true"
-            app:helperTextTextColor="@color/white"
-            app:hintEnabled="true"
-            app:hintTextColor="@color/maincolor4"
-            app:placeholderTextColor="@color/maincolor6"
-            app:prefixTextColor="@color/maincolor4"
-            app:suffixTextColor="@color/maincolor4">
 
-
-            <AutoCompleteTextView
-                android:id="@+id/act_stn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/montserrat_semibold"
-                android:textColor="@color/maincolor4"
-                android:textSize="12sp"
-                app:errorEnabled="true"
-                app:startIconContentDescription="Hello" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_oprtrupdt"
@@ -220,7 +257,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:fontFamily="@font/rubik_light"
+            android:fontFamily="@font/rubik_bold"
             android:gravity="center"
             android:text="UPDATE"
             android:textColor="@color/white"

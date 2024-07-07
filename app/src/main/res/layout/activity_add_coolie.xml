@@ -54,26 +54,37 @@
         android:id="@+id/materialCardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="15px"
+        app:cardElevation="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" >
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tv_cid"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/rubik_medium"
+                android:text="COOLIE ID: 998997"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_cname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/white"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -115,7 +126,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/white"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -155,7 +167,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/white"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -186,11 +199,11 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:inputType="number"
                     android:maxLength="10"
+                    android:maxLines="1"
                     android:textColor="@color/maincolor4"
                     android:textSize="17sp"
                     app:errorEnabled="true"
-                    app:startIconContentDescription="Hello"
-                    android:maxLines="1"/>
+                    app:startIconContentDescription="Hello" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
