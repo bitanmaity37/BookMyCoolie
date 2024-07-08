@@ -60,12 +60,12 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         Date bookingDate = new Date(orderStatus.getBookingDate().getTime());
         Date recordDate = new Date(orderStatus.getRecordTracking().getTime());
         //String requestStatus = getStatusString(orderStatus.getRequestStatus());
-        holder.requestId.setText(String.format("ID:%s", String.valueOf(orderStatus.getPassengerRequestId())));
+        holder.requestId.setText(String.format("ID: %s", String.valueOf(orderStatus.getPassengerRequestId())));
         holder.requestStatus.setText(OrderStatusUtil.getOrderStatus(orderStatus.getRequestStatus()));
         holder.pickUpArea.setText(orderStatus.getStationAreaPickupFromName());
         holder.dropOffArea.setText(orderStatus.getStationAreaDropAtName());
         holder.stationName.setText(orderStatus.getStationName());
-        holder.noOfBags.setText(String.format("%s bags",String.valueOf(orderStatus.getNoOfBags())));
+        holder.trainNo.setText(orderStatus.getTrainNumber());
         holder.serviceType.setText(ServiceTypeUtil.getServiceTypeName(orderStatus.getServiceType()));
         holder.bookedAt.setText(String.format("Booked on: %s", sdf.format(bookingDate)));
         //holder.recordTracking.setText(sdf.format(recordDate));
@@ -160,7 +160,7 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
         TextView coolieImage;
         LinearLayout recordTrackingLayout;
         TextView requestId, requestStatus, pickUpArea, dropOffArea,
-                stationName, noOfBags, serviceType, recordTrackingLabel, bookedAt, recordTracking;
+                stationName, trainNo, serviceType, recordTrackingLabel, bookedAt, recordTracking;
         Button cancelButton;
         RelativeLayout orderDetailsCard;
 
@@ -172,7 +172,7 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
             pickUpArea = itemView.findViewById(R.id.pickup_area);
             dropOffArea = itemView.findViewById(R.id.dropping_area);
             stationName = itemView.findViewById(R.id.station_name);
-            noOfBags = itemView.findViewById(R.id.no_of_bags);
+            trainNo = itemView.findViewById(R.id.train_number);
             serviceType = itemView.findViewById(R.id.service_type);
             cancelButton = itemView.findViewById(R.id.cancel_request_btn);
             //recordTrackingLabel = itemView.findViewById(R.id.record_tracking_label);

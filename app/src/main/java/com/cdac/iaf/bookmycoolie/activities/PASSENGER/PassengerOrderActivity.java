@@ -60,18 +60,18 @@ public class PassengerOrderActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.home) {
                 // Handle profile item click
                 startActivity(new Intent(PassengerOrderActivity.this, PassengerHome.class));
-                Toast.makeText(PassengerOrderActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerOrderActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (item.getItemId() == R.id.faq_item) {
                 // Handle FAQ item click
                 startActivity(new Intent(PassengerOrderActivity.this, PassengerFaqActivity.class));
-                Toast.makeText(PassengerOrderActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerOrderActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (item.getItemId() == R.id.contact_item) {
                 // Handle contact item click
 
                 startActivity(new Intent(PassengerOrderActivity.this, PassengerContactUsActivity.class));
-                Toast.makeText(PassengerOrderActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerOrderActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             }
             return false;
@@ -97,8 +97,8 @@ public class PassengerOrderActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     orderStatusList.addAll(response.body());
                     setAdapter();
-                    System.out.println(orderStatusList.get(0));
-                    Toast.makeText(PassengerOrderActivity.this, orderStatusList.get(0).toString(), Toast.LENGTH_SHORT).show();
+                    //System.out.println(orderStatusList.get(0));
+                    //Toast.makeText(PassengerOrderActivity.this, orderStatusList.get(0).toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -114,8 +114,6 @@ public class PassengerOrderActivity extends AppCompatActivity {
         orderStatusAdapter = new OrderStatusAdapter(PassengerOrderActivity.this,orderStatusList,authToken);
         recyclerView.setAdapter(orderStatusAdapter);
         orderStatusAdapter.setOnItemClickListener((textView, reqId, status) -> {
-            System.out.println("reqId: " + reqId);
-            System.out.println("status: " + status);
             Intent intent = new Intent(PassengerOrderActivity.this, PassengerOrderDetailsActivity.class);
             intent.putExtra("reqId", reqId);
             intent.putExtra("status", status);

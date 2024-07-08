@@ -14,7 +14,12 @@ import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.PassengerReqResponses;
 import com.cdac.iaf.bookmycoolie.utils.TimeConversionUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class FinishedRequestListAdapter extends RecyclerView.Adapter<FinishedRequestListAdapter.ViewHolder> {
 
@@ -41,7 +46,16 @@ public class FinishedRequestListAdapter extends RecyclerView.Adapter<FinishedReq
 
     @Override
     public void onBindViewHolder(@NonNull FinishedRequestListAdapter.ViewHolder holder, int position) {
-        System.out.println("requests: "+ requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime());
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault());
+        try {
+            Date startDate = inputFormat.parse(requests.get(holder.getAdapterPosition()).getBookingTentativeStartTime());
+            SimpleDateFormat outputFormat = new SimpleDateFormat("d MMMM yyyy, hh:mm a", Locale.getDefault());
+            outputFormat.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata")); // Set timezone to India Standard Time
+            System.out.println("Request Id: "+requests.get(holder.getAdapterPosition()).getPassengerRequestId()+"requests output format: "+  outputFormat.format(startDate));
+
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
         holder.reqid.setText("Request No: "+requests.get(holder.getAdapterPosition()).getPassengerRequestId());
 
@@ -57,7 +71,7 @@ public class FinishedRequestListAdapter extends RecyclerView.Adapter<FinishedReq
         String b = requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime();
 
         if (a != null && b!= null){
-            holder.psngrphn.setText(TimeConversionUtil.getFullDate(a.substring(0,10)) +" "+a.substring(11,16)+" to "+b.substring(11,16));
+            holder.psngrphn.setText(TimeConversionUtil.getFullDateIndia(a, b));
         } else {
             holder.psngrphn.setText("Date & Time not available");
         }

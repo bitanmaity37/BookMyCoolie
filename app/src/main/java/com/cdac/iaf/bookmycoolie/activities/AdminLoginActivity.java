@@ -20,6 +20,7 @@ import com.cdac.iaf.bookmycoolie.models.LoginRequest;
 import com.cdac.iaf.bookmycoolie.models.LoginResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
+import com.cdac.iaf.bookmycoolie.utils.NetworkUtils;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.SharedPreferenceUtility;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -37,12 +38,17 @@ public class AdminLoginActivity extends AppCompatActivity {
     Button btn_admlogin, btn_signup, btn_admnpage, btn_oprtrpage, btn_psngrpage,btnLogout;
     TextInputEditText tied_admname, tied_admpwd;
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+    boolean isNetworkAvailable;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
+        isNetworkAvailable = NetworkUtils.isInternetAvailable(this);
+        if (!isNetworkAvailable) {
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
         tied_admname = findViewById(R.id.tied_admname);
         tied_admpwd = findViewById(R.id.tied_admpwd);

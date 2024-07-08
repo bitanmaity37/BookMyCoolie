@@ -30,7 +30,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -124,9 +123,10 @@ public class BookCartService {
                 if (response.isSuccessful() && response.body() != null) {
                     stationAreaModelList = response.body();
                     setStationAreaPickUp(stationAreaModelList);
-                }else
+                } else
                     Toast.makeText(context, "No Station Area found!!", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onFailure(Call<ArrayList<StationAreaModel>> call, Throwable t) {
                 Toast.makeText(context, "Error while fetching station area!", Toast.LENGTH_SHORT).show();
@@ -135,7 +135,7 @@ public class BookCartService {
     }
 
     public void setStationAreaPickUp(ArrayList<StationAreaModel> stationAreaModelList) {
-        if (autoCompleteStationAreaPickup != null)
+        if (autoCompleteStationAreaPickup == null)
             autoCompleteStationAreaPickup = coolieBottomSheetDialog.findViewById(R.id.select_pickup_input);
         ArrayAdapter<StationAreaModel> adapterPickUpArea = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, stationAreaModelList);
         autoCompleteStationAreaPickup.setAdapter(adapterPickUpArea);
@@ -177,11 +177,7 @@ public class BookCartService {
         Calendar calendar = Calendar.getInstance();
 
         startTimeInput.setOnClickListener(v -> {
-            MaterialTimePicker startTime = new MaterialTimePicker.Builder()
-                    .setTimeFormat(TimeFormat.CLOCK_12H)
-                    .setHour(calendar.get(Calendar.HOUR_OF_DAY))
-                    .setMinute(calendar.get(Calendar.MINUTE))
-                    .setTitleText("Select Start Time").build();
+            MaterialTimePicker startTime = new MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_12H).setHour(calendar.get(Calendar.HOUR_OF_DAY)).setMinute(calendar.get(Calendar.MINUTE)).setTitleText("Select Start Time").build();
 
             startTime.show(fragmentManager, "MATERIAL_TIME_PICKER");
 
@@ -195,7 +191,7 @@ public class BookCartService {
                 String tentativeStartTime = TimeConversionUtil.convertTime(calendar);
                 coolieRequestModel.setBookingTentativeStartTime(tentativeStartTime);
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
                 String formattedDate = dateFormat.format(calendar.getTime());
                 startTimeInput.setText(formattedDate);
             });
@@ -207,11 +203,7 @@ public class BookCartService {
         Calendar calendar = Calendar.getInstance();
 
         endTimePicker.setOnClickListener(v -> {
-            MaterialTimePicker startTime = new MaterialTimePicker.Builder()
-                    .setTimeFormat(TimeFormat.CLOCK_12H)
-                    .setHour(calendar.get(Calendar.HOUR_OF_DAY))
-                    .setMinute(calendar.get(Calendar.MINUTE))
-                    .setTitleText("Select End Time").build();
+            MaterialTimePicker startTime = new MaterialTimePicker.Builder().setTimeFormat(TimeFormat.CLOCK_12H).setHour(calendar.get(Calendar.HOUR_OF_DAY)).setMinute(calendar.get(Calendar.MINUTE)).setTitleText("Select End Time").build();
 
             startTime.show(fragmentManager, "MATERIAL_TIME_PICKER");
 
@@ -225,7 +217,7 @@ public class BookCartService {
                 String tentativeEndTime = TimeConversionUtil.convertTime(calendar);
                 coolieRequestModel.setBookingTentativeEndTime(tentativeEndTime);
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
                 String formattedDate = dateFormat.format(calendar.getTime());
                 endTimePicker.setText(formattedDate);
             });
@@ -238,13 +230,15 @@ public class BookCartService {
         if (submitButton != null) {
             submitButton.setOnClickListener(v -> {
 
+                TextInputEditText getTrainNo = coolieBottomSheetDialog.findViewById(R.id.train_no_input);
+                TextInputEditText getTrainName = coolieBottomSheetDialog.findViewById(R.id.train_name_input);
                 TextInputEditText getNoOfCartsReq = coolieBottomSheetDialog.findViewById(R.id.carts_required_input);
-                TextInputEditText getNoOfBags = coolieBottomSheetDialog.findViewById(R.id.no_of_bags_input);
                 TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
 
-                if (validateInputs(getNoOfBags, approxWeight, getNoOfCartsReq)) {
+                if (validateInputs(getTrainNo, getTrainName, approxWeight, getNoOfCartsReq)) {
+                    coolieRequestModel.setTrainNumber(getTrainNo.getText().toString());
+                    coolieRequestModel.setTrainName(getTrainName.getText().toString());
                     coolieRequestModel.setNoOfCart(Integer.parseInt(getNoOfCartsReq.getText().toString()));
-                    coolieRequestModel.setNoOfBags(Integer.parseInt(getNoOfBags.getText().toString()));
                     coolieRequestModel.setApproxTotalWeightage(Integer.parseInt(approxWeight.getText().toString()));
 
                     Date date = new Date();
@@ -280,8 +274,8 @@ public class BookCartService {
         }
     }
 
-    private boolean validateInputs(TextInputEditText getNoOfBags, TextInputEditText
-            approxWeight, TextInputEditText getNoOfCartsReq) {
+    private boolean validateInputs(TextInputEditText getTrainNo, TextInputEditText getTrainName,
+                                   TextInputEditText approxWeight, TextInputEditText getNoOfCartsReq) {
         boolean isValid = true;
 
         if (coolieRequestModel.getStationId() == 0) {
@@ -293,6 +287,12 @@ public class BookCartService {
         } else if (coolieRequestModel.getStationAreaDropAt() == 0) {
             Toast.makeText(context, "Please select a drop-off area.", Toast.LENGTH_SHORT).show();
             isValid = false;
+        } else if (getTrainNo.getText() == null || getTrainNo.getText().toString().isEmpty()) {
+            getTrainNo.setError("Train number is required.");
+            isValid = false;
+        } else if (getTrainName.getText() == null || getTrainName.getText().toString().isEmpty()) {
+            getTrainName.setError("Train name is required.");
+            isValid = false;
         } else if (startTimeInput.getText() == null || startTimeInput.getText().toString().isEmpty()) {
             startTimeInput.setError("Start time is required.");
             isValid = false;
@@ -301,9 +301,6 @@ public class BookCartService {
             isValid = false;
         } else if (getNoOfCartsReq.getText() == null || getNoOfCartsReq.getText().toString().isEmpty()) {
             getNoOfCartsReq.setError("Number of carts is required.");
-            isValid = false;
-        } else if (getNoOfBags.getText() == null || getNoOfBags.getText().toString().isEmpty()) {
-            getNoOfBags.setError("Number of bags is required.");
             isValid = false;
         } else if (approxWeight.getText() == null || approxWeight.getText().toString().isEmpty()) {
             approxWeight.setError("Approximate weight is required.");
@@ -338,13 +335,17 @@ public class BookCartService {
             }
 
             TextInputEditText getNoOfCartsReq = coolieBottomSheetDialog.findViewById(R.id.carts_required_input);
-            TextInputEditText getNoOfBags = coolieBottomSheetDialog.findViewById(R.id.no_of_bags_input);
+            TextInputEditText getTrainNo = coolieBottomSheetDialog.findViewById(R.id.train_no_input);
+            TextInputEditText getTrainName = coolieBottomSheetDialog.findViewById(R.id.train_name_input);
             TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
             if (getNoOfCartsReq != null) {
                 getNoOfCartsReq.setText("");
             }
-            if (getNoOfBags != null) {
-                getNoOfBags.setText("");
+            if (getTrainNo != null) {
+                getTrainNo.setText("");
+            }
+            if (getTrainName != null) {
+                getTrainName.setText("");
             }
             if (approxWeight != null) {
                 approxWeight.setText("");

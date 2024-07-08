@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdac.iaf.bookmycoolie.R;
-import com.cdac.iaf.bookmycoolie.activities.ADMIN.AdminHomeActivity;
-import com.cdac.iaf.bookmycoolie.adpater.CarouselAdapter;
 import com.cdac.iaf.bookmycoolie.adpater.OnGoingRequestAdapter;
 import com.cdac.iaf.bookmycoolie.models.OrderDetailsModel;
 import com.cdac.iaf.bookmycoolie.models.OrderStatusModel;
@@ -23,7 +21,7 @@ import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.carousel.CarouselLayoutManager;
+import com.cdac.iaf.bookmycoolie.utils.NetworkUtils;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -44,6 +42,7 @@ public class PassengerHome extends AppCompatActivity {
     int userId;
     MaterialToolbar navbarMenu;
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
+    boolean isNetworkAvailable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,15 +143,21 @@ public class PassengerHome extends AppCompatActivity {
                     orderStatusModels.addAll(response.body());
                     AtomicInteger pendingRequests = new AtomicInteger(orderStatusModels.size());
                     for (OrderStatusModel orderStatusModel : orderStatusModels) {
-                        if (OrderStatusUtil.getOrderStatus(orderStatusModel.getRequestStatus()).equalsIgnoreCase("assigned")) {
-                            getCoolieForOngoingRequest(orderStatusModel.getPassengerRequestId(), orderDetails -> {
-                                allOrderDetailsByReqId.addAll(orderDetails);
-                                map.put(orderStatusModel.getPassengerRequestId(), orderDetails);
+                       int requestStatus = orderStatusModel.getRequestStatus();
+                        //Toast.makeText(PassengerHome.this, "requestStatus: "+requestStatus, Toast.LENGTH_SHORT).show();
+                        if (requestStatus == 1 || requestStatus == 2) {
+                            if (OrderStatusUtil.getOrderStatus(orderStatusModel.getRequestStatus()).equalsIgnoreCase("assigned")) {
+                                getCoolieForOngoingRequest(orderStatusModel.getPassengerRequestId(), orderDetails -> {
+                                    allOrderDetailsByReqId.addAll(orderDetails);
+                                    map.put(orderStatusModel.getPassengerRequestId(), orderDetails);
+                                    pendingRequests.getAndDecrement();
+                                    if (pendingRequests.get() == 0) {
+                                        setAdapters(orderStatusModels, map);
+                                    }
+                                });
+                            } else {
                                 pendingRequests.getAndDecrement();
-                                if (pendingRequests.get() == 0) {
-                                    setAdapters(orderStatusModels, map);
-                                }
-                            });
+                            }
                         } else {
                             pendingRequests.getAndDecrement();
                         }
@@ -160,7 +165,7 @@ public class PassengerHome extends AppCompatActivity {
                     if (pendingRequests.get() == 0) {
                         setAdapters(orderStatusModels, map);
                     }
-                    Toast.makeText(PassengerHome.this, orderStatusModels.get(0).toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PassengerHome.this, orderStatusModels.get(0).toString(), Toast.LENGTH_SHORT).show();
                 }
                 if(response.code()==401){
 
@@ -185,16 +190,21 @@ public class PassengerHome extends AppCompatActivity {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                Toast.makeText(PassengerHome.this, "Failed to fetch data. "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PassengerHome.this, "Failed to fetch data.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setAdapters(ArrayList<OrderStatusModel> orderStatusModels, Map<Integer, ArrayList<OrderDetailsModel>> map){
         recyclerView = findViewById(R.id.carousel_recycler_view);
-        CarouselLayoutManager layoutManager = new CarouselLayoutManager();
         OnGoingRequestAdapter carouselAdapter = new OnGoingRequestAdapter(orderStatusModels, PassengerHome.this, authToken, map);
         recyclerView.setAdapter(carouselAdapter);
+        carouselAdapter.setOnItemClickListener((textView, reqId, status) -> {
+            Intent intent = new Intent(PassengerHome.this, PassengerOrderDetailsActivity.class);
+            intent.putExtra("reqId", reqId);
+            intent.putExtra("status", status);
+            startActivity(intent);
+        });
     }
 
     public ArrayList<OrderDetailsModel> getCoolieForOngoingRequest(int reqId, CoolieDetailsCallBack coolieDetailsCallBack){

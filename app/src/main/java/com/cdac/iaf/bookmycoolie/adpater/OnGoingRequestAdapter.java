@@ -1,9 +1,12 @@
 package com.cdac.iaf.bookmycoolie.adpater;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,12 +34,15 @@ public class OnGoingRequestAdapter extends RecyclerView.Adapter<OnGoingRequestAd
     Map<Integer, ArrayList<OrderDetailsModel>> orderDetailsByReqId;
     Context context;
     String authToken;
+    Handler handler;
+    OrderStatusAdapter.OnItemClickListener onItemClickListener;
 
     public OnGoingRequestAdapter(ArrayList<OrderStatusModel> orderDetailsList, Context context, String authToken, Map<Integer, ArrayList<OrderDetailsModel>> orderDetailsByReqId) {
         this.orderDetailsList = orderDetailsList;
         this.context = context;
         this.authToken = authToken;
         this.orderDetailsByReqId = orderDetailsByReqId;
+        this.handler = new Handler(Looper.getMainLooper());
     }
 
     @NonNull
@@ -81,17 +87,28 @@ public class OnGoingRequestAdapter extends RecyclerView.Adapter<OnGoingRequestAd
             int colorId = OrderStatusUtil.getColor(model.getRequestStatus());
             holder.requestStatus.setTextColor(ContextCompat.getColor(context, colorId));
         }else{
-            holder.itemView.setVisibility(View.GONE);
+            handler.post(() -> {
+                removeItem(position);
+                notifyDataSetChanged();
+            });
         }
-
-
-        //holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(holder.requestId, orderStatusList.get(position).getPassengerRequestId(), orderStatus.getRequestStatus()));
+        holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(
+                holder.reqId, orderDetailsList.get(position).getPassengerRequestId(),
+                model.getRequestStatus())
+        );
     }
 
     @Override
     public int getItemCount() {
         return orderDetailsList.size();
     }
+
+    public void removeItem(int position) {
+        orderDetailsList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, orderDetailsList.size());
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -112,5 +129,12 @@ public class OnGoingRequestAdapter extends RecyclerView.Adapter<OnGoingRequestAd
 
     }
 
+    public void setOnItemClickListener(OrderStatusAdapter.OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onClick(TextView textView, int reqId, int status);
+    }
 
 }

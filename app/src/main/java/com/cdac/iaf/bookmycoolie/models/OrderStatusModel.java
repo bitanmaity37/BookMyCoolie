@@ -13,6 +13,8 @@ public class OrderStatusModel {
     private String stationName;
     private Timestamp bookingDate;
     private Timestamp recordTracking;
+    private String trainNumber;
+    private String trainName;
 
     public OrderStatusModel(int passengerRequestId, String stationAreaDropAtName,
                             String stationAreaPickupFromName, int requestStatus,
@@ -27,6 +29,22 @@ public class OrderStatusModel {
         this.stationName = stationName;
         this.bookingDate = bookingDate;
         this.recordTracking = recordTracking;
+    }
+
+    public String getTrainNumber() {
+        return trainNumber;
+    }
+
+    public void setTrainNumber(String trainNumber) {
+        this.trainNumber = trainNumber;
+    }
+
+    public String getTrainName() {
+        return trainName;
+    }
+
+    public void setTrainName(String trainName) {
+        this.trainName = trainName;
     }
 
     public Timestamp getBookingDate() {

@@ -174,7 +174,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/approx_weigt_input_layout"
+                    android:id="@+id/train_no_input_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                     android:focusableInTouchMode="true"
                     android:focusedByDefault="false"
                     android:foregroundTint="@color/white"
-                    android:hint="Weight of bags"
+                    android:hint="Train Number"
                     android:textColorHint="@color/maincolor4"
                     app:boxCornerRadiusTopStart="5dp"
                     app:boxStrokeColor="@color/maincolor4"
@@ -202,9 +202,8 @@
                     app:prefixTextColor="@color/maincolor4"
                     app:suffixTextColor="@color/maincolor4">
 
-
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/approx_weight_input"
+                        android:id="@+id/train_no_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubik_medium"
@@ -214,6 +213,97 @@
                         app:errorEnabled="true"
                         app:startIconContentDescription="Hello" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <!--<com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/no_of_bags_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:focusedByDefault="false"
+                    android:foregroundTint="@color/white"
+                    android:hint="No. of bags"
+                    android:textColorHint="@color/maincolor4"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/maincolor4"
+                    app:counterOverflowTextColor="@color/maincolor4"
+                    app:counterTextColor="@color/maincolor4"
+                    app:cursorColor="@color/maincolor4"
+                    app:errorEnabled="true"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="@color/white"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/maincolor4"
+                    app:placeholderTextColor="@color/maincolor6"
+                    app:prefixTextColor="@color/maincolor4"
+                    app:suffixTextColor="@color/maincolor4">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/no_of_bags_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_medium"
+                        android:inputType="text"
+                        android:textColor="@color/maincolor4"
+                        android:textSize="13sp"
+                        app:errorEnabled="true"
+                        app:startIconContentDescription="Hello" />
+                </com.google.android.material.textfield.TextInputLayout>-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/train_name_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:focusedByDefault="false"
+                    android:foregroundTint="@color/white"
+                    android:hint="Train Name"
+                    android:textColorHint="@color/maincolor4"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/maincolor4"
+                    app:counterOverflowTextColor="@color/maincolor4"
+                    app:counterTextColor="@color/maincolor4"
+                    app:cursorColor="@color/maincolor4"
+                    app:errorEnabled="true"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="@color/white"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/maincolor4"
+                    app:placeholderTextColor="@color/maincolor6"
+                    app:prefixTextColor="@color/maincolor4"
+                    app:suffixTextColor="@color/maincolor4">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/train_name_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_medium"
+                        android:inputType="text"
+                        android:textColor="@color/maincolor4"
+                        android:textSize="13sp"
+                        app:errorEnabled="true"
+                        app:startIconContentDescription="Hello" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+           <!-- <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/no_of_bags_input_layout"
@@ -256,12 +346,54 @@
                         app:errorEnabled="true"
                         app:startIconContentDescription="Hello" />
                 </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/approx_weigt_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:focusedByDefault="false"
+                    android:foregroundTint="@color/white"
+                    android:hint="Weight of bags"
+                    android:textColorHint="@color/maincolor4"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/maincolor4"
+                    app:counterOverflowTextColor="@color/maincolor4"
+                    app:counterTextColor="@color/maincolor4"
+                    app:cursorColor="@color/maincolor4"
+                    app:errorEnabled="true"
+                    app:helperTextEnabled="true"
+                    app:helperTextTextColor="@color/white"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/maincolor4"
+                    app:placeholderTextColor="@color/maincolor6"
+                    app:prefixTextColor="@color/maincolor4"
+                    app:suffixTextColor="@color/maincolor4">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/approx_weight_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_medium"
+                        android:inputType="text"
+                        android:textColor="@color/maincolor4"
+                        android:textSize="13sp"
+                        app:errorEnabled="true"
+                        app:startIconContentDescription="Hello" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/approx_start_time_input_layout"

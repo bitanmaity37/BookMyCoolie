@@ -29,7 +29,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -194,7 +193,7 @@ public class BookWheelChairService {
                 String tentativeStartTime = TimeConversionUtil.convertTime(calendar);
                 coolieRequestModel.setBookingTentativeStartTime(tentativeStartTime);
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
                 String formattedDate = dateFormat.format(calendar.getTime());
                 startTimeInput.setText(formattedDate);
             });
@@ -224,7 +223,7 @@ public class BookWheelChairService {
                 String tentativeEndTime = TimeConversionUtil.convertTime(calendar);
                 coolieRequestModel.setBookingTentativeEndTime(tentativeEndTime);
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
                 String formattedDate = dateFormat.format(calendar.getTime());
                 endTimePicker.setText(formattedDate);
             });
@@ -237,13 +236,15 @@ public class BookWheelChairService {
         if (submitButton != null) {
             submitButton.setOnClickListener(v -> {
 
+                TextInputEditText getTrainNo = coolieBottomSheetDialog.findViewById(R.id.train_no_input);
+                TextInputEditText getTrainName = coolieBottomSheetDialog.findViewById(R.id.train_name_input);
                 TextInputEditText getNoOfChairReq = coolieBottomSheetDialog.findViewById(R.id.chair_required_input);
-                TextInputEditText getNoOfBags = coolieBottomSheetDialog.findViewById(R.id.no_of_bags_input);
                 TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
 
-                if (validateInputs(getNoOfBags, approxWeight, getNoOfChairReq)) {
+                if (validateInputs(getTrainNo, getTrainName, approxWeight, getNoOfChairReq)) {
+                    coolieRequestModel.setTrainNumber(getTrainNo.getText().toString());
+                    coolieRequestModel.setTrainName(getTrainName.getText().toString());
                     coolieRequestModel.setNoOfWheelChair(Integer.parseInt(getNoOfChairReq.getText().toString()));
-                    coolieRequestModel.setNoOfBags(Integer.parseInt(getNoOfBags.getText().toString()));
                     coolieRequestModel.setApproxTotalWeightage(Integer.parseInt(approxWeight.getText().toString()));
 
                     Date date = new Date();
@@ -275,7 +276,7 @@ public class BookWheelChairService {
         }
     }
 
-    private boolean validateInputs(TextInputEditText getNoOfBags, TextInputEditText approxWeight, TextInputEditText getNoOfChairReq) {
+    private boolean validateInputs(TextInputEditText getTrainNo, TextInputEditText getTrainName, TextInputEditText approxWeight, TextInputEditText getNoOfChairReq) {
         boolean isValid = true;
 
         if (coolieRequestModel.getStationId() == 0) {
@@ -296,10 +297,16 @@ public class BookWheelChairService {
         } else if (getNoOfChairReq.getText() == null || getNoOfChairReq.getText().toString().isEmpty()) {
             getNoOfChairReq.setError("Number of chair is required.");
             isValid = false;
-        } else if (getNoOfBags.getText() == null || getNoOfBags.getText().toString().isEmpty()) {
-            getNoOfBags.setError("Number of bags is required.");
+        }
+        else if (getTrainNo.getText() == null || getTrainNo.getText().toString().isEmpty()) {
+            getTrainNo.setError("Train number is required.");
             isValid = false;
-        } else if (approxWeight.getText() == null || approxWeight.getText().toString().isEmpty()) {
+        }
+        else if (getTrainName.getText() == null || getTrainName.getText().toString().isEmpty()) {
+            getTrainName.setError("Train name is required.");
+            isValid = false;
+        }
+        else if (approxWeight.getText() == null || approxWeight.getText().toString().isEmpty()) {
             approxWeight.setError("Approximate weight is required.");
             isValid = false;
         }
@@ -332,13 +339,17 @@ public class BookWheelChairService {
             }
 
             TextInputEditText getNoOfChairReq = coolieBottomSheetDialog.findViewById(R.id.chair_required_input);
-            TextInputEditText getNoOfBags = coolieBottomSheetDialog.findViewById(R.id.no_of_bags_input);
+            TextInputEditText getTrainNo = coolieBottomSheetDialog.findViewById(R.id.train_no_input);
+            TextInputEditText getTrainName = coolieBottomSheetDialog.findViewById(R.id.train_name_input);
             TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
             if (getNoOfChairReq != null) {
                 getNoOfChairReq.setText("");
             }
-            if (getNoOfBags != null) {
-                getNoOfBags.setText("");
+            if (getTrainNo != null) {
+                getTrainNo.setText("");
+            }
+            if (getTrainName != null) {
+                getTrainName.setText("");
             }
             if (approxWeight != null) {
                 approxWeight.setText("");

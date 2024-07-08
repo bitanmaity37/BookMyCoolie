@@ -51,18 +51,18 @@ public class PassengerFaqActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.home) {
                 // Handle profile item click
                 startActivity(new Intent(PassengerFaqActivity.this, PassengerHome.class));
-                Toast.makeText(PassengerFaqActivity.this, "Home Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerFaqActivity.this, "Home Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (item.getItemId() == R.id.faq_item) {
                 // Handle FAQ item click
                 startActivity(new Intent(PassengerFaqActivity.this, PassengerFaqActivity.class));
-                Toast.makeText(PassengerFaqActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerFaqActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (item.getItemId() == R.id.contact_item) {
                 // Handle contact item click
 
                 startActivity(new Intent(PassengerFaqActivity.this, PassengerContactUsActivity.class));
-                Toast.makeText(PassengerFaqActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerFaqActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             }
             return false;

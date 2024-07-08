@@ -76,7 +76,7 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
         String b = requests.get(holder.getAdapterPosition()).getBookingTentativeEndTime();
 
         if (a != null && b!= null){
-            holder.psngrphn.setText(TimeConversionUtil.getFullDate(a.substring(0,10)) +" "+a.substring(11,16)+" to "+b.substring(11,16));
+            holder.psngrphn.setText(TimeConversionUtil.getFullDateIndia(a, b));
         } else {
             holder.psngrphn.setText("Date & Time not available");
         }

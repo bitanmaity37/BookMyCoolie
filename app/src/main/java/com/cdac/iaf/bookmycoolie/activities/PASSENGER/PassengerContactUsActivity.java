@@ -56,18 +56,18 @@ public class PassengerContactUsActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.home) {
                 // Handle profile item click
                 startActivity(new Intent(PassengerContactUsActivity.this, PassengerHome.class));
-                Toast.makeText(PassengerContactUsActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerContactUsActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (item.getItemId() == R.id.faq_item) {
                 // Handle FAQ item click
                 startActivity(new Intent(PassengerContactUsActivity.this, PassengerFaqActivity.class));
-                Toast.makeText(PassengerContactUsActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerContactUsActivity.this, "FAQ Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (item.getItemId() == R.id.contact_item) {
                 // Handle contact item click
 
                 startActivity(new Intent(PassengerContactUsActivity.this, PassengerContactUsActivity.class));
-                Toast.makeText(PassengerContactUsActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PassengerContactUsActivity.this, "Contact Us Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             }
             return false;

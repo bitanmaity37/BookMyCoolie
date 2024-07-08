@@ -1,7 +1,5 @@
 package com.cdac.iaf.bookmycoolie.models;
 
-import java.sql.Timestamp;
-
 public class CoolieRequestModel {
     int approxTotalWeightage;
     String bookingDate;
@@ -19,6 +17,8 @@ public class CoolieRequestModel {
     int serviceType;
     int requestStatus;
     int userMaster;
+    String trainName;
+    String trainNumber;
 
     @Override
     public String toString() {
@@ -38,6 +38,22 @@ public class CoolieRequestModel {
                 ", requestStatus=" + requestStatus +
                 ", userMaster=" + userMaster +
                 '}';
+    }
+
+    public String getTrainName() {
+        return trainName;
+    }
+
+    public void setTrainName(String trainName) {
+        this.trainName = trainName;
+    }
+
+    public String getTrainNumber() {
+        return trainNumber;
+    }
+
+    public void setTrainNumber(String trainNumber) {
+        this.trainNumber = trainNumber;
     }
 
     public int getNoOfCart() {

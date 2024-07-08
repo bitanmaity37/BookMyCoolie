@@ -84,7 +84,7 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
         if(operators.get(holder.getAdapterPosition()).getUserStatus()==0){
             holder.switch_oprtractv.setChecked(false);
             // holder.switch_attndnce.setTrack;
-            holder.switch_oprtractv.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.canceled)));
+            holder.switch_oprtractv.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.cancelled)));
         }
         if(operators.get(holder.getAdapterPosition()).getUserStatus()==1){
             holder.switch_oprtractv.setChecked(true);
@@ -153,7 +153,7 @@ public class OperatorListAdapter extends RecyclerView.Adapter<OperatorListAdapte
                             if(response.code()==200){
                                 progressDialog.dismiss();
 
-                                holder.switch_oprtractv.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.canceled)));
+                                holder.switch_oprtractv.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.cancelled)));
                                 //   holder.switch_attndnce.setTrackResource(context.getResources().getColor(R.color.canceled));
                                 System.out.println("SAVED ATTENDNC False");
                             }

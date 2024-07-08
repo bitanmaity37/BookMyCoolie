@@ -86,7 +86,7 @@ public class CoolieListAdapter extends RecyclerView.Adapter<CoolieListAdapter.Vi
         if(coolies.get(holder.getAdapterPosition()).getUserStatus()==0){
             holder.switch_coolieactv.setChecked(false);
             // holder.switch_attndnce.setTrack;
-            holder.switch_coolieactv.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.canceled)));
+            holder.switch_coolieactv.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.cancelled)));
         }
         if(coolies.get(holder.getAdapterPosition()).getUserStatus()==1){
             holder.switch_coolieactv.setChecked(true);
@@ -174,7 +174,7 @@ public class CoolieListAdapter extends RecyclerView.Adapter<CoolieListAdapter.Vi
                             if(response.code()==200){
                                 progressDialog.dismiss();
 
-                                holder.switch_coolieactv.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.canceled)));
+                                holder.switch_coolieactv.setTrackTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.cancelled)));
                                 //   holder.switch_attndnce.setTrackResource(context.getResources().getColor(R.color.canceled));
                                 System.out.println("SAVED ATTENDNC False");
                             }

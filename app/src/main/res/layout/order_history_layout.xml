@@ -101,14 +101,14 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/no_of_bags"
+            android:id="@+id/train_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:layout_toEndOf="@id/coolie_image"
             android:maxLines="1"
             android:paddingEnd="10dp"
-            android:text="No. of bags"
+            android:text="Train Number"
             android:textAppearance="?attr/textAppearanceBody1"
             android:fontFamily="@font/rubik_regular"
             android:textColor="@color/black" />
