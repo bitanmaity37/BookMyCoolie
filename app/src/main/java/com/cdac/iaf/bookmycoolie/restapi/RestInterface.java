@@ -112,7 +112,7 @@ public interface RestInterface {
     Call<ArrayList<AttendanceCoolieResponse>> getCforAtndnc(@Header("Authorization") String authorization,
                                                             @Body GetCoolieRequest freeCoolieRequest);
 
-    @POST("/operator/takeAttandance")
+    @POST("operator/takeAttandance")
     Call<ResponseBody> saveAttendance(@Header("Authorization") String authorization,
                                       @Body SaveAttendanceModel getCoolieRequest);
 
@@ -125,7 +125,7 @@ public interface RestInterface {
     @POST("auth/verifyOtp")
     Call<SimpleResponse> verifyOtp(@Body VerifyOtpRequestModel verifyOtpRequestModel);
 
-    @POST("/passenger/add")
+    @POST("passenger/add")
     Call<SimpleUserIDResponse> registerPsngr(@Body RegisterPassengerDetailsModel registerPassengerDetailsModel);
 
     @POST("admin/addStation")

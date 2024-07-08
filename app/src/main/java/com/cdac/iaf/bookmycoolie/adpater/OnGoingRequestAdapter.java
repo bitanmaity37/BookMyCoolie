@@ -87,10 +87,10 @@ public class OnGoingRequestAdapter extends RecyclerView.Adapter<OnGoingRequestAd
             int colorId = OrderStatusUtil.getColor(model.getRequestStatus());
             holder.requestStatus.setTextColor(ContextCompat.getColor(context, colorId));
         }else{
-            handler.post(() -> {
+            /*handler.post(() -> {
                 removeItem(position);
                 notifyDataSetChanged();
-            });
+            });*/
         }
         holder.itemView.setOnClickListener(view -> onItemClickListener.onClick(
                 holder.reqId, orderDetailsList.get(position).getPassengerRequestId(),

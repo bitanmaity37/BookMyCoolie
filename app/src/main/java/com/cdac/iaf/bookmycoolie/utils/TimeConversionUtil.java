@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class TimeConversionUtil {
 
@@ -70,6 +71,31 @@ public class TimeConversionUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Integer getMinutesDiffForCost(String a, String b){
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
+
+        try {
+            // Parse the time strings into Date objects
+            Date date1 = format.parse(a);
+            Date date2 = format.parse(b);
+
+            // Calculate the difference in milliseconds
+            long differenceInMillis = date2.getTime() - date1.getTime();
+
+            // Convert milliseconds to minutes
+
+            // Save the difference in an Integer variable
+            Integer differenceInMinutesInteger = (int) TimeUnit.MILLISECONDS.toMinutes(differenceInMillis);
+
+            System.out.println("Difference in minutes: " + differenceInMinutesInteger);
+            return  differenceInMinutesInteger;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
+
     }
 
 }

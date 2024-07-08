@@ -25,7 +25,7 @@ public class InvalidateUser {
         materialAlertDialogBuilder.setCancelable(false)
                 .setTitle("LOGGING OUT")
                 .setMessage("PLEASE LOGIN AGAIN")
-                .setNegativeButton("RETURN", new DialogInterface.OnClickListener() {
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         securedSharedPreferenceUtils.clearSharedPreference();

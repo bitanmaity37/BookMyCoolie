@@ -5,11 +5,16 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -39,6 +44,7 @@ import com.cdac.iaf.bookmycoolie.utils.FileUtil;
 import com.cdac.iaf.bookmycoolie.utils.InvalidateUser;
 import com.cdac.iaf.bookmycoolie.utils.RegEx;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -67,7 +73,7 @@ public class AddCoolieActivity extends AppCompatActivity {
     TextInputEditText tied_cname,
             tied_billano,
             tied_phno;
-    TextInputLayout til_cname;
+    TextInputLayout til_cname, til_billano, til_phnno;
 
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
 
@@ -76,6 +82,7 @@ public class AddCoolieActivity extends AppCompatActivity {
     Intent intentFromRow;
     Integer activityMode;
     Coolie coolie;
+    Boolean imageCaptured;
 
 
 
@@ -83,6 +90,8 @@ public class AddCoolieActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_coolie);
+
+        capturePicWork();
 
         home =findViewById(R.id.home);
         flagName =0;
@@ -109,6 +118,8 @@ public class AddCoolieActivity extends AppCompatActivity {
         tied_billano = findViewById(R.id.tied_billano);
         tied_phno = findViewById(R.id.tied_phno);
         til_cname = findViewById(R.id.til_cname);
+        til_billano = findViewById(R.id.til_billano);
+        til_phnno = findViewById(R.id.til_phnno);
         tv_cid = findViewById(R.id.tv_cid);
 
 
@@ -166,11 +177,13 @@ public class AddCoolieActivity extends AppCompatActivity {
 
         switch (activityMode){
             case 1:
+                imageCaptured = false;
                 tv_cid.setVisibility(View.GONE);
                 btn_rgstrc.setText("ADD COOLIE");
                 System.out.println("In Fill");
                 break;
             case 2:
+                imageCaptured = true;
                 btn_rgstrc.setText("UPDATE COOLIE");
                 tv_cid.setVisibility(View.VISIBLE);
                 tied_cname.setText(coolie.getUserName());
@@ -199,6 +212,7 @@ public class AddCoolieActivity extends AppCompatActivity {
 
                     switch (activityMode){
                         case 1:
+
                             Call<SimpleUserIDResponse> call = RestClient.getRetrofitClient().create(RestInterface.class)
                                     .addCoolie(
                                             securedSharedPreferenceUtils.getLoginData().getJwtToken(),
@@ -322,20 +336,32 @@ public class AddCoolieActivity extends AppCompatActivity {
             til_cname.setError("NAME IS INVALID OR BLANK");
         }
 
-
-
         if(tied_phno.getText().toString().matches(new RegEx().mobilePattern)){
-
+            til_phnno.setError("");
         }
         else{
             isValid = false;
+            til_phnno.setError("PHONE NUMBER IS INVALID OR BLANK");
         }
 
         if(!tied_billano.getText().toString().isEmpty() && tied_billano.getText().toString().matches(new RegEx().billaPattern)){
-
+            til_billano.setError("");
         }
         else {
             isValid = false;
+            til_billano.setError("BILLA NUMBER IS INVALID OR BLANK");
+        }
+        if(!imageCaptured){
+            isValid = false;
+            MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(AddCoolieActivity.this);
+            materialAlertDialogBuilder.setTitle("ALERT!!")
+                    .setMessage("PHOTO NOT CAPTURED")
+                    .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    }).show();
         }
 
         return isValid;
@@ -429,8 +455,12 @@ public class AddCoolieActivity extends AppCompatActivity {
 
                             byte[] byteArray = byteArrayOutputStream .toByteArray();
                             capturedPhoto = Base64.encodeToString(byteArray, Base64.NO_WRAP);
+                            if(capturedPhoto!=null){
+                                imageCaptured = true;
+                            }
                             System.out.println("CAMERA PHOTO"+scaledBitmap.getWidth()+" "+scaledBitmap.getHeight());
                         } catch (Exception e){
+                            imageCaptured = true;
                             camFlag = false;
                             System.out.println("activity cam excep: "+ e);
                             Toast.makeText(AddCoolieActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
@@ -532,6 +562,45 @@ public class AddCoolieActivity extends AppCompatActivity {
         }*/
 
     }
+
+    private void capturePicWork() {
+
+        if (ContextCompat.checkSelfPermission(AddCoolieActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            //camIntent.setAction(Intent.ACTION_CAMERA_BUTTON);
+           // startActivityForResult(cameraIntent, 12);
+            //camlauncer.launch(cameraIntent);
+
+        } else {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(AddCoolieActivity.this, Manifest.permission.CAMERA)) {
+                MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(AddCoolieActivity.this);
+                materialAlertDialogBuilder.setTitle("Camera Permission Needed")
+                        .setMessage("Access to Camera Permission is needed")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ActivityCompat.requestPermissions(AddCoolieActivity.this,
+                                        new String[]{Manifest.permission.CAMERA}, 1);
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .show();
+
+            } else {
+                ActivityCompat.requestPermissions(AddCoolieActivity.this,
+                        new String[]{Manifest.permission.CAMERA}, 12);
+            }
+        }
+
+    }
+
+
     @Override
     public void onBackPressed() {
         startActivity(new Intent(AddCoolieActivity.this, OpHomeActivity.class));

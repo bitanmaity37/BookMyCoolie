@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -94,6 +95,7 @@ public class AssignedListAdapter extends RecyclerView.Adapter<AssignedListAdapte
                 call.enqueue(new Callback<SimpleResponse>() {
                     @Override
                     public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response) {
+                        System.out.println("response "+response.code()+" "+response.body());
                         if(response.code()==200){
                             MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(context);
                             materialAlertDialogBuilder.setTitle("SUCCESS!!")

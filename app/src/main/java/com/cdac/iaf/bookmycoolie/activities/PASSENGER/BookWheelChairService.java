@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
 import com.cdac.iaf.bookmycoolie.models.CoolieResponseModel;
+import com.cdac.iaf.bookmycoolie.models.DynamicFare.FaresCalculation;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
@@ -54,7 +55,14 @@ public class BookWheelChairService {
     CoolieRequestModel coolieRequestModel = new CoolieRequestModel();
     Context context;
     FragmentManager fragmentManager;
+
+    String finalStartTime;
     int userId;
+
+
+
+
+    Integer apprxWght;
 
     public BookWheelChairService(Context context, String authToken, FragmentManager fragmentManager, int userId) {
         this.authToken = authToken;
@@ -195,7 +203,10 @@ public class BookWheelChairService {
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
                 String formattedDate = dateFormat.format(calendar.getTime());
+
+                finalStartTime = formattedDate;
                 startTimeInput.setText(formattedDate);
+
             });
         });
     }
@@ -226,6 +237,15 @@ public class BookWheelChairService {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
                 String formattedDate = dateFormat.format(calendar.getTime());
                 endTimePicker.setText(formattedDate);
+
+                FaresCalculation faresCalculation = new FaresCalculation();
+                faresCalculation.doAll();
+                //apprxWght = Integer.valueOf(approxWeight.getText().toString().trim());
+                Integer a = faresCalculation.calculateFare(10, finalStartTime, formattedDate, 210,false,false,true);
+                Toast.makeText(context, "APPROX COST "+a, Toast.LENGTH_SHORT).show();
+
+
+
             });
         });
     }
@@ -246,6 +266,7 @@ public class BookWheelChairService {
                     coolieRequestModel.setTrainName(getTrainName.getText().toString());
                     coolieRequestModel.setNoOfWheelChair(Integer.parseInt(getNoOfChairReq.getText().toString()));
                     coolieRequestModel.setApproxTotalWeightage(Integer.parseInt(approxWeight.getText().toString()));
+
 
                     Date date = new Date();
                     String formattedDate = TimeConversionUtil.convertTime(date);
