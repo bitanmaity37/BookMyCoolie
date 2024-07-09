@@ -23,10 +23,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.97"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="@font/rubik_bold"
             android:gravity="center|left"
             android:paddingLeft="8dp"
-            android:text="ADD STATION"
+            android:text="EDIT STATION INVENTORY"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,91 +59,68 @@
 
 
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:id="@+id/til_stnname"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/white"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:focusedByDefault="false"
-            android:foregroundTint="@color/white"
-            android:hint="NAME"
-            android:textColorHint="@color/maincolor4"
-            app:boxCornerRadiusTopStart="5dp"
-            app:boxStrokeColor="@color/maincolor4"
-            app:counterOverflowTextColor="@color/maincolor4"
-            app:counterTextColor="@color/maincolor4"
-            app:cursorColor="@color/maincolor4"
-            app:errorEnabled="true"
-            app:helperTextEnabled="true"
-            app:helperTextTextColor="@color/white"
-            app:hintEnabled="true"
-            app:hintTextColor="@color/maincolor4"
-            app:placeholderTextColor="@color/maincolor6"
-            app:prefixTextColor="@color/maincolor4"
-            app:suffixTextColor="@color/maincolor4">
+            android:orientation="horizontal"
+            android:weightSum="2.0">
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:src="@drawable/statn"/>
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
                 android:id="@+id/tied_stnname"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.85"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_regular"
-                android:inputType="textPersonName"
                 android:textColor="@color/maincolor4"
-                android:textSize="14dp"
-                app:errorEnabled="true"
-                android:maxLines="1"
-                android:maxLength="50"
+                android:text="STATION NAME"
+                android:textSize="18dp"
+                android:layout_marginStart="5dp"
                 app:startIconContentDescription="Hello" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_stncode"
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/til_stnncode"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/white"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:focusedByDefault="false"
-            android:foregroundTint="@color/white"
-            android:hint="CODE"
-            android:textColorHint="@color/maincolor4"
-            app:boxCornerRadiusTopStart="5dp"
-            app:boxStrokeColor="@color/maincolor4"
-            app:counterOverflowTextColor="@color/maincolor4"
-            app:counterTextColor="@color/maincolor4"
-            app:cursorColor="@color/maincolor4"
-            app:errorEnabled="true"
-            app:helperTextEnabled="true"
-            app:helperTextTextColor="@color/white"
-            app:hintEnabled="true"
-            app:hintTextColor="@color/maincolor4"
-            app:placeholderTextColor="@color/maincolor6"
-            app:prefixTextColor="@color/maincolor4"
-            app:suffixTextColor="@color/maincolor4">
+            android:orientation="horizontal"
+            android:weightSum="2.0">
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:src="@drawable/id"/>
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
                 android:id="@+id/tied_stncode"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1.85"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_regular"
-                android:inputType="textPersonName"
                 android:textColor="@color/maincolor4"
-                android:maxLength="10"
-                android:maxLines="1"
-                android:textSize="14dp"
-                app:errorEnabled="true"
+                android:text="STATION CODE"
+                android:textSize="18dp"
+                android:layout_marginStart="5dp"
                 app:startIconContentDescription="Hello" />
-        </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -239,86 +216,8 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ADD PLATFORMS/ AREAS"
-            android:fontFamily="@font/rubik_medium"
-            android:textColor="@color/maincolor4"
-            android:gravity="center"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp">
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_pltfrm"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.4"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:backgroundTint="@color/white"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:focusedByDefault="false"
-                android:foregroundTint="@color/white"
-                android:hint="PLATFORM NAME"
-                android:textColorHint="@color/maincolor4"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxStrokeColor="@color/maincolor4"
-                app:counterOverflowTextColor="@color/maincolor4"
-                app:counterTextColor="@color/maincolor4"
-                app:cursorColor="@color/maincolor4"
-                app:errorEnabled="true"
-                app:helperTextEnabled="true"
-                app:helperTextTextColor="@color/white"
-                app:hintEnabled="true"
-                app:hintTextColor="@color/maincolor4"
-                app:placeholderTextColor="@color/maincolor6"
-                app:prefixTextColor="@color/maincolor4"
-                app:suffixTextColor="@color/maincolor4">
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tied_platform"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/rubik_regular"
-                    android:inputType="text"
-                    android:maxLength="100"
-                    android:textColor="@color/maincolor4"
-                    android:textSize="14dp"
-                    app:errorEnabled="true"
-                    app:startIconContentDescription="Hello" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <Button
-                android:layout_marginEnd="5dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="0.6"
-                android:backgroundTint="@color/maincolor4"
-                android:text="ADD"
-                android:id="@+id/btn_addpltfrm"/>
-        </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="5dp"
-            android:id="@+id/rv_pltfrm"/>
-
-
-
-
-
-
-
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_addoptsave"
+            android:id="@+id/btn_saveInventory"
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

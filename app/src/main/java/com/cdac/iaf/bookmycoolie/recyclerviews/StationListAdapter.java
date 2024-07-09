@@ -1,6 +1,7 @@
 package com.cdac.iaf.bookmycoolie.recyclerviews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cdac.iaf.bookmycoolie.R;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.EditInventoryActivity;
+import com.cdac.iaf.bookmycoolie.activities.ADMIN.EditPlatformActivity;
 import com.cdac.iaf.bookmycoolie.models.STATION.AllStationResponse;
 
 import java.util.ArrayList;
@@ -48,6 +51,20 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         StationChildAdapter stationChildAdapter = new StationChildAdapter(context, stations.get(holder.getAdapterPosition()).getAreaMasterMappingModels());
         holder.rv_station_child.setAdapter(stationChildAdapter);
 
+        holder.btnmdfyinventory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            context.startActivity(new Intent(context, EditInventoryActivity.class));
+            }
+        });
+        holder.btnmdfyarea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, EditPlatformActivity.class));
+
+            }
+        });
+
     }
 
     @Override
@@ -60,7 +77,8 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
                 stname ,stcode,
                 countcart,
                 countwc;
-        Button btnmdfy;
+        Button btnmdfyinventory,
+        btnmdfyarea;
         RecyclerView rv_station_child;
         public ViewHolder(@NonNull View itemView) {
 
@@ -71,7 +89,8 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
             stcode = itemView.findViewById(R.id.stcode);
             countcart = itemView.findViewById(R.id.countcart);
             countwc = itemView.findViewById(R.id.countwc);
-            btnmdfy = itemView.findViewById(R.id.btnmdfy);
+            btnmdfyinventory = itemView.findViewById(R.id.btnmdfyinventory);
+            btnmdfyarea = itemView.findViewById(R.id.btnmdfyarea);
             rv_station_child = itemView.findViewById(R.id.rv_station_child);
         }
     }

@@ -30,6 +30,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ADMIN.EditPlatformActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ADMIN.EditInventoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ADMIN.StationListActivity"
             android:exported="false" />
         <activity

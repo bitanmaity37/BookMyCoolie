@@ -21,10 +21,12 @@ import com.cdac.iaf.bookmycoolie.models.LoginResponse;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
 import com.cdac.iaf.bookmycoolie.restapi.RestInterface;
 import com.cdac.iaf.bookmycoolie.utils.NetworkUtils;
+import com.cdac.iaf.bookmycoolie.utils.RegEx;
 import com.cdac.iaf.bookmycoolie.utils.SecuredSharedPreferenceUtils;
 import com.cdac.iaf.bookmycoolie.utils.SharedPreferenceUtility;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -36,6 +38,8 @@ import retrofit2.Response;
 public class AdminLoginActivity extends AppCompatActivity {
 
     Button btn_admlogin, btn_signup, btn_admnpage, btn_oprtrpage, btn_psngrpage,btnLogout;
+
+    TextInputLayout til_adname, til_adpwd;
     TextInputEditText tied_admname, tied_admpwd;
     SecuredSharedPreferenceUtils securedSharedPreferenceUtils;
     boolean isNetworkAvailable;
@@ -56,6 +60,8 @@ public class AdminLoginActivity extends AppCompatActivity {
         btn_admlogin = findViewById(R.id.btn_admlogin);
         btnLogout = findViewById(R.id.logout);
         btnLogout.setVisibility(View.GONE);
+        til_adname = findViewById(R.id.til_adname);
+                til_adpwd = findViewById(R.id.til_adpwd);
 
         try {
             securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(AdminLoginActivity.this);
@@ -126,6 +132,31 @@ public class AdminLoginActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private Boolean validator(){
+        boolean isValid = true;
+
+        if(tied_admname.getText().toString().matches(new RegEx().emailPattern) && !tied_admname.getText().toString().isEmpty()){
+            til_adname.setError("");
+        }
+        else{
+            isValid=false;
+            til_adname.setError("EMAIL IS INVALID OR BLANK");
+        }
+
+
+        if(!tied_admpwd.getText().toString().isEmpty() && tied_admpwd.getText().toString().trim().length()>=8 &&
+                tied_admpwd.getText().toString().trim().length()<=20){
+            til_adpwd.setError("");
+        }
+        else {
+            isValid = false;
+            til_adpwd.setError("PASSWORD LENGTH SHOULD BE 8 TO 20 CHARACTERS");
+        }
+
+        return isValid;
 
     }
 

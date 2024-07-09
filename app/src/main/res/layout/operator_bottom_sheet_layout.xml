@@ -31,7 +31,7 @@
                 android:layout_gravity="start"
                 android:padding="14dp"
                 android:text="ADD AN OPERATOR"
-                android:fontFamily="@font/ubuntu_bold"
+                android:fontFamily="@font/rubik_black"
                 android:layout_weight="0.95"
                 android:textStyle="bold"/>
 
@@ -82,10 +82,12 @@
                 android:id="@+id/tied_empid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
-                android:inputType="text"
+                android:fontFamily="@font/rubik_medium"
+                android:inputType="textPersonName"
                 android:textColor="@color/maincolor4"
-                android:textSize="14sp"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textSize="14dp"
                 app:errorEnabled="true"
                 app:startIconContentDescription="Hello" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -122,10 +124,12 @@
                 android:id="@+id/tied_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
+                android:fontFamily="@font/rubik_medium"
                 android:inputType="text"
                 android:textColor="@color/maincolor4"
-                android:textSize="14sp"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:textSize="14dp"
                 app:errorEnabled="true"
                 app:startIconContentDescription="Hello" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -162,8 +166,10 @@
                 android:id="@+id/tied_ophn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
-                android:inputType="text"
+                android:fontFamily="@font/rubik_medium"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:maxLines="1"
                 android:textColor="@color/maincolor4"
                 android:textSize="14sp"
                 app:errorEnabled="true"
@@ -202,8 +208,10 @@
                 android:id="@+id/tied_oemail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
-                android:inputType="text"
+                android:fontFamily="@font/rubik_medium"
+                android:maxLines="1"
+                android:maxLength="70"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/maincolor4"
                 android:textSize="14sp"
                 app:errorEnabled="true"
@@ -235,7 +243,8 @@
             app:hintTextColor="@color/maincolor4"
             app:placeholderTextColor="@color/maincolor6"
             app:prefixTextColor="@color/maincolor4"
-            app:suffixTextColor="@color/maincolor4">
+            app:suffixTextColor="@color/maincolor4"
+            app:endIconMode="password_toggle">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -243,7 +252,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_semibold"
-                android:inputType="text"
+                android:inputType="textPassword"
+                android:maxLines="1"
                 android:textColor="@color/maincolor4"
                 android:textSize="14sp"
                 app:errorEnabled="true"
@@ -282,7 +292,7 @@
             android:id="@+id/act_stndd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/montserrat_semibold"
+            android:fontFamily="@font/rubik_medium"
             app:startIconContentDescription="Hello"
             android:textColor="@color/maincolor4"
             android:textSize="12sp"
@@ -294,7 +304,7 @@
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/ubuntu_regular"
+            android:fontFamily="@font/rubik_bold"
             android:layout_margin="10dp"
             android:gravity="center"
             android:text="SAVE"

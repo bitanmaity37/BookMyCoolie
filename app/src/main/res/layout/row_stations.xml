@@ -106,7 +106,7 @@
                     android:layout_weight="1"
                     android:gravity="end">
                     <Button
-                        android:id="@+id/btnmdfy"
+                        android:id="@+id/btnmdfyinventory"
                         style="@style/Widget.Material3.Button.IconButton.Filled"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -114,7 +114,19 @@
                         android:backgroundTint="@color/white"
                         android:drawableTint="@color/black"
                         android:gravity="center"
-                        app:icon="@drawable/baseline_edit_note_24"
+                        app:icon="@drawable/edit_inventory"
+                        app:iconSize="20dp"
+                        app:iconTint="@color/maincolor"/>
+                    <Button
+                        android:id="@+id/btnmdfyarea"
+                        style="@style/Widget.Material3.Button.IconButton.Filled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/white"
+                        android:drawableTint="@color/black"
+                        android:gravity="center"
+                        app:icon="@drawable/edit_area"
                         app:iconSize="20dp"
                         app:iconTint="@color/maincolor"/>
 

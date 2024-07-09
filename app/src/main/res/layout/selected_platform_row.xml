@@ -43,6 +43,9 @@
                 android:textColor="@color/maincolor4"
                 android:textStyle="bold"
                 android:background="@drawable/textview2"
+                android:inputType="text"
+                android:maxLines="1"
+                android:maxLength="30"
                 />
 
 

@@ -11,4 +11,6 @@ public class RegEx {
     public final String namePattern = "^[a-zA-Z ]*$"; ///allows spaces
 
     public final String billaPattern = "^[\\.a-zA-Z0-9:/ -]*$";  ///allows spaces
+
+    public final String platformPattern = "^[\\.a-zA-Z0-9 ]*$";
 }
