@@ -152,4 +152,10 @@ public class EditInventoryActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(EditInventoryActivity.this,StationListActivity.class));
+        finishAffinity();
+    }
+
 }

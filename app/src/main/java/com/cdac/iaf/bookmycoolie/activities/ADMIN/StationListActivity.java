@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.cdac.iaf.bookmycoolie.R;
@@ -77,5 +78,10 @@ public class StationListActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(StationListActivity.this,AdminHomeActivity.class));
+        finishAffinity();
     }
 }

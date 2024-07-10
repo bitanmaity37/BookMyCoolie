@@ -60,6 +60,9 @@ public class EditPlatformActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+        setContentView(R.layout.activity_edit_platform);
         try {
             securedSharedPreferenceUtils = new SecuredSharedPreferenceUtils(EditPlatformActivity.this);
         } catch (GeneralSecurityException e) {
@@ -67,8 +70,6 @@ public class EditPlatformActivity extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        setContentView(R.layout.activity_edit_platform);
         intentFromRow = getIntent();
         Bundle args = intentFromRow.getBundleExtra("bundle");
         stationResponse = (AllStationResponse) args.getSerializable("selectedStation");
@@ -139,6 +140,8 @@ public class EditPlatformActivity extends AppCompatActivity {
                     
                     @Override
                     public void onResponse(Call<StationEditAddAreaResponse> call, Response<StationEditAddAreaResponse> response) {
+
+                        System.out.println(response.code()+" Response bad");
                         if(response.code()==200){
                             if (response.body().getMessage().equals("Station areas are added successfully")){
                                 progressDialog.dismiss();
@@ -197,11 +200,18 @@ public class EditPlatformActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<StationEditAddAreaResponse> call, Throwable t) {
+                        System.out.println("Error "+t.getMessage()+" "+t);
 
                     }
                 });
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(EditPlatformActivity.this,StationListActivity.class));
+        finishAffinity();
     }
 }

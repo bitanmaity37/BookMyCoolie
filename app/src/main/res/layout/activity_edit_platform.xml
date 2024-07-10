@@ -89,6 +89,23 @@
         </LinearLayout>
         <com.google.android.material.divider.MaterialDivider
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerInsetStart="2dp"
+            app:dividerInsetEnd="2dp"
+            app:dividerColor="@color/black"
+            app:dividerThickness="1dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EXISTING PLATFORMS/ AREAS"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@color/maincolor4"
+            android:gravity="center"/>
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:dividerInsetStart="2dp"
@@ -100,16 +117,35 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="5dp"
-            android:id="@+id/rv_pltfrm_edit_old"/>
+            android:id="@+id/rv_pltfrm_edit_old"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"/>
 
-
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerInsetStart="2dp"
+            app:dividerInsetEnd="2dp"
+            app:dividerColor="@color/black"
+            app:dividerThickness="1dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ADD PLATFORMS/ AREAS"
+            android:text="ADD MORE PLATFORMS/ AREAS"
             android:fontFamily="@font/rubik_medium"
             android:textColor="@color/maincolor4"
             android:gravity="center"/>
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerInsetStart="2dp"
+            app:dividerInsetEnd="2dp"
+            app:dividerColor="@color/black"
+            app:dividerThickness="1dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -169,18 +205,32 @@
                 android:text="ADD"
                 android:id="@+id/btn_addpltfrm"/>
         </LinearLayout>
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerInsetStart="2dp"
+            app:dividerInsetEnd="2dp"
+            app:dividerColor="@color/black"
+            app:dividerThickness="1dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="5dp"
             android:id="@+id/rv_pltfrm_edit_new"/>
-
-
-
-
-
-
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerInsetStart="2dp"
+            app:dividerInsetEnd="2dp"
+            app:dividerColor="@color/black"
+            app:dividerThickness="1dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_addoptsave"

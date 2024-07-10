@@ -1,5 +1,6 @@
 package com.cdac.iaf.bookmycoolie.recyclerviews;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull StationListAdapter.ViewHolder holder, int position) {
 

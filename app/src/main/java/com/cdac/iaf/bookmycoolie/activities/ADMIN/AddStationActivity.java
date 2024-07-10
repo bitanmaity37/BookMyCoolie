@@ -224,4 +224,10 @@ public class AddStationActivity extends AppCompatActivity {
         tied_chairc.setText("");
         rv_pltfrm.setAdapter(null);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AddStationActivity.this,AdminHomeActivity.class));
+        finishAffinity();
+    }
 }

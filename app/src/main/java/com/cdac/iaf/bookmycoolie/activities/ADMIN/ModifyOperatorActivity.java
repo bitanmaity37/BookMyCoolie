@@ -167,4 +167,10 @@ public class ModifyOperatorActivity extends AppCompatActivity {
         return isValid;
 
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ModifyOperatorActivity.this,AdminHomeActivity.class));
+        finishAffinity();
+    }
 }
