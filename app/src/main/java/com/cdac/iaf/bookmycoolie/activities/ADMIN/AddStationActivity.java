@@ -186,7 +186,7 @@ public class AddStationActivity extends AppCompatActivity {
             til_stncode.setError("PHONE NUMBER IS INVALID OR BLANK");
         }
 
-        if(!tied_cartc.getText().toString().isEmpty()){
+        if(!tied_cartc.getText().toString().isEmpty() && Integer.parseInt(tied_cartc.getText().toString().trim())<999){
             til_cartc.setError("");
         }
         else {
@@ -194,12 +194,12 @@ public class AddStationActivity extends AppCompatActivity {
             til_cartc.setError("NO. OF CART ATLEAST 0");
         }
 
-        if(!tied_chairc.getText().toString().isEmpty()){
+        if(!tied_chairc.getText().toString().isEmpty() && Integer.parseInt(tied_chairc.getText().toString().trim())<999){
             til_chairc.setError("");
         }
         else {
             isValid = false;
-            til_chairc.setError("NO. OF CART ATLEAST 0");
+            til_chairc.setError("NO. OF CHAIR ATLEAST 0");
         }
 
         return isValid;

@@ -19,6 +19,16 @@ public class AllStationResponse extends AddStationRequest implements Serializabl
         this.areaMasterMappingModels = areaMasterMappingModels;
     }
 
+    public AllStationResponse(Integer stationId, ArrayList<AreaMasterMappingModels> areaMasterMappingModels) {
+        this.stationId = stationId;
+        this.areaMasterMappingModels = areaMasterMappingModels;
+    }
+
+    public AllStationResponse(Integer stationId, Integer noOfCarts, Integer noOfWheelchairs) {
+        super(noOfCarts, noOfWheelchairs);
+        this.stationId = stationId;
+    }
+
     public ArrayList<AreaMasterMappingModels> getAreaMasterMappingModels() {
         return areaMasterMappingModels;
     }

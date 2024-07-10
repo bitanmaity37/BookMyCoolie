@@ -33,6 +33,7 @@ import com.cdac.iaf.bookmycoolie.models.RegisterPassengerDetailsModel;
 import com.cdac.iaf.bookmycoolie.models.SaveAttendanceModel;
 import com.cdac.iaf.bookmycoolie.models.SimpleResponse;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
+import com.cdac.iaf.bookmycoolie.models.StationEditAddAreaResponse;
 import com.cdac.iaf.bookmycoolie.models.StationListResponse;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
 import com.cdac.iaf.bookmycoolie.models.VerifyOtpRequestModel;
@@ -149,6 +150,17 @@ public interface RestInterface {
     @POST("admin/getStationAreaByStationId")
     Call<ArrayList<AreaMasterMappingModels>> getStationAreasByID(@Header("Authorization") String authorization,
                                                                  @Body StationIDRequest stationIDRequest);
+    @POST("admin/disableStationAreaMasterById")
+    Call<SimpleResponse> updateStationStatus(@Header("Authorization") String authorization,
+                                                @Body AreaMasterMappingModels areaMasterMappingModels);
+
+    @POST("admin/addAreaMasterByStationId")
+    Call<StationEditAddAreaResponse> addMoreAreaDuringEdit(@Header("Authorization") String authorization,
+                                                           @Body AllStationResponse allStationResponse);
+
+    @POST("operator/updateInventory")
+    Call<SimpleResponse> addInventory(@Header("Authorization") String authorization,
+                                    @Body AllStationResponse allStationResponse);
 
 
 }

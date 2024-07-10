@@ -166,7 +166,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rv_station_child" />
+                android:id="@+id/rv_station_child"/>
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

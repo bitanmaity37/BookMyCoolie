@@ -2,6 +2,7 @@ package com.cdac.iaf.bookmycoolie.recyclerviews;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.activities.ADMIN.EditInventoryActivity;
 import com.cdac.iaf.bookmycoolie.activities.ADMIN.EditPlatformActivity;
+import com.cdac.iaf.bookmycoolie.activities.OPERATOR.AddCoolieActivity;
+import com.cdac.iaf.bookmycoolie.activities.OPERATOR.OpHomeActivity;
+import com.cdac.iaf.bookmycoolie.models.Coolie;
 import com.cdac.iaf.bookmycoolie.models.STATION.AllStationResponse;
 
 import java.util.ArrayList;
@@ -48,19 +52,27 @@ public class StationListAdapter extends RecyclerView.Adapter<StationListAdapter.
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         holder.rv_station_child.setLayoutManager(linearLayoutManager);
-        StationChildAdapter stationChildAdapter = new StationChildAdapter(context, stations.get(holder.getAdapterPosition()).getAreaMasterMappingModels());
+        StationChildAdapter stationChildAdapter = new StationChildAdapter(context, stations.get(holder.getAdapterPosition()).getAreaMasterMappingModels(), false);
         holder.rv_station_child.setAdapter(stationChildAdapter);
 
         holder.btnmdfyinventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            context.startActivity(new Intent(context, EditInventoryActivity.class));
+                Intent intent = new Intent(context, EditInventoryActivity.class);
+                intent.putExtra("stationId",stations.get(holder.getAdapterPosition()).getStationId());
+                intent.putExtra("stationCode",stations.get(holder.getAdapterPosition()).getStationCode());
+                context.startActivity(intent);
             }
         });
         holder.btnmdfyarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, EditPlatformActivity.class));
+                Intent intent = new Intent(context, EditPlatformActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("selectedStation", stations.get(holder.getAdapterPosition()));
+                intent.putExtra("bundle",bundle);
+                //intent.putExtra("serviceMode",1);
+                context.startActivity(intent);
 
             }
         });

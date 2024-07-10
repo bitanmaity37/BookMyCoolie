@@ -60,8 +60,6 @@
 
 
         <LinearLayout
-            android:id="@+id/til_stnname"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -89,8 +87,20 @@
                 android:layout_marginStart="5dp"
                 app:startIconContentDescription="Hello" />
         </LinearLayout>
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerInsetStart="2dp"
+            app:dividerInsetEnd="2dp"
+            app:dividerColor="@color/black"
+            app:dividerThickness="1dp"/>
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/rv_pltfrm_edit_old"/>
 
 
         <TextView
@@ -159,11 +169,12 @@
                 android:text="ADD"
                 android:id="@+id/btn_addpltfrm"/>
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="5dp"
-            android:id="@+id/rv_pltfrm"/>
+            android:id="@+id/rv_pltfrm_edit_new"/>
 
 
 

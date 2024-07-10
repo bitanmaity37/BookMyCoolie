@@ -27,6 +27,15 @@ public class AddStationRequest implements Serializable {
     @SerializedName("stationAreaMasterMappings")
     ArrayList<StationAreaMasterMapping> stationAreaMasterMappings;
 
+    public AddStationRequest() {
+
+    }
+
+    public AddStationRequest(Integer noOfCarts, Integer noOfWheelchairs) {
+        this.noOfCarts = noOfCarts;
+        this.noOfWheelchairs = noOfWheelchairs;
+    }
+
     @Override
     public String toString() {
         return "AddStationRequest{" +
