@@ -20,6 +20,30 @@ public class AreaMasterMappingModels implements Serializable {
         this.areaDescription = areaDescription;
     }
 
+    public Integer getStationAreaMasterMappingId() {
+        return stationAreaMasterMappingId;
+    }
+
+    public void setStationAreaMasterMappingId(Integer stationAreaMasterMappingId) {
+        this.stationAreaMasterMappingId = stationAreaMasterMappingId;
+    }
+
+    public Boolean getAreaStatus() {
+        return areaStatus;
+    }
+
+    public void setAreaStatus(Boolean areaStatus) {
+        this.areaStatus = areaStatus;
+    }
+
+    public String getAreaDescription() {
+        return areaDescription;
+    }
+
+    public void setAreaDescription(String areaDescription) {
+        this.areaDescription = areaDescription;
+    }
+
     @Override
     public String toString() {
         return "AreaMasterMappingModels{" +
