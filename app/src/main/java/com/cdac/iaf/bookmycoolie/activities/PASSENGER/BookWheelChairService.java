@@ -3,10 +3,14 @@ package com.cdac.iaf.bookmycoolie.activities.PASSENGER;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
@@ -55,20 +59,24 @@ public class BookWheelChairService {
     CoolieRequestModel coolieRequestModel = new CoolieRequestModel();
     Context context;
     FragmentManager fragmentManager;
-
+    TextView approxAmount;
+    TextInputEditText approxWeight;
+    TextInputEditText getTrainName;
+    TextInputEditText getTrainNo;
     String finalStartTime;
     int userId;
-
-
+    LinearLayout approxAmountLayout;
+    String userName;
 
 
     Integer apprxWght;
 
-    public BookWheelChairService(Context context, String authToken, FragmentManager fragmentManager, int userId) {
+    public BookWheelChairService(Context context, String authToken, FragmentManager fragmentManager, int userId, String userName) {
         this.authToken = authToken;
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.userId = userId;
+        this.userName = userName;
     }
 
     public void showCoolieBottomSheet() {
@@ -77,6 +85,9 @@ public class BookWheelChairService {
         coolieBottomSheetDialog.setContentView(view1);
         coolieBottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         coolieBottomSheetDialog.show();
+        approxAmount = coolieBottomSheetDialog.findViewById(R.id.show_approx_amount);
+        approxAmountLayout = coolieBottomSheetDialog.findViewById(R.id.approx_amount_layout);
+        approxAmountLayout.setVisibility(View.GONE);
 
         getAllStation();
         setTentativeStartTimePicker();
@@ -116,6 +127,27 @@ public class BookWheelChairService {
             selectedStation = (StationModel) parent.getItemAtPosition(position);
             coolieRequestModel.setStationId(selectedStation.getStationId()); //setting station id in request model
             getStationAreaByStationId(selectedStation.getStationId());
+
+            //reset fields
+            if (autoCompleteStationAreaPickup != null) {
+                autoCompleteStationAreaPickup.setText("");
+                autoCompleteStationAreaPickup.clearListSelection();
+            }
+            if (autoCompleteStationAreaDropAt != null) {
+                autoCompleteStationAreaDropAt.setText("");
+                autoCompleteStationAreaDropAt.clearListSelection();
+            }
+            if(approxWeight != null){
+                approxWeight.setText("");
+            }
+            // Reset TextInputEditTexts
+            if (startTimeInput != null) {
+                startTimeInput.setText("");
+            }
+            if (endTimePicker != null) {
+                endTimePicker.setText("");
+            }
+            approxAmountLayout.setVisibility(View.GONE);
         });
     }
 
@@ -127,9 +159,10 @@ public class BookWheelChairService {
                 if (response.isSuccessful() && response.body() != null) {
                     stationAreaModelList = response.body();
                     setStationAreaPickUp(stationAreaModelList);
-                }else
+                } else
                     Toast.makeText(context, "No Station Area found!!", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onFailure(Call<ArrayList<StationAreaModel>> call, Throwable t) {
                 Toast.makeText(context, "Error while fetching station area!", Toast.LENGTH_SHORT).show();
@@ -147,6 +180,22 @@ public class BookWheelChairService {
             selectedStationAreaPickUp = (StationAreaModel) parent.getItemAtPosition(position);
             coolieRequestModel.setStationAreaPickupFrom(selectedStationAreaPickUp.getStationAreaMasterMappingId());
             setStationAreaDropAt(stationAreaModelList);
+            //reset fields
+            if (autoCompleteStationAreaDropAt != null) {
+                autoCompleteStationAreaDropAt.setText("");
+                autoCompleteStationAreaDropAt.clearListSelection();
+            }
+            if(approxWeight != null){
+                approxWeight.setText("");
+            }
+            // Reset TextInputEditTexts
+            if (startTimeInput != null) {
+                startTimeInput.setText("");
+            }
+            if (endTimePicker != null) {
+                endTimePicker.setText("");
+            }
+            approxAmountLayout.setVisibility(View.GONE);
         });
 
     }
@@ -174,8 +223,48 @@ public class BookWheelChairService {
         autoCompleteStationAreaDropAt.setOnItemClickListener((parent, view, position, id) -> {
             selectedStationAreaDropAt = (StationAreaModel) parent.getItemAtPosition(position);
             coolieRequestModel.setStationAreaDropAt(selectedStationAreaDropAt.getStationAreaMasterMappingId());
+            //reset fields
+            if(approxWeight != null){
+                approxWeight.setText("");
+            }
+            // Reset TextInputEditTexts
+            if (startTimeInput != null) {
+                startTimeInput.setText("");
+            }
+            if (endTimePicker != null) {
+                endTimePicker.setText("");
+            }
+            approxAmountLayout.setVisibility(View.GONE);
+            setApproxWeight();
         });
 
+    }
+
+    public void setApproxWeight(){
+        approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
+        approxWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // No action needed before text changes
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // No action needed during text changes
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Reset TextInputEditTexts
+                if (startTimeInput != null) {
+                    startTimeInput.setText("");
+                }
+                if (endTimePicker != null) {
+                    endTimePicker.setText("");
+                }
+                approxAmountLayout.setVisibility(View.GONE);
+            }
+        });
     }
 
     public void setTentativeStartTimePicker() {
@@ -206,10 +295,16 @@ public class BookWheelChairService {
 
                 finalStartTime = formattedDate;
                 startTimeInput.setText(formattedDate);
-
+                //reset fields
+                if (endTimePicker != null) {
+                    endTimePicker.setText("");
+                }
+                approxAmountLayout.setVisibility(View.GONE);
             });
         });
     }
+
+
 
     public void setTentativeEndTimePicker() {
         endTimePicker = coolieBottomSheetDialog.findViewById(R.id.approx_end_time_input);
@@ -237,17 +332,27 @@ public class BookWheelChairService {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
                 String formattedDate = dateFormat.format(calendar.getTime());
                 endTimePicker.setText(formattedDate);
-
-                FaresCalculation faresCalculation = new FaresCalculation();
-                faresCalculation.doAll();
-                //apprxWght = Integer.valueOf(approxWeight.getText().toString().trim());
-                Integer a = faresCalculation.calculateFare(10, finalStartTime, formattedDate, 210,false,false,true);
-                Toast.makeText(context, "APPROX COST "+a, Toast.LENGTH_SHORT).show();
-
-
-
+                approxAmountLayout.setVisibility(View.GONE);
+                calculateFares();
             });
         });
+    }
+
+    public void calculateFares() {
+        getTrainNo = coolieBottomSheetDialog.findViewById(R.id.train_no_input);
+        getTrainName = coolieBottomSheetDialog.findViewById(R.id.train_name_input);
+        //TextInputEditText getNoOfChairReq = coolieBottomSheetDialog.findViewById(R.id.chair_required_input);
+        approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
+        approxAmountLayout.setVisibility(View.VISIBLE);
+        coolieRequestModel.setApproxTotalWeightage(Integer.parseInt(approxWeight.getText().toString()));
+
+        FaresCalculation faresCalculation = new FaresCalculation();
+        faresCalculation.doAll();
+        //apprxWght = Integer.valueOf(approxWeight.getText().toString().trim());
+        Integer a = faresCalculation.calculateFare(coolieRequestModel.getStationId(), coolieRequestModel.getBookingTentativeStartTime(), coolieRequestModel.getBookingTentativeEndTime(), coolieRequestModel.getApproxTotalWeightage(), false, false, true);
+        if(a != null)
+            approxAmount.setText(String.format("₹%d", a));
+        Toast.makeText(context, "APPROX COST " + a, Toast.LENGTH_SHORT).show();
     }
 
     public void submitBookCoolieForm() {
@@ -255,49 +360,40 @@ public class BookWheelChairService {
 
         if (submitButton != null) {
             submitButton.setOnClickListener(v -> {
-
-                TextInputEditText getTrainNo = coolieBottomSheetDialog.findViewById(R.id.train_no_input);
-                TextInputEditText getTrainName = coolieBottomSheetDialog.findViewById(R.id.train_name_input);
-                TextInputEditText getNoOfChairReq = coolieBottomSheetDialog.findViewById(R.id.chair_required_input);
-                TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
-
-                if (validateInputs(getTrainNo, getTrainName, approxWeight, getNoOfChairReq)) {
+                if (validateInputs(getTrainNo, getTrainName, approxWeight)) {
                     coolieRequestModel.setTrainNumber(getTrainNo.getText().toString());
                     coolieRequestModel.setTrainName(getTrainName.getText().toString());
-                    coolieRequestModel.setNoOfWheelChair(Integer.parseInt(getNoOfChairReq.getText().toString()));
+                    //coolieRequestModel.setNoOfWheelChair(Integer.parseInt(getNoOfChairReq.getText().toString()));
                     coolieRequestModel.setApproxTotalWeightage(Integer.parseInt(approxWeight.getText().toString()));
-
 
                     Date date = new Date();
                     String formattedDate = TimeConversionUtil.convertTime(date);
                     coolieRequestModel.setBookingDate(formattedDate);
-                    coolieRequestModel.setBookingFor("John Doe");
+                    coolieRequestModel.setBookingFor(userName);
                     coolieRequestModel.setBookingType("Round Trip");
                     coolieRequestModel.setRecordTracking(formattedDate);
                     coolieRequestModel.setServiceType(3);
                     coolieRequestModel.setRequestStatus(1);
                     coolieRequestModel.setUserMaster(userId);
-
-                    Call<CoolieResponseModel> callSubmitBookCoolieForm = RestClient.getRetrofitClient().create(RestInterface.class).submitBookCoolieForm(authToken, coolieRequestModel);
-                    callSubmitBookCoolieForm.enqueue(new Callback<CoolieResponseModel>() {
-                        @Override
-                        public void onResponse(Call<CoolieResponseModel> call, Response<CoolieResponseModel> response) {
-                            Toast.makeText(context, "Wheel chair booked successfully!", Toast.LENGTH_SHORT).show();
-                            resetFormFields();
-                            coolieBottomSheetDialog.dismiss();
-                        }
-
-                        @Override
-                        public void onFailure(Call<CoolieResponseModel> call, Throwable t) {
-                            Toast.makeText(context, "Error while booking wheel chair service!" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
                 }
+                Call<CoolieResponseModel> callSubmitBookCoolieForm = RestClient.getRetrofitClient().create(RestInterface.class).submitBookCoolieForm(authToken, coolieRequestModel);
+                callSubmitBookCoolieForm.enqueue(new Callback<CoolieResponseModel>() {
+                    @Override
+                    public void onResponse(Call<CoolieResponseModel> call, Response<CoolieResponseModel> response) {
+                        Toast.makeText(context, "Wheel chair booked successfully!", Toast.LENGTH_SHORT).show();
+                        resetFormFields();
+                        coolieBottomSheetDialog.dismiss();
+                    }
+                    @Override
+                    public void onFailure(Call<CoolieResponseModel> call, Throwable t) {
+                        Toast.makeText(context, "Error while booking wheel chair service!" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             });
         }
     }
 
-    private boolean validateInputs(TextInputEditText getTrainNo, TextInputEditText getTrainName, TextInputEditText approxWeight, TextInputEditText getNoOfChairReq) {
+    private boolean validateInputs(TextInputEditText getTrainNo, TextInputEditText getTrainName, TextInputEditText approxWeight) {
         boolean isValid = true;
 
         if (coolieRequestModel.getStationId() == 0) {
@@ -315,19 +411,13 @@ public class BookWheelChairService {
         } else if (endTimePicker.getText() == null || endTimePicker.getText().toString().isEmpty()) {
             endTimePicker.setError("End time is required.");
             isValid = false;
-        } else if (getNoOfChairReq.getText() == null || getNoOfChairReq.getText().toString().isEmpty()) {
-            getNoOfChairReq.setError("Number of chair is required.");
-            isValid = false;
-        }
-        else if (getTrainNo.getText() == null || getTrainNo.getText().toString().isEmpty()) {
+        } else if (getTrainNo.getText() == null || getTrainNo.getText().toString().isEmpty()) {
             getTrainNo.setError("Train number is required.");
             isValid = false;
-        }
-        else if (getTrainName.getText() == null || getTrainName.getText().toString().isEmpty()) {
+        } else if (getTrainName.getText() == null || getTrainName.getText().toString().isEmpty()) {
             getTrainName.setError("Train name is required.");
             isValid = false;
-        }
-        else if (approxWeight.getText() == null || approxWeight.getText().toString().isEmpty()) {
+        } else if (approxWeight.getText() == null || approxWeight.getText().toString().isEmpty()) {
             approxWeight.setError("Approximate weight is required.");
             isValid = false;
         }
@@ -359,13 +449,13 @@ public class BookWheelChairService {
                 endTimePicker.setText("");
             }
 
-            TextInputEditText getNoOfChairReq = coolieBottomSheetDialog.findViewById(R.id.chair_required_input);
+            //TextInputEditText getNoOfChairReq = coolieBottomSheetDialog.findViewById(R.id.chair_required_input);
             TextInputEditText getTrainNo = coolieBottomSheetDialog.findViewById(R.id.train_no_input);
             TextInputEditText getTrainName = coolieBottomSheetDialog.findViewById(R.id.train_name_input);
             TextInputEditText approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
-            if (getNoOfChairReq != null) {
+            /*if (getNoOfChairReq != null) {
                 getNoOfChairReq.setText("");
-            }
+            }*/
             if (getTrainNo != null) {
                 getTrainNo.setText("");
             }

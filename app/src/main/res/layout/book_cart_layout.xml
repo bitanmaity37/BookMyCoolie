@@ -172,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputLayout
+                <!--<com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/carts_required_input_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -212,7 +212,7 @@
                         android:textSize="13dp"
                         app:errorEnabled="true"
                         app:startIconContentDescription="Hello" />
-                </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>-->
 
 
             </LinearLayout>
@@ -482,6 +482,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/approx_amount_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

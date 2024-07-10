@@ -3,10 +3,14 @@ package com.cdac.iaf.bookmycoolie.activities.PASSENGER;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import com.cdac.iaf.bookmycoolie.R;
 import com.cdac.iaf.bookmycoolie.models.CoolieRequestModel;
 import com.cdac.iaf.bookmycoolie.models.CoolieResponseModel;
+import com.cdac.iaf.bookmycoolie.models.DynamicFare.FaresCalculation;
 import com.cdac.iaf.bookmycoolie.models.StationAreaModel;
 import com.cdac.iaf.bookmycoolie.models.StationModel;
 import com.cdac.iaf.bookmycoolie.restapi.RestClient;
@@ -55,12 +60,19 @@ public class BookCoolieService {
     Context context;
     FragmentManager fragmentManager;
     int userId;
+    TextView approxAmount;
+    TextInputEditText approxWeight;
+    LinearLayout approxAmountLayout;
+    TextInputEditText getTrainName;
+    TextInputEditText getTrainNo;
+    String userName;
 
-    public BookCoolieService(Context context, String authToken, FragmentManager fragmentManager, int userId) {
+    public BookCoolieService(Context context, String authToken, FragmentManager fragmentManager, int userId, String userName) {
         this.authToken = authToken;
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.userId = userId;
+        this.userName = userName;
     }
 
     public void showCoolieBottomSheet() {
@@ -69,6 +81,10 @@ public class BookCoolieService {
         coolieBottomSheetDialog.setContentView(view1);
         coolieBottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         coolieBottomSheetDialog.show();
+        approxAmount = coolieBottomSheetDialog.findViewById(R.id.show_approx_amount);
+        approxAmountLayout = coolieBottomSheetDialog.findViewById(R.id.approx_amount_layout);
+        approxAmountLayout.setVisibility(View.GONE);
+
 
         getAllStation(); //fetching all stations
         setTentativeStartTimePicker(); //setting timepicker for start time
@@ -107,6 +123,27 @@ public class BookCoolieService {
             selectedStation = (StationModel) parent.getItemAtPosition(position);
             coolieRequestModel.setStationId(selectedStation.getStationId()); //setting station id in request model
             getStationAreaByStationId(selectedStation.getStationId());
+
+            //reset fields
+            if (autoCompleteStationAreaPickup != null) {
+                autoCompleteStationAreaPickup.setText("");
+                autoCompleteStationAreaPickup.clearListSelection();
+            }
+            if (autoCompleteStationAreaDropAt != null) {
+                autoCompleteStationAreaDropAt.setText("");
+                autoCompleteStationAreaDropAt.clearListSelection();
+            }
+            if(approxWeight != null){
+                approxWeight.setText("");
+            }
+            // Reset TextInputEditTexts
+            if (startTimeInput != null) {
+                startTimeInput.setText("");
+            }
+            if (endTimePicker != null) {
+                endTimePicker.setText("");
+            }
+            approxAmountLayout.setVisibility(View.GONE);
         });
     }
 
@@ -140,6 +177,22 @@ public class BookCoolieService {
             selectedStationAreaPickUp = (StationAreaModel) parent.getItemAtPosition(position);
             coolieRequestModel.setStationAreaPickupFrom(selectedStationAreaPickUp.getStationAreaMasterMappingId());
             setStationAreaDropAt(stationAreaModelList);
+            //reset fields
+            if (autoCompleteStationAreaDropAt != null) {
+                autoCompleteStationAreaDropAt.setText("");
+                autoCompleteStationAreaDropAt.clearListSelection();
+            }
+            if(approxWeight != null){
+                approxWeight.setText("");
+            }
+            // Reset TextInputEditTexts
+            if (startTimeInput != null) {
+                startTimeInput.setText("");
+            }
+            if (endTimePicker != null) {
+                endTimePicker.setText("");
+            }
+            approxAmountLayout.setVisibility(View.GONE);
         });
     }
 
@@ -166,6 +219,46 @@ public class BookCoolieService {
         autoCompleteStationAreaDropAt.setOnItemClickListener((parent, view, position, id) -> {
             selectedStationAreaDropAt = (StationAreaModel) parent.getItemAtPosition(position);
             coolieRequestModel.setStationAreaDropAt(selectedStationAreaDropAt.getStationAreaMasterMappingId());
+            //reset fields
+            if(approxWeight != null){
+                approxWeight.setText("");
+            }
+            // Reset TextInputEditTexts
+            if (startTimeInput != null) {
+                startTimeInput.setText("");
+            }
+            if (endTimePicker != null) {
+                endTimePicker.setText("");
+            }
+            approxAmountLayout.setVisibility(View.GONE);
+            setApproxWeight();
+        });
+    }
+
+    public void setApproxWeight(){
+        approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
+        approxWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // No action needed before text changes
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // No action needed during text changes
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Reset TextInputEditTexts
+                if (startTimeInput != null) {
+                    startTimeInput.setText("");
+                }
+                if (endTimePicker != null) {
+                    endTimePicker.setText("");
+                }
+                approxAmountLayout.setVisibility(View.GONE);
+            }
         });
     }
 
@@ -195,6 +288,11 @@ public class BookCoolieService {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
                 String formattedDate = dateFormat.format(calendar.getTime());
                 startTimeInput.setText(formattedDate);
+                //reset fields
+                if (endTimePicker != null) {
+                    endTimePicker.setText("");
+                }
+                approxAmountLayout.setVisibility(View.GONE);
             });
         });
     }
@@ -226,8 +324,27 @@ public class BookCoolieService {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
                 String formattedDate = dateFormat.format(calendar.getTime());
                 endTimePicker.setText(formattedDate);
+                approxAmountLayout.setVisibility(View.GONE);
+                calculateFares();
             });
         });
+    }
+
+    public void calculateFares() {
+        getTrainNo = coolieBottomSheetDialog.findViewById(R.id.train_no_input);
+        getTrainName = coolieBottomSheetDialog.findViewById(R.id.train_name_input);
+        //TextInputEditText getNoOfChairReq = coolieBottomSheetDialog.findViewById(R.id.chair_required_input);
+        approxWeight = coolieBottomSheetDialog.findViewById(R.id.approx_weight_input);
+        approxAmountLayout.setVisibility(View.VISIBLE);
+        coolieRequestModel.setApproxTotalWeightage(Integer.parseInt(approxWeight.getText().toString()));
+
+        FaresCalculation faresCalculation = new FaresCalculation();
+        faresCalculation.doAll();
+        //apprxWght = Integer.valueOf(approxWeight.getText().toString().trim());
+        Integer a = faresCalculation.calculateFare(coolieRequestModel.getStationId(), coolieRequestModel.getBookingTentativeStartTime(), coolieRequestModel.getBookingTentativeEndTime(), coolieRequestModel.getApproxTotalWeightage(), false, false, true);
+        if(a != null)
+            approxAmount.setText(String.format("₹%d", a));
+        Toast.makeText(context, "APPROX COST " + a, Toast.LENGTH_SHORT).show();
     }
 
     public void submitBookCoolieForm() {
