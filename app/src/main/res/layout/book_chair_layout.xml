@@ -35,7 +35,7 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/viewMore"
+                    android:id="@+id/close_dialog"
                     style="@style/Widget.Material3.Button.IconButton.Filled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

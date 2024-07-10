@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,6 +86,8 @@ public class BookCartService {
         approxAmount = coolieBottomSheetDialog.findViewById(R.id.show_approx_amount);
         approxAmountLayout = coolieBottomSheetDialog.findViewById(R.id.approx_amount_layout);
         approxAmountLayout.setVisibility(View.GONE);
+        Button closeDialog = coolieBottomSheetDialog.findViewById(R.id.close_dialog);
+        closeDialog.setOnClickListener(v -> coolieBottomSheetDialog.dismiss());
 
         getAllStation();
         setTentativeStartTimePicker();
